@@ -11,7 +11,8 @@ import Image from "next/image";
 import { useEffect, useState, useMemo, useContext } from "react";
 import Proposal from "../components/Proposal";
 import styles from "../styles/Home.module.css";
-import { ApeDaoContext } from "./Context/solutions";
+
+import { ApeDaoContext } from "../components/Context/solutions";
 
 const style = {
   wrapper: `relative h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 flex flex-col items-center  `,
