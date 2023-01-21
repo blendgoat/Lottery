@@ -1,3 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* .linear-gradient {
+  background: linear-gradient(
+    179.14deg,
+    rgba(32, 18, 63, 0) -7.14%,
+    #000000 87.01%
+  );
+} */
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(0.8);
+}
+
+
 html,
 body {
   padding: 0;
@@ -18,7 +38,11 @@ a {
 html {
   color-scheme: dark;
 }
-body {
+/* body {
   color: #e7e8e8;
-  background: #0f1318;
-}
+  background: linear-gradient(
+    179.14deg,
+    rgba(129, 7, 129, 0) -7.14%,
+    #81078f 87.01%
+  );;
+} */
