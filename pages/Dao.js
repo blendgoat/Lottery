@@ -74,8 +74,9 @@ const NewDao = () => {
     process.env.NEXT_PUBLIC_VOTE
   );
 
+  const thebalace = nftBalance?.toString();
+
   useEffect(() => {
-    const thebalace = nftBalance?.toString();
     if (thebalace > 0) setHasMembership(true);
     console.log({ thebalace });
   }, [nftBalance]);
@@ -118,7 +119,7 @@ const NewDao = () => {
   }, [address, isVoteLoading]);
 
   useEffect(() => {
-    if (!token) return;
+    if (!token || thebalace === 0) return;
     checkDelegate();
     console.log({ proposals });
   }, [isTokenLoading]);
