@@ -135,6 +135,7 @@ const NewDao = () => {
 
     const tx = await editionDrop.claimTo(address, tokenId, quantity);
     const receipt = tx.receipt;
+    window.location.reload();
   };
 
   const shortenAddress = (str) => {
