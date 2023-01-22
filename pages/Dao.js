@@ -63,6 +63,7 @@ const NewDao = () => {
   const [memberAddresses, setMemberAddresses] = useState([]);
   const [tbalance, setTbalance] = useState(0);
   const [nativeBalance, setNativeBalance] = useState(0);
+  const [hasMembership, setHasMembership] = useState();
 
   const { address, nftBalance } = useContext(ApeDaoContext);
 
@@ -72,6 +73,12 @@ const NewDao = () => {
   const { contract: vote, isLoading: isVoteLoading } = useContract(
     process.env.NEXT_PUBLIC_VOTE
   );
+
+  useEffect(() => {
+    const thebalace = nftBalance?.toString();
+    if (thebalace > 0) setHasMembership(true);
+    console.log({ thebalace });
+  }, [nftBalance]);
 
   const sdk = useSDK();
   const getProposals = async () => {
@@ -205,7 +212,7 @@ const NewDao = () => {
     <div>
       {address && (
         <div className={style.wrapper}>
-          {nftBalance ? (
+          {hasMembership ? (
             <>
               <div className={style.topItemsContainer}>
                 <div className="h-[150px] flex-col text-slate-600 p-4 font-bold rounded-xl border border-slate-400 w-[300px]">
@@ -270,7 +277,7 @@ const NewDao = () => {
                 </button>
               </div>
               <div className="w-2/3 mt-24">
-                {proposals?.map((proposal) => (
+                {proposals?.map((proposal, id) => (
                   <Proposal
                     proposalId={proposal.proposalId}
                     description={proposal.description}

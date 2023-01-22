@@ -14,7 +14,7 @@ const style = {
   contentWrapper: `flex h-screen relative justify-center flex-wrap items-center`,
   topContent: `flex items-center justify-center`,
 
-  detailsContainer: `w-[500px] ml-4 p-8 overflow-scroll   m-8 card rounded-lg h-48 shadow-xl items-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 `,
+  detailsContainer: `w-[500px] text-sky-400 ml-4 p-8 overflow-scroll   m-8 card rounded-lg h-48 shadow-xl items-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 `,
   nftImgContainer: `w-[500px] p-8 m-8 card shadow-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 border-black rounded-lg h-48 items-center `,
   timeContainer: `container justify-center w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-xl rounded-lg mt-48  items-center p-2 h-64 flex`,
   ethcontainer: ` max-w-[280px] flex-1  mr-2 items-center justify-center `,
@@ -106,7 +106,7 @@ const mainPage = () => {
             <div>
               {gameClosed ? (
                 <div className={style.nftImgContainer}>
-                  <a href="https://thirdweb.com/dashboard">
+                  <a href="">
                     <h2>DO NOT ENTER &rarr;</h2>
                     <p>
                       Lottery is currently closed and calculating winer. Click
@@ -119,7 +119,7 @@ const mainPage = () => {
               ) : (
                 <>
                   <div className={style.nftImgContainer}>
-                    <a href="https://thirdweb.com/dashboard">
+                    <a href="">
                       <h2>ENTER &rarr;</h2>
                       <p>
                         Lottery is open, press the "Enter" button to play. Click
@@ -136,19 +136,16 @@ const mainPage = () => {
           </>
         )}
 
-        <div className={style.playerWrapper}>
-          <div className={style.detailsContainer}>
-            <a href="https://thirdweb.com/dashboard">
-              <h2>Entries &rarr;</h2>
-              {finalPlayersList?.map((playerList, id) => (
-                <div key={id}>
-                  <div className="flex">{`${playerList}`}</div>
-                </div>
-              ))}
-            </a>
-          </div>
+        <div className={style.detailsContainer}>
+          <h2>Entries &rarr;</h2>
+          {finalPlayersList?.map((playerList, id) => (
+            <div key={id}>
+              <div className="flex my-2">{`${playerList}`}</div>
+            </div>
+          ))}
         </div>
       </div>
+
       <div className={style.timeContainer}>
         <div className={style.ethcontainer}>
           <div>
