@@ -119,7 +119,7 @@ const NewDao = () => {
   }, [address, isVoteLoading]);
 
   useEffect(() => {
-    if (!token || thebalace === 0) return;
+    if (!token || thebalace == 0) return;
     checkDelegate();
     console.log({ proposals });
   }, [isTokenLoading]);
