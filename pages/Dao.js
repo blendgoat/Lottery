@@ -282,21 +282,17 @@ const NewDao = () => {
             </>
           ) : (
             <>
-              {!nftBalance ? (
-                <div className={style.mintwrapper}>
-                  <h1>Mint 🍪DAO Membership</h1>
-                  <button
-                    onClick={() => {
-                      minIt();
-                    }}
-                    className={style.button}
-                  >
-                    Mint
-                  </button>
-                </div>
-              ) : (
-                <div>Loading...</div>
-              )}
+              <div className={style.mintwrapper}>
+                <h1>Mint 🍪DAO Membership</h1>
+                <button
+                  onClick={() => {
+                    minIt();
+                  }}
+                  className={style.button}
+                >
+                  Mint
+                </button>
+              </div>
             </>
           )}
         </div>
