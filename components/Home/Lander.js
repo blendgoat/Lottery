@@ -3,9 +3,9 @@ import { ConnectWallet } from "@thirdweb-dev/react";
 import styles from "../../styles/Home.module.css";
 
 const style = {
-  container: ` bg-gradient-to-r from-violet-500 to-fuchsia-500`,
+  container: ` bg-indigo-900`,
   main: `flex  h-screen relative justify-center flex-wrap items-center `,
-  connect: `h-full bg-gradient-to-r from-violet-500 to-fuchsia-500`,
+  connect: `h-full bg-indigo-900`,
 };
 
 const Lander = () => {

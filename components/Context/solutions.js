@@ -21,23 +21,57 @@ export const ApeDaoProvider = ({ children }) => {
   const address = useAddress(); //Get the address using thirdwebs convenient hooks
   const sdk = useSDK();
 
-  const { contract: editionDrop } = useContract(
-    "0x8b19873681db03931aDD0B63B32DDEECBe216Eaf",
+  const { contract: editionDrop, isLoading: isNftLoading } = useContract(
+    "0xa85caec09986d1AC483709A960bD1cCa972E3c44",
     "edition-drop"
   );
+
+  const NftImage = globalThis.data;
+
+  const nft = editionDrop
+    ?.get("0")
+    .then((result) => {
+      console.log({ result });
+      const nftData = result.metadata;
+      globalThis.data = nftData;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   const { contract: token, isLoading: isTokenLoading } = useContract(
     process.env.NEXT_PUBLIC_TOKEN
   );
 
-  const { data: nftBalance } = useNFTBalance(editionDrop, address, "0");
+  // const [hasMembership, setHasMembership] = useState();
 
-  const [balance, setBalance] = useState(0);
-  const [ownedTokenBalance, setOwnedTokeBalance] = useState(0);
+  const { data: nftBalance } = useNFTBalance(editionDrop, address, "0");
+  const daoMember = nftBalance?.toString();
+
+  const GetTreasureBalance = async () => {
+    const ownedTokenBalance = await token?.balanceOf(
+      "0x242E1Ce141092EE7de0c3C32a3A40Da7323449b8"
+    );
+
+    return ownedTokenBalance;
+  };
+
+  const GetTreasureBalanceNative = async () => {
+    const balance = await sdk?.getBalance(
+      "0x242E1Ce141092EE7de0c3C32a3A40Da7323449b8"
+    );
+
+    return balance;
+  };
+
+  // useEffect(() => {
+  //   if (nftBalance > 0) setHasMembership(true);
+  //   console.log({ nftBalance });
+  // }, [nftBalance]);
 
   //   const GetTreasureBalance = async () => {
   //     const ownedTokenBalance = await token?.balanceOf(
-  //       "0x2EA832C22ac15fD0c3E42bC774660D61504D9A43"
+  //       "0x242E1Ce141092EE7de0c3C32a3A40Da7323449b8"
   //     );
 
   //     const balance = await sdk?.getBalance(
@@ -61,9 +95,12 @@ export const ApeDaoProvider = ({ children }) => {
       value={{
         address,
         nftBalance,
-
-        balance,
-        ownedTokenBalance,
+        daoMember,
+        nft,
+        isNftLoading,
+        NftImage,
+        GetTreasureBalance,
+        GetTreasureBalanceNative,
       }}
     >
       {children}

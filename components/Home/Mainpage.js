@@ -8,15 +8,18 @@ import {
 } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
 import styles from "../../styles/Home.module.css";
+import Popup from "../Popup";
+import Sendingtransaction from "./Sendingtransaction";
+
 const style = {
-  wrapper: `relative h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 flex flex-col items-center  `,
+  wrapper: `relative h-full w-full bg-indigo-900 flex flex-col items-center  `,
   container: `container m-4   flex flex-col justify-between`,
   contentWrapper: `flex h-screen relative justify-center flex-wrap items-center`,
   topContent: `flex items-center justify-center`,
 
-  detailsContainer: `w-[500px] text-sky-400 ml-4 p-8 overflow-scroll   m-8 card rounded-lg h-48 shadow-xl items-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 `,
-  nftImgContainer: `w-[500px] p-8 m-8 card shadow-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 border-black rounded-lg h-48 items-center `,
-  timeContainer: `container justify-center w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-xl rounded-lg mt-48  items-center p-2 h-64 flex`,
+  detailsContainer: `w-[500px] text-[#5271ff] ml-4 p-8 overflow-scroll   m-8 card rounded-lg h-48 shadow-xl items-center bg-indigo-900 `,
+  nftImgContainer: `w-[500px] text-[#5271ff] p-8 m-8 card shadow-xl bg-indigo-900 border-black rounded-lg h-48 items-center `,
+  timeContainer: `container justify-center w-full bg-indigo-900 shadow-xl rounded-lg mt-48  items-center p-2 h-64 flex`,
   ethcontainer: ` max-w-[280px] flex-1  mr-2 items-center justify-center `,
   ethLogo: `items-center justify-center`,
   ethPotBalance: `items-center text-9xl text-white/75  mr-32 font-bold`,
@@ -32,9 +35,11 @@ const mainPage = () => {
   const [gameState, setGameState] = useState();
   const [gameClosed, setGameClosed] = useState();
   const [lotLoading, setLotLoading] = useState(true);
+  const [buttonPop, setButtonPop] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { contract } = useContract(
-    "0x143Ec8Fde617beF965ef9E949E68a0ed3cf50520"
+    "0xd0FCC7Aa1EF5f95278Af3A85cB5e75B0443bda62"
   );
 
   const { data, isLoading } = useContractRead(contract, "getBalance");
@@ -48,6 +53,11 @@ const mainPage = () => {
 
   const gameStateData = gameState?.loterryState;
   const currentGameState = gameStateData?.data;
+
+  const listAmKpa = () => {
+    setLoading(true);
+    setButtonPop(true);
+  };
 
   useEffect(() => {
     if (currentGameState != 0) setGameClosed(true);
@@ -68,9 +78,15 @@ const mainPage = () => {
         value: ethers.utils.parseEther(`${entryValue}`),
       });
       console.info("contract call successs", data);
+      closePop();
     } catch (err) {
       console.error("contract call failure", err);
+      closePop();
     }
+  };
+
+  const closePop = () => {
+    setButtonPop(false);
   };
 
   useEffect(() => {
@@ -96,6 +112,9 @@ const mainPage = () => {
 
   return (
     <div className={style.wrapper}>
+      <Popup trigger={buttonPop}>
+        <Sendingtransaction />
+      </Popup>
       <div className={style.topContent}>
         {lotLoading ? (
           <div className={style.nftImgContainer}>
@@ -106,14 +125,13 @@ const mainPage = () => {
             <div>
               {gameClosed ? (
                 <div className={style.nftImgContainer}>
-                  <a href="">
-                    <h2>DO NOT ENTER &rarr;</h2>
-                    <p>
-                      Lottery is currently closed and calculating winer. Click
-                      here for our terms and conditions and more information. By
-                      entering the lottery you accept our terms and conditions.
-                    </p>
-                  </a>
+                  <h2>DO NOT ENTER &rarr;</h2>
+                  <p>
+                    Lottery is currently closed and calculating winer. Click
+                    here for our terms and conditions and more information. By
+                    entering the lottery you accept our terms and conditions.
+                  </p>
+
                   <div className={style.searchBarClosed}></div>
                 </div>
               ) : (
@@ -175,6 +193,7 @@ const mainPage = () => {
         className={style.button}
         onClick={() => {
           enterLottery();
+          listAmKpa();
         }}
       >
         <div className={style.buttonText}>Enter</div>

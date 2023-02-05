@@ -1,62 +1,28 @@
-import {
-  ConnectWallet,
-  useAddress,
-  useContract,
-  useNFTBalance,
-  useSDK,
-} from "@thirdweb-dev/react";
-import { NATIVE_TOKEN_ADDRESS } from "@thirdweb-dev/sdk";
-import Head from "next/head";
-import Image from "next/image";
+import { useContract, useSDK, MediaRenderer } from "@thirdweb-dev/react";
 import { useEffect, useState, useMemo, useContext } from "react";
 import Proposal from "../components/Proposal";
-import styles from "../styles/Home.module.css";
+import Link from "next/link";
+import Popup from "../components/Popup";
+import Sendingtransaction from "../components/Home/Sendingtransaction";
 
 import { ApeDaoContext } from "../components/Context/solutions";
 
 const style = {
-  wrapper: `relative h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 flex flex-col items-center  `,
-  mintwrapper: `h-screen p-2 w-full bg-gradient-to-r from-violet-500 to-fuchsia-500 flex justify-center flex-col items-center  `,
+  wrapper: `relative h-full bg-indigo-900 flex flex-col items-center  `,
+  mintwrapper: `h-screen p-2 w-full bg-indigo-900 flex justify-center flex-col items-center  `,
   topContent: `flex h-screen flex-col items-center rounded-xl p-4 w-4/5 justify-center `,
   topItemsContainer: `flex  justify-between  mt-8  rounded-xl p-8 w-4/5 `,
-  ammtContainer: `flex text-sky-400 mt-2  flex-col rounded-xl  w-full `,
+  ammtContainer: `text-[#5271ff] mt-2  flex-col rounded-xl  w-full `,
   topContents: `flex flex-col items-center rounded-xl p-8 w-4/5 justify-center `,
-  formInputContainer: `p-2 mt-4 flex rounded border w-2/3 items-center justify-center `,
+  formInputContainer: `p-2 mt-4 flex rounded bg-indigo-900 shadow-xl  w-2/3 items-center justify-center `,
   formInput: `p-2 mb-2   w-full bg-transparent h-96`,
   formTitle: `text-2xl font-bold text-slate-600`,
-  button: ` flex shadow-xl mt-8  w-[500px] bg:white hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500 p-[0.8rem]  items-center justify-center h-16  rounded-lg cursor-pointer text-black`,
+  button: ` flex shadow-xl mt-8 mx-8 w-[500px] bg-indigo-700 hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500 p-[0.8rem]  items-center justify-center h-16  rounded-lg cursor-pointer text-black`,
   buttonText: ` text-xl font-semibold p-3 text-slate-200 hover:text-slate-400   `,
+  nftImg: `w-[300px] mb-16 object-cover shadow-2xl`,
 };
 
-// export async function getServerSideProps() {
-//   const { address } = "0xC560DAdA2F20E9e640dDEE893C75825526Fc4E33";
-//   const editionDrop = "0x8b19873681db03931aDD0B63B32DDEECBe216Eaf";
-
-//   const hasNft = useNFTBalance(editionDrop, address, "0");
-
-//   // If they don't have an NFT, redirect them to the login page
-//   if (!hasNft) {
-//     console.log("User", "doesn't have an NFT! Redirecting...");
-//     return {
-//       noNft,
-//     };
-//   }
-
-//   if (!hasNft) {
-//     console.log("User", "doesn't have an NFT! Redirecting...");
-//     return {
-//       hasNft,
-//     };
-//   }
-
-//   // Finally, return the props
-//   return {
-//     props: {},
-//   };
-// }
-
 const NewDao = () => {
-  // const address = useAddress();
   const [proposals, setProposals] = useState([]);
   const [proposalDescription, setProposalDescription] = useState("");
   const [memberTokenAmounts, setMemberTokenAmounts] = useState([]);
@@ -64,8 +30,19 @@ const NewDao = () => {
   const [tbalance, setTbalance] = useState(0);
   const [nativeBalance, setNativeBalance] = useState(0);
   const [hasMembership, setHasMembership] = useState();
+  const [buttonPop, setButtonPop] = useState(false);
 
-  const { address, nftBalance } = useContext(ApeDaoContext);
+  const {
+    address,
+    nftBalance,
+    daoMember,
+    GetTreasureBalance,
+    GetTreasureBalanceNative,
+    nft,
+    NftImage,
+  } = useContext(ApeDaoContext);
+
+  console.log({ nft });
 
   const { contract: token, isLoading: isTokenLoading } = useContract(
     process.env.NEXT_PUBLIC_TOKEN
@@ -74,44 +51,22 @@ const NewDao = () => {
     process.env.NEXT_PUBLIC_VOTE
   );
 
-  const thebalace = nftBalance?.toString();
-
-  useEffect(() => {
-    if (thebalace > 0) setHasMembership(true);
-    console.log({ thebalace });
-  }, [nftBalance]);
+  console.log({ hasMembership });
 
   const sdk = useSDK();
+
+  const listAmKpa = () => {
+    setButtonPop(true);
+  };
+
+  const closePop = () => {
+    setButtonPop(false);
+  };
+
   const getProposals = async () => {
     if (!address || isVoteLoading) return;
     const data = await vote?.getAll();
-    setProposals(data.reverse());
-  };
-
-  const createProposal = async () => {
-    // const executions = [
-    //   {
-    //     // The contract you want to make a call to
-    //     toAddress: "0x...",
-    //     nativeTokenValue: 0.5,
-    //     transactionData: token.encoder.encode("transfer", [
-    //       fromAddress,
-    //       amount,
-    //     ]),
-    //   },
-    // ];
-
-    await vote.propose(proposalDescription);
-    window.location.reload();
-  };
-
-  const checkDelegate = async () => {
-    if (isTokenLoading || !address) return;
-    const delegation = await token.getDelegation();
-    if (delegation !== address) {
-      await token.delegateTo(address);
-      window.location.reload();
-    }
+    setProposals(data?.reverse());
   };
 
   useEffect(() => {
@@ -119,23 +74,63 @@ const NewDao = () => {
   }, [address, isVoteLoading]);
 
   useEffect(() => {
-    if (!token || thebalace == 0) return;
-    checkDelegate();
+    if (daoMember > 0) setHasMembership(true);
     console.log({ proposals });
-  }, [isTokenLoading]);
+  }, [nftBalance]);
+
+  const createProposal = async () => {
+    try {
+      await vote.propose(proposalDescription);
+      window.location.reload();
+    } catch (error) {
+      console.log("create proposal error is", { error });
+      closePop();
+    }
+  };
+
+  // const checkDelegate = async () => {
+  //   if (isTokenLoading || !address) return;
+  //   const delegation = await token.getDelegation();
+  //   if (delegation !== address) {
+  //     await token.delegateTo(address);
+  //     window.location.reload();
+  //   }
+  // };
+
+  const checkDelegate = async () => {
+    try {
+      await token?.delegateTo(address);
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+      closePop();
+    }
+  };
+
+  // useEffect(() => {
+  //   if (!token || daoMember === 0) return;
+  //   checkDelegate();
+  //   console.log({ proposals });
+  // }, [isTokenLoading]);
 
   const { contract: editionDrop } = useContract(
-    "0x8b19873681db03931aDD0B63B32DDEECBe216Eaf",
+    "0xa85caec09986d1AC483709A960bD1cCa972E3c44",
     "edition-drop"
   );
 
   const minIt = async () => {
-    const tokenId = 0;
-    const quantity = 1;
+    try {
+      const tokenId = 0;
+      const quantity = 1;
 
-    const tx = await editionDrop.claimTo(address, tokenId, quantity);
-    const receipt = tx.receipt;
-    window.location.reload();
+      const tx = await editionDrop.claimTo(address, tokenId, quantity);
+      closePop();
+      const receipt = tx.receipt;
+    } catch (error) {
+      console.log({ error });
+      closePop();
+    }
+    // window.location.reload();
   };
 
   const shortenAddress = (str) => {
@@ -144,8 +139,9 @@ const NewDao = () => {
 
   const getAllAddresses = async () => {
     try {
+      const tokenId = 0;
       const memberAddresses = await editionDrop?.history.getAllClaimerAddresses(
-        0
+        tokenId
       );
       setMemberAddresses(memberAddresses);
       console.log({ memberAddresses });
@@ -155,7 +151,7 @@ const NewDao = () => {
   };
 
   useEffect(() => {
-    if (!nftBalance) return;
+    if (hasMembership == false) return;
     getAllAddresses();
   }, [nftBalance, editionDrop?.history]);
 
@@ -172,16 +168,12 @@ const NewDao = () => {
   useEffect(() => {
     if (!nftBalance) return;
     getAllBalances();
-    memberList();
-  }, [nftBalance, token?.history]);
-
-  useEffect(() => {
-    if (!nftBalance) return;
-    memberList();
-  }, [address, isVoteLoading]);
+    // memberList();
+  }, [nftBalance]);
 
   const memberList = () => {
-    return memberAddresses?.map((address) => {
+    return memberAddresses?.map((address, id) => {
+      key = id;
       const member = memberTokenAmounts?.find(
         ({ holder }) => holder === address
       );
@@ -189,122 +181,185 @@ const NewDao = () => {
     });
   };
 
-  console.log({ tbalance });
-
-  const GetTreasureBalance = async () => {
-    const ownedTokenBalance = await token?.balanceOf(
-      "0x2EA832C22ac15fD0c3E42bC774660D61504D9A43"
-    );
-    setTbalance(ownedTokenBalance);
-    console.log({ ownedTokenBalance });
-
-    const balance = await sdk?.getBalance(
-      "0x2ea832c22ac15fd0c3e42bc774660d61504d9a43"
-    );
-    setNativeBalance(balance);
-    console.log({ balance });
-  };
+  console.log({ nftBalance });
 
   useEffect(() => {
     if (!nftBalance) return;
-    GetTreasureBalance();
+    memberList();
+  }, [address, isVoteLoading]);
+
+  // Get Balances of Vote Contract
+  // const GetTreasureBalance = async () => {
+  //   const ownedTokenBalance = await token?.balanceOf(
+  //     "0x242E1Ce141092EE7de0c3C32a3A40Da7323449b8"
+  //   );
+  //   setTbalance(ownedTokenBalance);
+  //   console.log({ daoMember });
+
+  //   const balance = await sdk?.getBalance(
+  //     "0x242E1Ce141092EE7de0c3C32a3A40Da7323449b8"
+  //   );
+  //   setNativeBalance(balance);
+  //   console.log({ balance });
+  // };
+
+  useEffect(() => {
+    if (!nftBalance) return;
+    GetTreasureBalance()
+      .then((ownedTokenBalance) => {
+        setTbalance(ownedTokenBalance);
+        console.log({ ownedTokenBalance });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [nftBalance]);
+
+  useEffect(() => {
+    if (!nftBalance) return;
+    GetTreasureBalanceNative()
+      .then((balance) => {
+        setNativeBalance(balance);
+        console.log({ balance });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, [nftBalance]);
 
   return (
     <div>
-      {address && (
-        <div className={style.wrapper}>
-          {hasMembership ? (
-            <>
-              <div className={style.topItemsContainer}>
-                <div className="h-[150px] flex-col text-slate-600 p-4 font-bold rounded-xl border border-slate-400 w-[300px]">
-                  <div>Treasury</div>
-                  <div className="text-sky-400 flex flex-col">
-                    <div>
-                      {tbalance?.name}:{tbalance?.displayValue}
-                    </div>
-                    <div>
-                      {nativeBalance?.name}: {nativeBalance?.displayValue}
-                    </div>
-                  </div>
-                </div>
-                <div className="h-[150px] text-slate-600 p-4 overflow-scroll font-bold rounded-xl border border-slate-400 w-[300px]">
+      {hasMembership ? (
+        <>
+          <div className={style.wrapper}>
+            <Popup trigger={buttonPop}>
+              <div className="w-full">
+                <Sendingtransaction />
+              </div>
+            </Popup>
+
+            <div className={style.topItemsContainer}>
+              <div className="h-[150px] flex-col text-slate-600 p-4 font-bold bg-indigo-900 shadow-xl rounded-xl w-[300px]">
+                <div>Treasury</div>
+                <div className="text-[#5271ff] flex flex-col">
                   <div>
-                    <div> Members</div>
-                    <div className=" my-2 overflow-scroll font-bold rounded-xl  w-full">
-                      <table className={style.ammtContainer}>
-                        <thead>
-                          <tr className="flex justify-between  ">
-                            <th>Address</th>
-                            <th className="">Token Amount</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {memberTokenAmounts?.map((member) => {
-                            return (
-                              <tr
-                                key={member.address}
-                                className=" flex justify-between"
-                              >
-                                <td>{shortenAddress(member.holder)}</td>
-                                <td>{member?.balance.displayValue}</td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    </div>
+                    {tbalance?.symbol}: {tbalance?.displayValue}
+                  </div>
+                  <div>
+                    {nativeBalance?.symbol}: {nativeBalance?.displayValue}
                   </div>
                 </div>
               </div>
-              <div className={style.formTitle}>New Proposal</div>
-              <div className={style.formInputContainer}>
-                <div className={style.formInput}>
-                  <textarea
-                    type="text"
-                    value={proposalDescription}
-                    onChange={(e) => setProposalDescription(e.target.value)}
-                    placeholder="Description..."
-                    className={style.formInput}
-                  />
-                </div>
-              </div>
+              {/* <div className="h-[150px] flex-col text-slate-600 p-4 font-bold bg-indigo-900 shadow-xl rounded-xl w-[300px]"> */}
               <div>
-                <button
-                  className={style.button}
-                  disabled={isVoteLoading}
-                  onClick={createProposal}
-                >
-                  <div className="text-slate-600">Create Proposal</div>
-                </button>
+                {/* <div> Members</div>
+                  <div className=" my-2 overflow-scroll font-bold rounded-xl  w-full">
+                    <table className={style.ammtContainer}>
+                      <thead>
+                        <tr className="flex justify-between  ">
+                          <th>Address</th>
+                          <th className="">Token Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {memberTokenAmounts?.map((member, id) => {
+                          return (
+                            <tr key={id} className=" flex justify-between">
+                              <td>{shortenAddress(member.holder)}</td>
+                              <td>{member?.balance.displayValue}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div> */}
+                {/* </div> */}
               </div>
-              <div className="w-2/3 mt-24">
-                {proposals?.map((proposal, id) => (
-                  <Proposal
-                    proposalId={proposal.proposalId}
-                    description={proposal.description}
-                    key={Math.random()}
-                    proposal={proposal}
-                  />
-                ))}
+            </div>
+            <div className="w-3/4 rounded m-24 font-bold text-[#5271ff] bg-indigo-900 shadow-xl flex flex-col items-center justify-center p-4">
+              <div>
+                Participating in the voting and proposal process on our
+                platform, requires that you delegate your voting (BNG) tokens to
+                the designated voting contract, and also a minimum of 1000BNG.
+                This delegation is solely for the purpose of verifying your
+                votes and does not grant access to your funds.
               </div>
-            </>
-          ) : (
-            <>
-              <div className={style.mintwrapper}>
-                <h1>Mint 🍪DAO Membership</h1>
+              <div className="flex ">
                 <button
                   onClick={() => {
-                    minIt();
+                    checkDelegate();
+                    listAmKpa();
                   }}
                   className={style.button}
                 >
-                  Mint
+                  Delegate
                 </button>
+                <Link href="/Token">
+                  <button className={style.button}>Get BNG</button>
+                </Link>
               </div>
-            </>
-          )}
-        </div>
+            </div>
+            <div className={style.formTitle}>New Proposal</div>
+            <div className={style.formInputContainer}>
+              <div className={style.formInput}>
+                <textarea
+                  type="text"
+                  value={proposalDescription}
+                  onChange={(e) => setProposalDescription(e.target.value)}
+                  placeholder="Description..."
+                  className={style.formInput}
+                />
+              </div>
+            </div>
+            <div>
+              <button
+                className={style.button}
+                disabled={isVoteLoading}
+                onClick={() => {
+                  createProposal();
+                  listAmKpa();
+                }}
+              >
+                <div>Create Proposal</div>
+              </button>
+            </div>
+            <div className="w-2/3 mt-24">
+              {proposals?.map((proposal, id) => (
+                <Proposal
+                  proposalId={proposal.proposalId}
+                  description={proposal.description}
+                  key={Math.random()}
+                  proposal={proposal}
+                />
+              ))}
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className={style.mintwrapper}>
+            <Popup trigger={buttonPop}>
+              <div className="w-full">
+                <Sendingtransaction />
+              </div>
+            </Popup>
+
+            <MediaRenderer
+            // src={NftImage.animation_url}
+            // className={style.nftImg}
+            />
+            <h1>Mint 🍪DAO Membership</h1>
+            <button
+              onClick={() => {
+                minIt();
+                listAmKpa();
+              }}
+              className={style.button}
+            >
+              Mint
+            </button>
+          </div>
+        </>
       )}
     </div>
   );

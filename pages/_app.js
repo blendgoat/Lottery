@@ -3,11 +3,16 @@ import "../styles/globals.css";
 import Maincombine from "../components/Maincombine";
 import { ApeDaoProvider } from "../components/Context/solutions";
 // This is the chainId your dApp will work on.
-const activeChainId = ChainId.Goerli;
+const activeChainId = ChainId.BinanceSmartChainTestnet;
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ThirdwebProvider desiredChainId={activeChainId}>
+    <ThirdwebProvider
+      // chainRpc={{
+      //   [activeChainId]: "https://data-seed-prebsc-2-s3.binance.org:8545/",
+      // }}
+      desiredChainId={activeChainId}
+    >
       <ApeDaoProvider>
         <Maincombine>
           <Component {...pageProps} />
