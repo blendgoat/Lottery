@@ -309,18 +309,19 @@ const NewDao = () => {
             </div>
             <div className="w-3/4 rounded m-24 font-bold text-[#5271ff] bg-indigo-900 shadow-xl flex flex-col items-center justify-center p-4">
               <div>
-                Participating in the voting and proposal process on our
-                platform, requires that you delegate your voting (BNG) tokens to
-                the designated voting contract, and also a minimum of 1000BNG.
-                This delegation is solely for the purpose of verifying your
-                votes and does not grant access to your funds.
+                To take part in the voting and proposal process on our platform,
+                you must delegate your BNG tokens to the designated voting
+                contract. A minimum of 1000 BNG tokens is required to create
+                proposals. Please note that this delegation is solely for the
+                purpose of verifying your voting power and does not give any
+                control over your funds.
               </div>
               <div className="flex ">
                 <button
                   onClick={() => {
-                    // checkDelegate();
-                    // listAmKpa();
-                    getUri();
+                    checkDelegate();
+                    listAmKpa();
+                    // getUri();
                   }}
                   className={style.button}
                 >
@@ -330,9 +331,9 @@ const NewDao = () => {
                 <button
                   className={style.button}
                   onClick={() => {
-                    // checkDelegate();
-                    // listAmKpa();
-                    getUriUrl();
+                    checkDelegate();
+                    listAmKpa();
+                    // getUriUrl();
                   }}
                 >
                   Get BNG
