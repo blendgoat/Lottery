@@ -34,7 +34,7 @@ const Maincombine = ({ children }) => {
       ) : (
         <>
           <Lander />
-          {children}
+          {/* {children} */}
         </>
       )}
     </div>
