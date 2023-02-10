@@ -50,7 +50,7 @@ export const ApeDaoProvider = ({ children }) => {
 
   const GetTreasureBalance = async () => {
     const ownedTokenBalance = await token?.balanceOf(
-      "0x242E1Ce141092EE7de0c3C32a3A40Da7323449b8"
+      "0x952f931A5a118Ac8a90C339A79287E998d51BEe2"
     );
 
     return ownedTokenBalance;
@@ -58,7 +58,7 @@ export const ApeDaoProvider = ({ children }) => {
 
   const GetTreasureBalanceNative = async () => {
     const balance = await sdk?.getBalance(
-      "0x242E1Ce141092EE7de0c3C32a3A40Da7323449b8"
+      "0x952f931A5a118Ac8a90C339A79287E998d51BEe2"
     );
 
     return balance;
@@ -71,7 +71,7 @@ export const ApeDaoProvider = ({ children }) => {
 
   //   const GetTreasureBalance = async () => {
   //     const ownedTokenBalance = await token?.balanceOf(
-  //       "0x242E1Ce141092EE7de0c3C32a3A40Da7323449b8"
+  //       "0x952f931A5a118Ac8a90C339A79287E998d51BEe2"
   //     );
 
   //     const balance = await sdk?.getBalance(

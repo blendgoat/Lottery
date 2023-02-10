@@ -8,9 +8,10 @@ const activeChainId = ChainId.BinanceSmartChainTestnet;
 function MyApp({ Component, pageProps }) {
   return (
     <ThirdwebProvider
-      // chainRpc={{
-      //   [activeChainId]: "https://data-seed-prebsc-2-s3.binance.org:8545/",
-      // }}
+      chainRpc={{
+        [ChainId.BinanceSmartChainTestnet]:
+          "https://nd-764-677-613.p2pify.com/28787a475356e4577cff82f01fee0326",
+      }}
       desiredChainId={activeChainId}
     >
       <ApeDaoProvider>

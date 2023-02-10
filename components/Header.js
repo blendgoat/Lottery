@@ -94,6 +94,19 @@ const Header = ({ setIsOpen, refine }) => {
           /> */}
         </div>
       </div>
+      <div className={style.headerItems}>
+        <Link href="/">
+          <div
+            // onClick={() => {
+            //   const your_url = "/Token";
+            //   window.location.href = your_url;
+            // }}
+            className={style.headerItem}
+          >
+            <div>HOME</div>
+          </div>
+        </Link>
+      </div>
 
       <div className={style.headerItems}>
         <Link href="/Dao">
@@ -108,27 +121,14 @@ const Header = ({ setIsOpen, refine }) => {
           </div>
         </Link>
       </div>
-      <div className={style.headerItems}>
-        <Link href="/Token">
-          <div
-            // onClick={() => {
-            //   const your_url = "/Token";
-            //   window.location.href = your_url;
-            // }}
-            className={style.headerItem}
-          >
-            <div>Token</div>
-          </div>
-        </Link>
-      </div>
-      <div className={style.headerItems}>
+      {/* <div className={style.headerItems}>
         <div className={style.headerIcon} onClick={() => setIsOpen(true)}>
           <MdOutlineAccountBalanceWallet />
         </div>
-        {/* <div className={style.headerIcon} onClick={() => setIsOpen(true)}>
+        <div className={style.headerIcon} onClick={() => setIsOpen(true)}>
           <ConnectWallet />
-        </div> */}
-      </div>
+        </div>
+      </div> */}
     </div>
   );
 };

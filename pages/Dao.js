@@ -7,6 +7,8 @@ import Sendingtransaction from "../components/Home/Sendingtransaction";
 
 import { ApeDaoContext } from "../components/Context/solutions";
 
+import { ThirdwebStorage } from "@thirdweb-dev/storage";
+
 const style = {
   wrapper: `relative h-full bg-indigo-900 flex flex-col items-center  `,
   mintwrapper: `h-screen p-2 w-full bg-indigo-900 flex justify-center flex-col items-center  `,
@@ -42,6 +44,34 @@ const NewDao = () => {
     NftImage,
   } = useContext(ApeDaoContext);
 
+  ////////////////////////////////////////////////////
+  const storage = new ThirdwebStorage();
+
+  const metadata = {
+    name: "BullionVoteNoDropFlat",
+    voting_delay_in_blocks: 0,
+    voting_period_in_blocks: 8600,
+    voting_token_address: "0xf9fAa5973C6cb15d0aAB2b9ED0eC37E0A6BaD031",
+    voting_quorum_fraction: 0,
+    proposal_token_threshold: "1000",
+    trusted_forwarders: [],
+  };
+
+  const getUri = async () => {
+    const uri = await storage.upload(metadata);
+    // This will log a URL like ipfs://QmWgbcjKWCXhaLzMz4gNBxQpAHktQK6MkLvBkKXbsoWEEy/0
+    console.log(uri);
+  };
+
+  const getUriUrl = async () => {
+    const uri = "ipfs://QmWGTyLo6jgy82diMyyMCkFzDxX7Bm3BghhUh2DonytZ7L/0";
+    const url = storage.resolveScheme(uri);
+    // This will log a URL like https://gateway.ipfscdn.io/ipfs/QmWgbcjKWCXhaLzMz4gNBxQpAHktQK6MkLvBkKXbsoWEEy/0
+    console.log(url);
+  };
+
+  //////////////////////////////////////////////
+
   console.log({ nft });
 
   const { contract: token, isLoading: isTokenLoading } = useContract(
@@ -51,9 +81,16 @@ const NewDao = () => {
     process.env.NEXT_PUBLIC_VOTE
   );
 
+  const { contract: editionDrop } = useContract(
+    "0xa85caec09986d1AC483709A960bD1cCa972E3c44",
+    "edition-drop"
+  );
+
   console.log({ hasMembership });
 
   const sdk = useSDK();
+
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   const listAmKpa = () => {
     setButtonPop(true);
@@ -63,20 +100,14 @@ const NewDao = () => {
     setButtonPop(false);
   };
 
-  const getProposals = async () => {
-    if (!address || isVoteLoading) return;
-    const data = await vote?.getAll();
-    setProposals(data?.reverse());
-  };
-
-  useEffect(() => {
-    getProposals();
-  }, [address, isVoteLoading]);
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     if (daoMember > 0) setHasMembership(true);
     console.log({ proposals });
   }, [nftBalance]);
+
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   const createProposal = async () => {
     try {
@@ -88,14 +119,7 @@ const NewDao = () => {
     }
   };
 
-  // const checkDelegate = async () => {
-  //   if (isTokenLoading || !address) return;
-  //   const delegation = await token.getDelegation();
-  //   if (delegation !== address) {
-  //     await token.delegateTo(address);
-  //     window.location.reload();
-  //   }
-  // };
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   const checkDelegate = async () => {
     try {
@@ -107,16 +131,7 @@ const NewDao = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (!token || daoMember === 0) return;
-  //   checkDelegate();
-  //   console.log({ proposals });
-  // }, [isTokenLoading]);
-
-  const { contract: editionDrop } = useContract(
-    "0xa85caec09986d1AC483709A960bD1cCa972E3c44",
-    "edition-drop"
-  );
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   const minIt = async () => {
     try {
@@ -133,9 +148,13 @@ const NewDao = () => {
     // window.location.reload();
   };
 
+  //////////////////////////////////////////////////////////////////////////////////////////
+
   const shortenAddress = (str) => {
     return str?.substring(0, 6) + "..." + str?.substring(str.length - 4);
   };
+
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   const getAllAddresses = async () => {
     try {
@@ -153,11 +172,14 @@ const NewDao = () => {
   useEffect(() => {
     if (hasMembership == false) return;
     getAllAddresses();
-  }, [nftBalance, editionDrop?.history]);
+  }, [nftBalance]);
+
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   const getAllBalances = async () => {
+    const holderBalance = token?.history;
     try {
-      const amounts = await token?.history.getAllHolderBalances();
+      const amounts = await holderBalance?.getAllHolderBalances();
       setMemberTokenAmounts(amounts);
       console.log("👜 Amounts", amounts);
     } catch (error) {
@@ -165,15 +187,18 @@ const NewDao = () => {
     }
   };
 
+  console.log({ memberTokenAmounts });
+
   useEffect(() => {
-    if (!nftBalance) return;
+    if (!nftBalance || !token) return;
     getAllBalances();
     // memberList();
-  }, [nftBalance]);
+  }, [nftBalance, token]);
+
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   const memberList = () => {
     return memberAddresses?.map((address, id) => {
-      key = id;
       const member = memberTokenAmounts?.find(
         ({ holder }) => holder === address
       );
@@ -184,24 +209,11 @@ const NewDao = () => {
   console.log({ nftBalance });
 
   useEffect(() => {
-    if (!nftBalance) return;
+    if (!nftBalance || !memberAddresses) return;
     memberList();
   }, [address, isVoteLoading]);
 
-  // Get Balances of Vote Contract
-  // const GetTreasureBalance = async () => {
-  //   const ownedTokenBalance = await token?.balanceOf(
-  //     "0x242E1Ce141092EE7de0c3C32a3A40Da7323449b8"
-  //   );
-  //   setTbalance(ownedTokenBalance);
-  //   console.log({ daoMember });
-
-  //   const balance = await sdk?.getBalance(
-  //     "0x242E1Ce141092EE7de0c3C32a3A40Da7323449b8"
-  //   );
-  //   setNativeBalance(balance);
-  //   console.log({ balance });
-  // };
+  //////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     if (!nftBalance) return;
@@ -239,7 +251,7 @@ const NewDao = () => {
             </Popup>
 
             <div className={style.topItemsContainer}>
-              <div className="h-[150px] flex-col text-slate-600 p-4 font-bold bg-indigo-900 shadow-xl rounded-xl w-[300px]">
+              <div className="h-[150px] flex-col text-slate-600  p-4 font-bold bg-indigo-900 shadow-xl rounded-xl w-[300px]">
                 <div>Treasury</div>
                 <div className="text-[#5271ff] flex flex-col">
                   <div>
@@ -250,9 +262,9 @@ const NewDao = () => {
                   </div>
                 </div>
               </div>
-              {/* <div className="h-[150px] flex-col text-slate-600 p-4 font-bold bg-indigo-900 shadow-xl rounded-xl w-[300px]"> */}
-              <div>
-                {/* <div> Members</div>
+              <div className="h-[150px] flex-col text-slate-600 overflow-scroll p-4 font-bold bg-indigo-900 shadow-xl rounded-xl w-[300px]">
+                <div>
+                  <div> Members</div>
                   <div className=" my-2 overflow-scroll font-bold rounded-xl  w-full">
                     <table className={style.ammtContainer}>
                       <thead>
@@ -261,19 +273,38 @@ const NewDao = () => {
                           <th className="">Token Amount</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        {memberTokenAmounts?.map((member, id) => {
-                          return (
-                            <tr key={id} className=" flex justify-between">
-                              <td>{shortenAddress(member.holder)}</td>
-                              <td>{member?.balance.displayValue}</td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
+                      {memberTokenAmounts ? (
+                        <tbody>
+                          {memberTokenAmounts.map((member, id) => {
+                            return (
+                              <tr
+                                key={id}
+                                className=" flex justify-between my-2"
+                              >
+                                <td>{shortenAddress(member.holder)}</td>
+                                <td>{member?.balance.displayValue}</td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      ) : (
+                        <tbody>
+                          {/* {memberTokenAmounts.map((member, id) => {
+                            return (
+                              <tr
+                                key={id}
+                                className=" flex justify-between my-2"
+                              >
+                                <td>{shortenAddress(member.holder)}</td>
+                                <td>{member?.balance.displayValue}</td>
+                              </tr>
+                            );
+                          })} */}
+                        </tbody>
+                      )}
                     </table>
-                  </div> */}
-                {/* </div> */}
+                  </div>
+                </div>
               </div>
             </div>
             <div className="w-3/4 rounded m-24 font-bold text-[#5271ff] bg-indigo-900 shadow-xl flex flex-col items-center justify-center p-4">
@@ -287,16 +318,26 @@ const NewDao = () => {
               <div className="flex ">
                 <button
                   onClick={() => {
-                    checkDelegate();
-                    listAmKpa();
+                    // checkDelegate();
+                    // listAmKpa();
+                    getUri();
                   }}
                   className={style.button}
                 >
                   Delegate
                 </button>
-                <Link href="/Token">
-                  <button className={style.button}>Get BNG</button>
-                </Link>
+                {/* <Link href="/Token"> */}
+                <button
+                  className={style.button}
+                  onClick={() => {
+                    // checkDelegate();
+                    // listAmKpa();
+                    getUriUrl();
+                  }}
+                >
+                  Get BNG
+                </button>
+                {/* </Link> */}
               </div>
             </div>
             <div className={style.formTitle}>New Proposal</div>
