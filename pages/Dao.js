@@ -328,7 +328,7 @@ const NewDao = () => {
                   Delegate
                 </button>
                 {/* <Link href="/Token"> */}
-                <button
+                {/* <button
                   className={style.button}
                   onClick={() => {
                     checkDelegate();
@@ -337,7 +337,7 @@ const NewDao = () => {
                   }}
                 >
                   Get BNG
-                </button>
+                </button> */}
                 {/* </Link> */}
               </div>
             </div>
