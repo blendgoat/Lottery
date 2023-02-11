@@ -10,16 +10,17 @@ import { ApeDaoContext } from "../components/Context/solutions";
 import { ThirdwebStorage } from "@thirdweb-dev/storage";
 
 const style = {
-  wrapper: `relative h-full bg-indigo-900 flex flex-col items-center  `,
+  wrapper: `relative w-screen h-full bg-indigo-900 flex flex-col items-center  `,
   mintwrapper: `h-screen p-2 w-full bg-indigo-900 flex justify-center flex-col items-center  `,
-  topContent: `flex h-screen flex-col items-center rounded-xl p-4 w-4/5 justify-center `,
-  topItemsContainer: `flex  justify-between  mt-8  rounded-xl p-8 w-4/5 `,
+
+  topItemsContainer: `flex flex-col lg:flex-row  justify-between  mt-8  rounded-xl p-8 lg:w-4/5 xl:w-4/5  `,
   ammtContainer: `text-[#5271ff] mt-2  flex-col rounded-xl  w-full `,
   topContents: `flex flex-col items-center rounded-xl p-8 w-4/5 justify-center `,
   formInputContainer: `p-2 mt-4 flex rounded bg-indigo-900 shadow-xl  w-2/3 items-center justify-center `,
   formInput: `p-2 mb-2   w-full bg-transparent h-96`,
-  formTitle: `text-2xl font-bold text-slate-600`,
-  button: ` flex shadow-xl mt-8 mx-8 w-[500px] bg-indigo-700 hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500 p-[0.8rem]  items-center justify-center h-16  rounded-lg cursor-pointer text-black`,
+  formTitle: `text-2xl font-bold text-slate-600 mt-16`,
+  buttonDelegate: ` flex shadow-xl  mx-8 w-[320px] bg-indigo-700 hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500 p-[0.8rem]  items-center justify-center h-16  rounded-lg cursor-pointer text-black`,
+  button: ` flex shadow-xl mt-8 mx-8 w-[320px] bg-indigo-700 hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500 p-[0.8rem]  items-center justify-center h-16  rounded-lg cursor-pointer text-black`,
   buttonText: ` text-xl font-semibold p-3 text-slate-200 hover:text-slate-400   `,
   nftImg: `w-[300px] mb-16 object-cover shadow-2xl`,
 };
@@ -47,13 +48,25 @@ const NewDao = () => {
   ////////////////////////////////////////////////////
   const storage = new ThirdwebStorage();
 
+  // const metadata = {
+  //   name: "BullionVoteNoDropFlat",
+  //   voting_delay_in_blocks: 0,
+  //   voting_period_in_blocks: 8600,
+  //   voting_token_address: "0xf9fAa5973C6cb15d0aAB2b9ED0eC37E0A6BaD031",
+  //   voting_quorum_fraction: 0,
+  //   proposal_token_threshold: "1000",
+  //   trusted_forwarders: [],
+  // };
+
   const metadata = {
-    name: "BullionVoteNoDropFlat",
-    voting_delay_in_blocks: 0,
-    voting_period_in_blocks: 8600,
-    voting_token_address: "0xf9fAa5973C6cb15d0aAB2b9ED0eC37E0A6BaD031",
-    voting_quorum_fraction: 0,
-    proposal_token_threshold: "1000",
+    name: "BullionDAOMembership",
+    seller_fee_basis_points: 0,
+    fee_recipient: "0x2E012dC6146049948408A5e55FCC8B680213958d",
+    merkle: {},
+    symbol: "BNGm",
+    platform_fee_basis_points: 0,
+    platform_fee_recipient: "0x2E012dC6146049948408A5e55FCC8B680213958d",
+    primary_sale_recipient: "0x2E012dC6146049948408A5e55FCC8B680213958d",
     trusted_forwarders: [],
   };
 
@@ -262,7 +275,7 @@ const NewDao = () => {
                   </div>
                 </div>
               </div>
-              <div className="h-[150px] flex-col text-slate-600 overflow-scroll p-4 font-bold bg-indigo-900 shadow-xl rounded-xl w-[300px]">
+              <div className="h-[150px] flex-col mt-8 text-slate-600 overflow-scroll p-4 font-bold bg-indigo-900 shadow-xl sm:my-8 rounded-xl w-[300px]">
                 <div>
                   <div> Members</div>
                   <div className=" my-2 overflow-scroll font-bold rounded-xl  w-full">
@@ -275,7 +288,7 @@ const NewDao = () => {
                       </thead>
                       {memberTokenAmounts ? (
                         <tbody>
-                          {memberTokenAmounts.map((member, id) => {
+                          {memberTokenAmounts?.map((member, id) => {
                             return (
                               <tr
                                 key={id}
@@ -307,8 +320,8 @@ const NewDao = () => {
                 </div>
               </div>
             </div>
-            <div className="w-3/4 rounded m-24 font-bold text-[#5271ff] bg-indigo-900 shadow-xl flex flex-col items-center justify-center p-4">
-              <div>
+            <div className="w-3/4 rounded m-16 font-bold text-[#5271ff] text-sm bg-indigo-900 shadow-xl flex flex-col items-center justify-center p-4">
+              <div className="m-8">
                 To take part in the voting and proposal process on our platform,
                 you must delegate your BNG tokens to the designated voting
                 contract. A minimum of 1000 BNG tokens is required to create
@@ -316,31 +329,17 @@ const NewDao = () => {
                 purpose of verifying your voting power and does not give any
                 control over your funds.
               </div>
-              <div className="flex ">
-                <button
-                  onClick={() => {
-                    checkDelegate();
-                    listAmKpa();
-                    // getUri();
-                  }}
-                  className={style.button}
-                >
-                  Delegate
-                </button>
-                {/* <Link href="/Token"> */}
-                {/* <button
-                  className={style.button}
-                  onClick={() => {
-                    checkDelegate();
-                    listAmKpa();
-                    // getUriUrl();
-                  }}
-                >
-                  Get BNG
-                </button> */}
-                {/* </Link> */}
-              </div>
             </div>
+            <button
+              onClick={() => {
+                checkDelegate();
+                listAmKpa();
+                // getUri();
+              }}
+              className={style.buttonDelegate}
+            >
+              Delegate
+            </button>
             <div className={style.formTitle}>New Proposal</div>
             <div className={style.formInputContainer}>
               <div className={style.formInput}>

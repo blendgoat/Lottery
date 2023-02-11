@@ -2,7 +2,7 @@ import React from "react";
 
 const style = {
   wrapper: `relative h-full w-full bg-indigo-900 flex flex-col items-center  `,
-  container: `container m-4 h-64 mt-96 w-[500px] bg-indigo-900 shadow-xl flex-col flex items-center rounded   justify-center`,
+  container: `container m-4 h-64 mt-96 w-[300px] bg-indigo-900 shadow-xl flex-col flex items-center rounded   justify-center`,
   contentWrapper: `flex h-screen relative justify-center flex-wrap items-center`,
   topContent: `flex items-center justify-center`,
 
