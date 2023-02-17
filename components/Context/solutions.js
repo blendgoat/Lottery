@@ -5,6 +5,7 @@ import {
   useAddress,
   useMetamask,
   useDisconnect,
+  useNetwork,
   useNFTBalance,
   useSDK,
 } from "@thirdweb-dev/react";
@@ -20,6 +21,8 @@ export const ApeDaoProvider = ({ children }) => {
   */
   const address = useAddress(); //Get the address using thirdwebs convenient hooks
   const sdk = useSDK();
+  const network = useNetwork();
+  console.log({ network });
 
   const { contract: editionDrop, isLoading: isNftLoading } = useContract(
     "0xa85caec09986d1AC483709A960bD1cCa972E3c44",
@@ -41,6 +44,10 @@ export const ApeDaoProvider = ({ children }) => {
 
   const { contract: token, isLoading: isTokenLoading } = useContract(
     process.env.NEXT_PUBLIC_TOKEN
+  );
+
+  const { contract: vote, isLoading: isVoteLoading } = useContract(
+    process.env.NEXT_PUBLIC_VOTE
   );
 
   // const [hasMembership, setHasMembership] = useState();
@@ -82,25 +89,47 @@ export const ApeDaoProvider = ({ children }) => {
 
   //Get all the proposals in the contract
   const getAllProposals = async () => {
-    const proposals = await contract.getAll();
+    const proposals = await vote?.getAll();
     console.log(proposals);
-    return proposals;
+  };
+
+  const executeProposal = async (id, closePop) => {
+    const canExecute = await isExecutable(id);
+    if (canExecute) {
+      try {
+        const res = await vote.execute(id);
+        console.log(res);
+        closePop();
+      } catch (error) {
+        console.log(error);
+        closePop();
+      }
+    } else {
+      console.log("Can not execute");
+    }
   };
 
   //Check if proposal given is executable
-  const isExecutable = async (id) => {};
+  const isExecutable = async (id) => {
+    const canExecute = await vote.canExecute(id);
+    return canExecute;
+  };
 
   return (
     <ApeDaoContext.Provider
       value={{
         address,
+        getAllProposals,
         nftBalance,
         daoMember,
+        network,
         nft,
         isNftLoading,
         NftImage,
+        isExecutable,
         GetTreasureBalance,
         GetTreasureBalanceNative,
+        executeProposal,
       }}
     >
       {children}

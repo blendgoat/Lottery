@@ -7,7 +7,6 @@ const index = () => {
   return (
     <div>
       <Mainpage />
-      {/* <Nftgate /> */}
     </div>
   );
 };
