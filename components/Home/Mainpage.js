@@ -21,7 +21,7 @@ const style = {
   nftImgContainer: `w-[330px] md:w-[400px] lg:w-[500] text-[#5271ff] text-sm lg:text-base p-8 m-8 card shadow-xl bg-indigo-900 border-black rounded-lg h-48 items-center `,
   timeContainer: `container justify-center w-full lg:w-full bg-indigo-900 shadow-xl rounded-lg mt-8 md:mt-16 lg:mt-32 xl:mt-32  items-center p-4 h-64 flex`,
   ethcontainer: ` max-w-[280px] flex-1  mr-2 items-center justify-center `,
-  ethLogo: `items-center justify-center w-[200px]  lg:w-[300px]`,
+  ethLogo: `items-center justify-center w-[150px]  lg:w-[300px]`,
   ethPotBalance: `items-center text-4xl lg:text-9xl text-white/75  mr-32 font-bold`,
   button: ` flex shadow-xl mb-16 xl:mb-24 w-4/5 bg:white hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500  mt-16 md:mt-24 lg:mt-8 xl:mt-24 p-[0.8rem]  items-center justify-center h-16  rounded-lg cursor-pointer text-black`,
   buttonText: ` text-xl font-semibold p-3 text-slate-200 hover:text-slate-400   `,
