@@ -159,7 +159,7 @@ const mainPage = () => {
           <h2>Entries &rarr;</h2>
           {finalPlayersList?.map((playerList, id) => (
             <div key={id}>
-              <div className="flex lg:my-[5px] my-[2px]">{`${playerList}`}</div>
+              <div className="flex lg:my-[5px] ">{`${playerList}`}</div>
             </div>
           ))}
         </div>
