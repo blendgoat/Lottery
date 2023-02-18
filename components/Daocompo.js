@@ -1,52 +1,34 @@
-import { useContract, useSDK, MediaRenderer } from "@thirdweb-dev/react";
+import { useContract, useSDK } from "@thirdweb-dev/react";
 import React, { useEffect, useState, useMemo, useContext } from "react";
 import Proposal from "./Proposal";
-import Link from "next/link";
 import Popup from "./Popup";
 import Sendingtransaction from "../components/Home/Sendingtransaction";
 import { ethers } from "ethers";
 
 import { ApeDaoContext } from "../components/Context/solutions";
 
-import { ThirdwebStorage } from "@thirdweb-dev/storage";
-
 const style = {
   wrapper: `relative w-screen h-full bg-indigo-900 flex flex-col items-center  `,
   mintwrapper: `h-screen p-2 w-full bg-indigo-900 flex justify-center flex-col items-center  `,
   topItemsContainer: `flex flex-col lg:flex-row  justify-between  mt-8  rounded-xl p-8 lg:w-4/5 xl:w-4/5  `,
-  ammtContainer: `text-[#5271ff] mt-2  flex-col rounded-xl  w-full `,
-  topContents: `flex flex-col items-center rounded-xl p-8 w-4/5 justify-center `,
   formInputContainer: `p-2 mt-4 flex rounded bg-indigo-900 shadow-xl  w-2/3 items-center justify-center `,
   formInput: `p-2 mb-2   w-full bg-transparent h-96`,
   formTitle: `text-2xl font-bold text-slate-600 mt-16`,
-  buttonDelegate: ` flex shadow-xl  mx-8 w-[320px] lg:w-[600px] bg-indigo-700 hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500 p-[0.8rem]  items-center justify-center h-16  rounded-lg cursor-pointer text-black`,
+  buttonDelegate: ` flex shadow-xl  mt-4 mb-24 w-[320px] lg:w-[600px] bg-indigo-700 hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500 p-[0.8rem]  items-center justify-center h-16  rounded-lg cursor-pointer text-black`,
   button: ` flex shadow-xl mt-8 mx-8 w-[320px] lg:w-[600px] bg-indigo-700 hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500 p-[0.8rem]  items-center justify-center h-16  rounded-lg cursor-pointer text-black`,
-  mintButton: ` flex shadow-xl mt-8  w-[320px] lg:w-[600px] bg-indigo-700 hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500 p-[0.8rem]  items-center justify-center h-16  rounded-lg cursor-pointer text-black`,
-  buttonText: ` text-xl font-semibold p-3 text-slate-200 hover:text-slate-400   `,
-  nftImg: `w-[300px] mb-16 object-cover shadow-2xl`,
 };
 
 const Daocompo = () => {
   const [proposals, setProposals] = useState([]);
   const [proposalDescription, setProposalDescription] = useState("");
-  const [memberTokenAmounts, setMemberTokenAmounts] = useState([]);
-  const [memberAddresses, setMemberAddresses] = useState([]);
   const [tbalance, setTbalance] = useState(0);
   const [nativeBalance, setNativeBalance] = useState(0);
   const [buttonPop, setButtonPop] = useState(false);
 
-  const {
-    address,
-    nftBalance,
-    daoMember,
-    GetTreasureBalance,
-    GetTreasureBalanceNative,
-    nft,
-    NftImage,
-  } = useContext(ApeDaoContext);
+  const { address, nftBalance, GetTreasureBalance, GetTreasureBalanceNative } =
+    useContext(ApeDaoContext);
 
   ////////////////////////////////////////////////////
-  const storage = new ThirdwebStorage();
 
   const { contract: token, isLoading: isTokenLoading } = useContract(
     process.env.NEXT_PUBLIC_TOKEN
@@ -55,19 +37,18 @@ const Daocompo = () => {
     process.env.NEXT_PUBLIC_VOTE
   );
 
-  const getAllProposals = async () => {
-    const proposals = await vote
-      ?.getAll()
-      .then((proposals) => {
-        setProposals(proposals?.reverse());
-        console.log(proposals);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   useEffect(() => {
+    const getAllProposals = async () => {
+      const proposals = await vote
+        ?.getAll()
+        .then((proposals) => {
+          setProposals(proposals?.reverse());
+          console.log(proposals);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
     getAllProposals();
   }, [nftBalance]);
   console.log({ proposals });
@@ -138,7 +119,7 @@ const Daocompo = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////
 
-  useEffect(() => {
+  useMemo(() => {
     if (!nftBalance) return;
     GetTreasureBalance()
       .then((ownedTokenBalance) => {
@@ -148,10 +129,7 @@ const Daocompo = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [nftBalance]);
 
-  useEffect(() => {
-    if (!nftBalance) return;
     GetTreasureBalanceNative()
       .then((balance) => {
         setNativeBalance(balance);

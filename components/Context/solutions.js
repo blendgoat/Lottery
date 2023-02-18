@@ -71,23 +71,6 @@ export const ApeDaoProvider = ({ children }) => {
     return balance;
   };
 
-  // useEffect(() => {
-  //   if (nftBalance > 0) setHasMembership(true);
-  //   console.log({ nftBalance });
-  // }, [nftBalance]);
-
-  //   const GetTreasureBalance = async () => {
-  //     const ownedTokenBalance = await token?.balanceOf(
-  //       "0x952f931A5a118Ac8a90C339A79287E998d51BEe2"
-  //     );
-
-  //     const balance = await sdk?.getBalance(
-  //       "0x2ea832c22ac15fd0c3e42bc774660d61504d9a43"
-  //     );
-  //     return balance, ownedTokenBalance;
-  //   };
-
-  //Get all the proposals in the contract
   const getAllProposals = async () => {
     const proposals = await vote?.getAll();
     console.log(proposals);

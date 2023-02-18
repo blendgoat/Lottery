@@ -186,7 +186,7 @@ export default function Proposal({
               return (
                 <div key={Math.random()}>
                   <div className="mx-2 text-sm lg:text-base font-bold">
-                    {vote.label}: {Math.trunc(voteCount)} BNG
+                    {vote.label}: {Math.trunc(voteCount)} BNGX
                   </div>
                 </div>
               );
