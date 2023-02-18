@@ -17,8 +17,8 @@ const style = {
   contentWrapper: `flex h-screen relative justify-center flex-wrap items-center`,
   topContent: `flex flex-col lg:flex-row items-center justify-center`,
 
-  detailsContainer: `w-[330px] md:w-[400px] lg:w-[500] text-sm text-[#5271ff] lg:text-base ml-4 p-8 overflow-scroll   m-8 card rounded-lg h-48 shadow-xl items-center bg-indigo-900 `,
-  nftImgContainer: `w-[330px] md:w-[400px] lg:w-[500] text-[#5271ff] text-sm lg:text-base p-8 m-8 card shadow-xl bg-indigo-900 border-black rounded-lg h-48 items-center `,
+  detailsContainer: `w-[330px] md:w-[400px] lg:w-[500] text-xs text-[#5271ff] lg:text-base ml-4 p-8 overflow-scroll   m-8 card rounded-lg h-48 shadow-xl items-center bg-indigo-900 `,
+  nftImgContainer: `w-[330px] md:w-[400px] lg:w-[500] text-[#5271ff] text-xs lg:text-base p-8 m-8 card shadow-xl bg-indigo-900 border-black rounded-lg h-48 items-center `,
   timeContainer: `container justify-center w-full lg:w-full bg-indigo-900 shadow-xl rounded-lg mt-8 md:mt-16 lg:mt-32 xl:mt-32  items-center p-4 h-64 flex`,
   ethcontainer: ` max-w-[280px] flex-1  mr-2 items-center justify-center `,
   ethLogo: `items-center justify-center w-[150px]  lg:w-[300px]`,
