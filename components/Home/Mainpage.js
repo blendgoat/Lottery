@@ -128,8 +128,8 @@ const mainPage = () => {
                 <div className={style.nftImgContainer}>
                   <h2>DO NOT ENTER &rarr;</h2>
                   <p>
-                    Lottery is currently closed and calculating winer. Click
-                    here for our terms and conditions and more information. By
+                    Game is currently closed and calculating winer. Click here
+                    for our terms and conditions and more information. By
                     entering the lottery you accept our terms and conditions.
                   </p>
 
@@ -141,7 +141,7 @@ const mainPage = () => {
                     <a href="">
                       <h2>ENTER &rarr;</h2>
                       <p>
-                        Lottery is open, press the "Enter" button to play. Click
+                        Game is open, press the "Enter" button to play. Click
                         here for our terms and conditions and more information.
                         By entering the lottery you accept our terms and
                         conditions.

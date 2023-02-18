@@ -47,7 +47,7 @@ const Maincombine = ({ children }) => {
             {netMisMatch == false && (
               <>
                 <Header />
-                {children}
+                <div>{children}</div>
                 <Footert />
               </>
             )}
