@@ -25,7 +25,7 @@ const style = {
   ethPotBalance: `items-center text-4xl lg:text-9xl text-white/75  mr-32 font-bold`,
   button: ` flex shadow-xl mb-24 xl:mb-24 w-4/5 bg:white hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500  mt-16 md:mt-24 lg:mt-8 xl:mt-24 p-[0.8rem]  items-center justify-center h-16  rounded-lg cursor-pointer text-black`,
   buttonText: ` text-xl font-semibold p-3 text-slate-200 hover:text-slate-400   `,
-  searchBar: `relative flex flex-1 my-[0.8rem] w-max-[520px] h-6 mt-4  items-center bg-lime-500 rounded-[0.8rem] `,
+  searchBar: `relative flex flex-1 lg:my-[0.8rem] w-max-[520px] h-6 mt-8 mb-2  items-center bg-lime-500 rounded-[0.8rem] `,
   searchBarClosed: `relative flex flex-1 my-[0.8rem] w-max-[520px] h-6  items-center bg-red-500 rounded-[0.8rem] `,
 };
 
