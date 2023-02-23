@@ -119,7 +119,7 @@ const Daocompo = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////
 
-  useMemo(() => {
+  useEffect(() => {
     if (!nftBalance) return;
     GetTreasureBalance()
       .then((ownedTokenBalance) => {
