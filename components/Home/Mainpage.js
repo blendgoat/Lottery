@@ -7,6 +7,8 @@ import {
   useContractRead,
   useAddress,
 } from "@thirdweb-dev/react";
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
+// import { AwsKmsWallet } from "@thirdweb-dev/sdk/evm/wallets";
 import { ethers } from "ethers";
 import styles from "../../styles/Home.module.css";
 import Popup from "../Popup";
