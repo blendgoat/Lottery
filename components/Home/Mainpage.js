@@ -5,11 +5,13 @@ import {
   useContract,
   useContractWrite,
   useContractRead,
+  useAddress,
 } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
 import styles from "../../styles/Home.module.css";
 import Popup from "../Popup";
 import Sendingtransaction from "./Sendingtransaction";
+import { client } from "../../lib/sanityClient";
 
 const style = {
   wrapper: `relative h-screen md:h-screen lg:h-full w-full bg-indigo-900 flex flex-col items-center  `,
@@ -37,6 +39,9 @@ const mainPage = () => {
   const [lotLoading, setLotLoading] = useState(true);
   const [buttonPop, setButtonPop] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [gamerId, setGamerId] = useState();
+
+  const address = useAddress();
 
   const { contract } = useContract(
     "0xd0FCC7Aa1EF5f95278Af3A85cB5e75B0443bda62"
@@ -45,8 +50,18 @@ const mainPage = () => {
   const { data, isLoading } = useContractRead(contract, "getBalance");
   const players = useContractRead(contract, "getPlayers");
   const loterryState = useContractRead(contract, "lottery_state");
+  const gameId = useContractRead(contract, "lotteryId");
 
   const finalBalance = balance?.data.toString() / ("1e" + 18);
+
+  console.log({ thePlayers });
+
+  const finGamersID = gamerId?.gameId;
+  const currentGameID = finGamersID?.data;
+
+  // const made = currentGameID?.toString();
+
+  // console.log({ made });
 
   const gamePlayers = thePlayers?.players;
   const finalPlayersList = gamePlayers?.data;
@@ -78,10 +93,27 @@ const mainPage = () => {
         value: ethers.utils.parseEther(`${entryValue}`),
       });
       console.info("contract call successs", data);
-      closePop();
+      addWhiteList();
     } catch (err) {
       console.error("contract call failure", err);
       closePop();
+    }
+  };
+
+  const addWhiteList = async () => {
+    const userDoc = {
+      _type: "users",
+      _id: address,
+      gameId: currentGameID?.toString(),
+      walletAddress: address,
+    };
+
+    try {
+      const result = await client.createIfNotExists(userDoc);
+      console.log(result);
+      closePop();
+    } catch (err) {
+      console.log({ err });
     }
   };
 
@@ -102,6 +134,11 @@ const mainPage = () => {
   useEffect(() => {
     if (!loterryState) return;
     setGameState({ loterryState });
+  }, [data]);
+
+  useEffect(() => {
+    if (!gameId) return;
+    setGamerId({ gameId });
   }, [data]);
 
   console.log({ lotLoading });
