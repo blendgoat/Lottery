@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { ConnectWallet } from "@thirdweb-dev/react";
+import { MdOutlineAccountBalanceWallet } from "react-icons/md";
+import { AiOutlineSearch } from "react-icons/ai";
+import { CgProfile } from "react-icons/cg";
+import { AiFillAlert } from "react-icons/ai";
 import {
   Web3Button,
   useContract,
@@ -16,21 +20,22 @@ import Sendingtransaction from "./Sendingtransaction";
 import { client } from "../../lib/sanityClient";
 
 const style = {
-  wrapper: `relative h-screen md:h-screen lg:h-full w-full bg-indigo-900 flex flex-col items-center  `,
+  wrapper: `relative h-screen  md:h-screen lg:h-full w-full flex flex-col items-center  `,
   container: `container m-4   flex flex-col justify-between`,
   contentWrapper: `flex h-screen relative justify-center flex-wrap items-center`,
-  topContent: `flex flex-col lg:flex-row items-center justify-center`,
+  topContent: `flex flex-col lg:flex-row w-full items-center justify-center lg:justify-between`,
 
-  detailsContainer: `w-[330px] md:w-[400px] lg:w-[500] text-xs text-[#5271ff] lg:text-base ml-4 p-4 lg:p-8 overflow-scroll   m-8 card rounded-lg h-48 shadow-xl items-center bg-indigo-900 `,
-  nftImgContainer: `w-[330px] md:w-[400px] lg:w-[500] text-[#5271ff] text-xs lg:text-base p-4 lg:p-8 m-8 card shadow-xl bg-indigo-900 border-black rounded-lg h-48 items-center `,
-  timeContainer: `container justify-center w-full lg:w-full bg-indigo-900 shadow-xl rounded-lg mt-8 md:mt-16 lg:mt-32 xl:mt-32  items-center p-4 h-64 flex`,
+  detailsContainer: ` w-[330px] md:w-[400px] lg:w-[500] text-xs text-gray-400 lg:text-base p-4 lg:p-8 overflow-scroll border-gray-300 bg-opacity-30   bg-gray-300 m-4  lg:m-8 card rounded-lg h-48  items-center  `,
+  nftImgContainer: `w-[330px] md:w-[400px] lg:w-[500] text-gray-400 text-xs  p-4 lg:p-8 m-8 card   border-gray-300 bg-gray-300 bg-opacity-30  rounded-lg h-48 items-center `,
+  timeContainer: `container justify-center w-2/3 lg:w-full  shadow-xl rounded-lg mt-32 md:mt-16 lg:mt-24 xl:mt-32 bg-gray-300 bg-opacity-30 flex-shrink-0  items-center p-4 h-32 lg:h-64 flex flex-row`,
   ethcontainer: ` max-w-[280px] flex-1  mr-2 items-center justify-center `,
-  ethLogo: `items-center justify-center w-[150px]  lg:w-[300px]`,
-  ethPotBalance: `items-center text-4xl lg:text-9xl text-white/75  mr-32 font-bold`,
-  button: ` flex shadow-xl mb-24 xl:mb-24 w-4/5 bg:white hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500  mt-16 md:mt-24 lg:mt-8 xl:mt-24 p-[0.8rem]  items-center justify-center h-16  rounded-lg cursor-pointer text-black`,
-  buttonText: ` text-xl font-semibold p-3 text-slate-200 hover:text-slate-400   `,
+  ethLogo: `items-center justify-center w-[72px]  lg:w-[300px]`,
+  ethPotBalance: `items-center text-4xl lg:text-9xl text-gray-400 mr-16  lg:mr-32 font-bold`,
+  button: ` flex shadow-xl xl:mb-16 w-4/5 bg:white hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500  mt-16 md:mt-24 lg:mt-8 xl:mt-24 p-[0.8rem]  items-center justify-center h-16  rounded-lg cursor-pointer text-black`,
+  buttonText: ` text-xl font-semibold p-3 text-gray-400 hover:text-slate-400   `,
   searchBar: `relative flex flex-1 lg:my-[0.8rem] w-max-[520px] h-6 mt-8 mb-2  items-center bg-lime-500 rounded-[0.8rem] `,
   searchBarClosed: `relative flex flex-1 my-[0.8rem] w-max-[520px] h-6  items-center bg-red-500 rounded-[0.8rem] `,
+  headerIcon: `text-[#8a939b] mb-2 text-3xl font-black hover:text-white cursor-pointer`,
 };
 
 const mainPage = () => {
@@ -46,13 +51,13 @@ const mainPage = () => {
   const address = useAddress();
 
   const { contract } = useContract(
-    "0xd0FCC7Aa1EF5f95278Af3A85cB5e75B0443bda62"
+    "0xeE3583630f0052B363c7Ad90F46346f1Bb004F73"
   );
 
   const { data, isLoading } = useContractRead(contract, "getBalance");
   const players = useContractRead(contract, "getPlayers");
-  const loterryState = useContractRead(contract, "lottery_state");
-  const gameId = useContractRead(contract, "lotteryId");
+  const loterryState = useContractRead(contract, "game_state");
+  const gameId = useContractRead(contract, "gameId");
 
   const finalBalance = balance?.data.toString() / ("1e" + 18);
 
@@ -150,7 +155,125 @@ const mainPage = () => {
   }
 
   return (
-    <div className={style.wrapper}>
+    // <div className={style.wrapper}>
+    //   <Popup trigger={buttonPop}>
+    //     <Sendingtransaction />
+    //   </Popup>
+    // </div>
+    <div class="bg-gray-50 h-full md:h-screen lg:h-full flex  justify-center  lg:px-16">
+      <div class="relative w-screen lg:mt-16">
+        <div class="absolute top-0 -left-4  w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div class="absolute top-0 -right-4  w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-violet-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-20  w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+        {/* <div class="lg:m-8 relative lg:space-y-4"></div> */}
+
+        <div className={style.wrapper}>
+          <Popup trigger={buttonPop}>
+            <Sendingtransaction />
+          </Popup>
+          <div className={style.topContent}>
+            {lotLoading ? (
+              <div className={style.nftImgContainer}>
+                <div className="text-sky-400">Loading...</div>
+              </div>
+            ) : (
+              <>
+                <div>
+                  {gameClosed ? (
+                    <div className={style.nftImgContainer}>
+                      <div
+                        className={style.headerIcon}
+                        // onClick={() => setIsOpen(true)}
+                      >
+                        <AiFillAlert />
+                      </div>
+
+                      <p>
+                        Game is currently closed and calculating winer. Click
+                        here for our terms and conditions and more information.
+                        By entering the game you accept our terms and
+                        conditions.
+                      </p>
+                      <div className={style.searchBarClosed}></div>
+                    </div>
+                  ) : (
+                    <>
+                      <div className={style.nftImgContainer}>
+                        <div
+                          className={style.headerIcon}
+                          // onClick={() => setIsOpen(true)}
+                        >
+                          <AiFillAlert />
+                        </div>
+
+                        <p>
+                          Game is open, press the "Enter" button to play. By
+                          entering the game you accept our terms and conditions.
+                        </p>
+
+                        <div className={style.searchBar}></div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </>
+            )}
+
+            <div className={style.detailsContainer}>
+              <div
+                className={style.headerIcon}
+                // onClick={() => setIsOpen(true)}
+              >
+                <CgProfile />
+              </div>
+              {finalPlayersList?.map((playerList, id) => (
+                <div key={id} className="my-2">{`${playerList}`}</div>
+              ))}
+            </div>
+          </div>
+
+          <div className={style.timeContainer}>
+            {isLoading ? (
+              <div className="text-sky-400">Loading</div>
+            ) : (
+              <>
+                <div>
+                  <img
+                    src="/Binance-Icon-Logo.wine.svg"
+                    alt="eth"
+                    className={style.ethLogo}
+                  />
+                </div>
+                <div>
+                  <div className="text-xl text-gray-400 lg:2-xl">
+                    POT BALANCE
+                  </div>
+                  <div className={style.ethPotBalance}>
+                    <div>{`${finalBalance}`} BNB</div>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+
+          <div
+            className={style.button}
+            onClick={() => {
+              enterLottery();
+              listAmKpa();
+            }}
+          >
+            <div className={style.buttonText}>Enter</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default mainPage;
+
+/* <div className={style.wrapper}>
       <Popup trigger={buttonPop}>
         <Sendingtransaction />
       </Popup>
@@ -158,7 +281,7 @@ const mainPage = () => {
       <div className={style.topContent}>
         {lotLoading ? (
           <div className={style.nftImgContainer}>
-            <div className="text-sky-400">Loading...</div>
+            <div className="text-sky-400">Loading...</div> 
           </div>
         ) : (
           <>
@@ -169,7 +292,7 @@ const mainPage = () => {
                   <p>
                     Game is currently closed and calculating winer. Click here
                     for our terms and conditions and more information. By
-                    entering the lottery you accept our terms and conditions.
+                    entering the game you accept our terms and conditions.
                   </p>
 
                   <div className={style.searchBarClosed}></div>
@@ -182,7 +305,7 @@ const mainPage = () => {
                       <p>
                         Game is open, press the "Enter" button to play. Click
                         here for our terms and conditions and more information.
-                        By entering the lottery you accept our terms and
+                        By entering the game you accept our terms and
                         conditions.
                       </p>
                     </a>
@@ -217,7 +340,7 @@ const mainPage = () => {
               <div className="text-xl lg:2-xl">POT BALANCE</div>
               <div className={style.ethPotBalance}>
                 <div>{`${finalBalance}`} BNB</div>
-                {/* <div>1000000000 BNB</div> */}
+                
               </div>
             </div>
           </>
@@ -233,8 +356,4 @@ const mainPage = () => {
       >
         <div className={style.buttonText}>Enter</div>
       </div>
-    </div>
-  );
-};
-
-export default mainPage;
+    </div> */

@@ -14,8 +14,8 @@ import styles from "../styles/Home.module.css";
 const style = {
   logoContainer: ` flex h-[30px] items-center justify-center cursor-pointer`,
   connect: `m-2 w-[230px]`,
-  headerItems: ` flex items-center justify-end mr-8`,
-  headerItem: `text-[#5271ff] px-4 font-bold my-2  hover:text-white cursor-pointer`,
+  headerItems: ` flex font-sans  items-center justify-end `,
+  headerItem: `text-gray-900 px-24 hover:text-white cursor-pointer`,
 };
 
 const Header = ({ setIsOpen, refine }) => {
@@ -41,8 +41,8 @@ const Header = ({ setIsOpen, refine }) => {
   //   );
 
   return (
-    <div className="flex md:flex-row flex-col-reverse justify-between bg-slate-800 gap-6">
-      <div className="sm:flex hidden flex w-full flex-row items-center justify-between">
+    <div className="flex md:flex-row flex-col-reverse justify-between gap-6">
+      <div className="sm:flex hidden flex w-full flex-row fixed z-10 items-center justify-between">
         <div>
           <Link href="/">
             <img
@@ -53,32 +53,31 @@ const Header = ({ setIsOpen, refine }) => {
           </Link>
         </div>
         <div className="flex">
-          <div className="mr-8">
-            <div className={style.connect}>
-              <ConnectWallet />
-            </div>
-          </div>
-
           <div className={style.headerItems}>
             <Link href="/">
               <div className={style.headerItem}>
-                <div>HOME</div>
+                <div className="text-sm">HOME</div>
               </div>
             </Link>
           </div>
           <div className={style.headerItems}>
             <Link href="/Dao">
               <div className={style.headerItem}>
-                <div>DAO</div>
+                <div className="text-sm">DAO</div>
               </div>
             </Link>
           </div>
           <div className={style.headerItems}>
             <Link href="/Aboutus">
               <div className={style.headerItem}>
-                <div>ABOUT</div>
+                <div className="text-sm">ABOUT</div>
               </div>
             </Link>
+          </div>
+          <div className="mr-8">
+            <div className={style.connect}>
+              <ConnectWallet accentColor="#f9fafb" border-radius="9999px" />
+            </div>
           </div>
         </div>
       </div>

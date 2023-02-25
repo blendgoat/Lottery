@@ -4,18 +4,26 @@ import Proposal from "./Proposal";
 import Popup from "./Popup";
 import Sendingtransaction from "../components/Home/Sendingtransaction";
 import { ethers } from "ethers";
+import { AiFillAlert, AiFillAccountBook } from "react-icons/ai";
 
 import { ApeDaoContext } from "../components/Context/solutions";
+import Footert from "./Footert";
 
 const style = {
-  wrapper: `relative w-screen h-full bg-indigo-900 flex flex-col items-center  `,
+  wrapperMain: `w-full p-8 lg:p-16 h-screen md:h-screen lg:h-full bg-gray-50 flex flex-col items-center  `,
+  wrapper: `relative  w-full flex flex-col items-center  `,
+
   mintwrapper: `h-screen p-2 w-full bg-indigo-900 flex justify-center flex-col items-center  `,
-  topItemsContainer: `flex flex-col lg:flex-row  justify-between  mt-8  rounded-xl p-8 lg:w-4/5 xl:w-4/5  `,
-  formInputContainer: `p-2 mt-4 flex rounded bg-indigo-900 shadow-xl  w-2/3 items-center justify-center `,
-  formInput: `p-2 mb-2   w-full bg-transparent h-96`,
-  formTitle: `text-2xl font-bold text-slate-600 mt-16`,
-  buttonDelegate: ` flex shadow-xl  mt-4 mb-24 w-[320px] lg:w-[600px] bg-indigo-700 hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500 p-[0.8rem]  items-center justify-center h-16  rounded-lg cursor-pointer text-black`,
-  button: ` flex shadow-xl mt-8 mx-8 w-[320px] lg:w-[600px] bg-indigo-700 hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500 p-[0.8rem]  items-center justify-center h-16  rounded-lg cursor-pointer text-black`,
+  topContent: `flex  flex-col  lg:flex-row w-full items-center justify-center lg:justify-between`,
+  nftImgContainer: `w-[330px] md:w-[400px] lg:w-[500] text-gray-400 text-xs  p-4 lg:p-8 m-8 card   border-gray-300 bg-gray-300  bg-opacity-30  rounded-lg h-64 items-center `,
+
+  // topItemsContainer: `flex flex-col lg:flex-row  justify-between  mt-8  rounded-xl p-8 lg:w-4/5 xl:w-4/5  `,
+  formInputContainer: `p-2 mt-4 flex rounded  shadow-xl bg-gray-300 bg-opacity-30  w-full items-center justify-center `,
+  formInput: `p-2 mb-2 w-full   bg-transparent lg:h-96 h-48`,
+  formTitle: `text-2xl font-bold text-slate-600 mt-8`,
+  buttonDelegate: ` flex shadow-xl bg-opacity-30 mt-8  lg:mt-[16px] mb-24 w-[130px] lg:w-[130px] bg-indigo-700 hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500 p-[0.8rem]  items-center justify-center h-[40px]  rounded-lg cursor-pointer text-black`,
+  button: ` flex bg-opacity-30 shadow-xl mt-8 mx-8 w-[320px] lg:w-[600px] bg-gray-300 hover:bg-gradient-to-r from-indigo-500   via-pink-500 to-pink-500 p-[0.8rem]  items-center justify-center h-16  rounded-lg cursor-pointer text-black`,
+  headerIcon: `text-[#8a939b] mb-4 text-3xl font-black hover:text-white cursor-pointer`,
 };
 
 const Daocompo = () => {
@@ -141,71 +149,92 @@ const Daocompo = () => {
   }, [nftBalance]);
 
   return (
-    <div className={style.wrapper}>
-      <Popup trigger={buttonPop}>
-        <div className="w-full">
-          <Sendingtransaction />
-        </div>
-      </Popup>
-
-      <div className={style.topItemsContainer}>
-        <div className="h-[150px] flex-col text-slate-600  p-4 font-bold bg-indigo-900 shadow-xl rounded-xl w-[300px]">
-          <div>Treasury</div>
-          <div className="text-[#5271ff] flex flex-col">
-            <div>
-              {tbalance?.symbol}: {tbalance?.displayValue}
+    <div class="relative snap-y snap-mandatory overflow-scroll bg-gray-50 h-screen md:h-screen lg:h-screen  justify-center bg-fixed">
+      <div className="fixed h-screen md:h-screen w-screen flex items-center lg:h-full">
+        <div class="absolute top-0 -left-4 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-rose-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob "></div>
+        <div class="absolute top-0 -right-4 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-20 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+        <div class="m-8 relative space-y-4"></div>
+      </div>
+      <div className="relative snap-start w-screen h-screen  p-4 lg:p-16 flex flex-col items-center">
+        <div className={style.topContent}>
+          <div className={style.nftImgContainer}>
+            <div
+              className={style.headerIcon}
+              // onClick={() => setIsOpen(true)}
+            >
+              <AiFillAlert />
             </div>
             <div>
-              {nativeBalance?.symbol}: {nativeBalance?.displayValue}
+              To take part in the voting and proposal process on our platform,
+              you must delegate your BNG tokens to the designated voting
+              contract. A minimum of 1000 BNG tokens is required to create
+              proposals. Please note that this delegation is solely for the
+              purpose of verifying your voting power and does not give any
+              control over your funds.
+            </div>
+            <button
+              onClick={() => {
+                checkDelegate();
+                listAmKpa();
+                // getUri();
+              }}
+              className={style.buttonDelegate}
+            >
+              Delegate
+            </button>
+          </div>
+          <div className={style.nftImgContainer}>
+            <div
+              className={style.headerIcon}
+              // onClick={() => setIsOpen(true)}
+            >
+              <AiFillAccountBook />
+            </div>
+            <div className="my-4">
+              <div className="font-bold">
+                {tbalance?.symbol}: {tbalance?.displayValue}
+              </div>
+              <div className="my-2"></div>
+              <div className="font-bold">
+                {nativeBalance?.symbol}: {nativeBalance?.displayValue}
+              </div>
+            </div>
+            <div>
+              The amounts displayed above indicate the total funds held by the
+              treasury. The treasury is programmed to releass a maximum of
+              5000BNGX and 1BNB per proposal which requires funding. These
+              ammounts may be reviewed upwards by the community.
             </div>
           </div>
         </div>
-      </div>
-      <div className="w-3/4 rounded m-16 font-bold text-[#5271ff] text-sm bg-indigo-900 shadow-xl flex flex-col items-center justify-center p-4">
-        <div className="m-8">
-          To take part in the voting and proposal process on our platform, you
-          must delegate your BNG tokens to the designated voting contract. A
-          minimum of 1000 BNG tokens is required to create proposals. Please
-          note that this delegation is solely for the purpose of verifying your
-          voting power and does not give any control over your funds.
+        <div className={style.formTitle}>New Proposal</div>
+        <div className={style.formInputContainer}>
+          <div className={style.formInput}>
+            <textarea
+              type="text"
+              value={proposalDescription}
+              onChange={(e) => setProposalDescription(e.target.value)}
+              placeholder="Description..."
+              className={style.formInput}
+            />
+          </div>
+        </div>
+        <div>
+          <button
+            className={style.button}
+            disabled={isVoteLoading}
+            onClick={() => {
+              createProposal();
+              listAmKpa();
+            }}
+          >
+            <div>Create Proposal</div>
+          </button>
         </div>
       </div>
-      <button
-        onClick={() => {
-          checkDelegate();
-          listAmKpa();
-          // getUri();
-        }}
-        className={style.buttonDelegate}
-      >
-        Delegate
-      </button>
-      <div className={style.formTitle}>New Proposal</div>
-      <div className={style.formInputContainer}>
-        <div className={style.formInput}>
-          <textarea
-            type="text"
-            value={proposalDescription}
-            onChange={(e) => setProposalDescription(e.target.value)}
-            placeholder="Description..."
-            className={style.formInput}
-          />
-        </div>
-      </div>
-      <div>
-        <button
-          className={style.button}
-          disabled={isVoteLoading}
-          onClick={() => {
-            createProposal();
-            listAmKpa();
-          }}
-        >
-          <div>Create Proposal</div>
-        </button>
-      </div>
-      <div className="w-2/3 mt-24">
-        {proposals?.map((proposal, id) => (
+      {proposals?.map((proposal, id) => (
+        <div className="snap-start mt-32 relative w-screen h-screen flex items-center justify-center">
           <Proposal
             proposalId={proposal.proposalId}
             description={proposal.description}
@@ -214,10 +243,118 @@ const Daocompo = () => {
             listAmKpa={listAmKpa}
             closePop={closePop}
           />
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 };
 
 export default Daocompo;
+
+{
+  /* <div class="relative w-full justify-center  flex mt-16">
+        <div className="fixed h-screen md:h-screen lg:h-full">
+          <div class="absolute top-0 -left-4 w-[720px] h-[720px] bg-rose-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob "></div>
+          <div class="absolute top-0 -right-4 w-[720px] h-[720px] bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+          <div class="absolute -bottom-8 left-20 w-[720px] h-[720px] bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+          <div class="m-8 relative space-y-4"></div>
+        </div>
+        <div className={style.wrapper}>
+          <Popup trigger={buttonPop}>
+            <div className="w-full">
+              <Sendingtransaction />
+            </div>
+          </Popup>
+          <div className={style.topContent}>
+            <div className={style.nftImgContainer}>
+              <div
+                className={style.headerIcon}
+                // onClick={() => setIsOpen(true)}
+              >
+                <AiFillAlert />
+              </div>
+              <div>
+                To take part in the voting and proposal process on our platform,
+                you must delegate your BNG tokens to the designated voting
+                contract. A minimum of 1000 BNG tokens is required to create
+                proposals. Please note that this delegation is solely for the
+                purpose of verifying your voting power and does not give any
+                control over your funds.
+              </div>
+              <button
+                onClick={() => {
+                  checkDelegate();
+                  listAmKpa();
+                  // getUri();
+                }}
+                className={style.buttonDelegate}
+              >
+                Delegate
+              </button>
+            </div>
+            <div className={style.nftImgContainer}>
+              <div
+                className={style.headerIcon}
+                // onClick={() => setIsOpen(true)}
+              >
+                <AiFillAccountBook />
+              </div>
+              <div>
+                To take part in the voting and proposal process on our platform,
+                you must delegate your BNG tokens to the designated voting
+                contract. A minimum of 1000 BNG tokens is required to create
+                proposals. Please note that this delegation is solely for the
+                purpose of verifying your voting power and does not give any
+                control over your funds.
+              </div>
+              <div className="my-4">
+                <div className="font-bold">
+                  {tbalance?.symbol}: {tbalance?.displayValue}
+                </div>
+                <div className="my-2"></div>
+                <div className="font-bold">
+                  {nativeBalance?.symbol}: {nativeBalance?.displayValue}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className={style.formTitle}>New Proposal</div>
+          <div className={style.formInputContainer}>
+            <div className={style.formInput}>
+              <textarea
+                type="text"
+                value={proposalDescription}
+                onChange={(e) => setProposalDescription(e.target.value)}
+                placeholder="Description..."
+                className={style.formInput}
+              />
+            </div>
+          </div>
+          <div>
+            <button
+              className={style.button}
+              disabled={isVoteLoading}
+              onClick={() => {
+                createProposal();
+                listAmKpa();
+              }}
+            >
+              <div>Create Proposal</div>
+            </button>
+          </div>
+          <div className="w-2/3 mt-24">
+            {proposals?.map((proposal, id) => (
+              <Proposal
+                proposalId={proposal.proposalId}
+                description={proposal.description}
+                key={Math.random()}
+                proposal={proposal}
+                listAmKpa={listAmKpa}
+                closePop={closePop}
+              />
+            ))}
+          </div>
+        </div>
+      </div> */
+}
