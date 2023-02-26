@@ -76,6 +76,8 @@ const Gamefrontopen = () => {
   const gameStateData = gameState?.loterryState;
   const currentGameState = gameStateData?.data;
 
+  console.log({ currentGameState });
+
   const listAmKpa = () => {
     setLoading(true);
     setButtonPop(true);
@@ -164,13 +166,34 @@ const Gamefrontopen = () => {
           >
             <AiFillAlert />
           </div>
-          <div>
-            <p>
-              Game is open, press the "Enter" button to play. By entering the
-              game you accept our terms and conditions.
-            </p>
-          </div>
-          <div className={style.searchBar}></div>
+          {lotLoading ? (
+            <div className="text-sky-400">Loading...</div>
+          ) : (
+            <div>
+              {currentGameState == 0 && (
+                <>
+                  <div>
+                    <p>
+                      Game is open, press the "Enter" button to play. By
+                      entering the game you accept our terms and conditions.
+                    </p>
+                  </div>
+                  <div className={style.searchBar}></div>
+                </>
+              )}
+              {currentGameState > 0 && (
+                <>
+                  <div>
+                    <p>
+                      Game is currently closed and calculating winer. By
+                      entering the game you accept our terms and conditions.
+                    </p>
+                  </div>
+                  <div className={style.searchBarClosed}></div>
+                </>
+              )}
+            </div>
+          )}
         </div>
         <div className={style.nftImgContainer}>
           <div className={style.headerIcon}>
@@ -194,9 +217,13 @@ const Gamefrontopen = () => {
         </div>
         <div>
           <div className="text-xl text-gray-400 lg:2-xl">POT BALANCE</div>
-          <div className={style.ethPotBalance}>
-            <div>{`${finalBalance}`} BNB</div>
-          </div>
+          {lotLoading ? (
+            <div className="text-sky-400">Loading...</div>
+          ) : (
+            <div className={style.ethPotBalance}>
+              <div>{`${finalBalance}`} BNB</div>
+            </div>
+          )}
         </div>
       </div>
       <div

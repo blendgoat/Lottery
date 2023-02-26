@@ -10,7 +10,7 @@ const style = {
 
 const Footert = () => {
   return (
-    <div className="flex md:flex-row  justify-center p-4 bg-gray-50 gap-6">
+    <div className="relative flex md:flex-row  justify-center p-4 bg-gray-50 gap-6">
       <div>
         <a
           target="_blank"
