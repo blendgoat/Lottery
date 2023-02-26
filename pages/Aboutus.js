@@ -262,7 +262,7 @@ const CryptoLottery = () => {
                   <h3 className="text-lg font-bold text-gray-900 mb-2">
                     {contract.name}
                   </h3>
-                  <p className="text-gray-500">
+                  <p className="text-gray-500 lg:text-base text-sm">
                     Contract Address: {contract.address}
                   </p>
                 </div>

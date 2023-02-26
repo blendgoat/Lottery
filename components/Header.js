@@ -15,7 +15,7 @@ const style = {
   logoContainer: ` flex h-[30px] items-center justify-center cursor-pointer`,
   connect: `m-2 w-[230px]`,
   headerItems: ` flex font-sans  items-center justify-end `,
-  headerItem: `text-gray-900 px-24 hover:text-white cursor-pointer`,
+  headerItem: `text-gray-50 px-24 hover:text-gray-900 cursor-pointer`,
 };
 
 const Header = ({ setIsOpen, refine }) => {
@@ -98,11 +98,11 @@ const Header = ({ setIsOpen, refine }) => {
           onClick={() => SetToggleDrawer((prev) => !prev)}
         />
         <div
-          className={`absolute top-[60px] flex right-0 left-0 bg-[#1c1c24] z-10 shadow-secondary py-4 px-8 ${
+          className={`absolute top-[60px] flex right-0 left-0 bg-[#1c1c24]  z-10 shadow-secondary py-4 px-8 ${
             !toggleDrawer ? "-translate-y-[100vh]" : "translate-y-0"
           } transition-all duration-700`}
         >
-          <div className="w-full flex flex-col items-center justify-center">
+          <div className="w-full flex flex-col  items-center justify-center">
             <Link href="/">
               <div
                 className={style.headerItem}
