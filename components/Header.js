@@ -16,6 +16,7 @@ const style = {
   connect: `m-2 w-[230px]`,
   headerItems: ` flex font-sans  items-center justify-end `,
   headerItem: `text-gray-50 px-24 hover:text-gray-900 cursor-pointer`,
+  headerItemM: `text-gray-900 px-24 hover:text-gray-50 cursor-pointer`,
 };
 
 const Header = ({ setIsOpen, refine }) => {
@@ -55,21 +56,21 @@ const Header = ({ setIsOpen, refine }) => {
         <div className="flex">
           <div className={style.headerItems}>
             <Link href="/">
-              <div className={style.headerItem}>
+              <div className={style.headerItemM}>
                 <div className="text-sm">HOME</div>
               </div>
             </Link>
           </div>
           <div className={style.headerItems}>
             <Link href="/Dao">
-              <div className={style.headerItem}>
+              <div className={style.headerItemM}>
                 <div className="text-sm">DAO</div>
               </div>
             </Link>
           </div>
           <div className={style.headerItems}>
             <Link href="/Aboutus">
-              <div className={style.headerItem}>
+              <div className={style.headerItemM}>
                 <div className="text-sm">ABOUT</div>
               </div>
             </Link>
