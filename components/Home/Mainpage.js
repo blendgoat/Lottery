@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { ConnectWallet } from "@thirdweb-dev/react";
-import { MdOutlineAccountBalanceWallet } from "react-icons/md";
-import { AiOutlineSearch } from "react-icons/ai";
-import { CgProfile } from "react-icons/cg";
-import { AiFillAlert } from "react-icons/ai";
+import Footert from "../Footert";
+import Gamefrontopen from "./Gamefront/Gamefrontopen";
 import {
   Web3Button,
   useContract,
@@ -39,321 +36,137 @@ const style = {
 };
 
 const mainPage = () => {
-  const [balance, setBalance] = useState();
-  const [thePlayers, setThePlayers] = useState();
-  const [gameState, setGameState] = useState();
-  const [gameClosed, setGameClosed] = useState();
-  const [lotLoading, setLotLoading] = useState(true);
-  const [buttonPop, setButtonPop] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [gamerId, setGamerId] = useState();
+  // const [balance, setBalance] = useState();
+  // const [thePlayers, setThePlayers] = useState();
+  // const [gameState, setGameState] = useState();
+  // const [gameClosed, setGameClosed] = useState();
+  // const [lotLoading, setLotLoading] = useState(true);
+  // const [buttonPop, setButtonPop] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  // const [gamerId, setGamerId] = useState();
 
-  const address = useAddress();
+  // const address = useAddress();
 
-  const { contract } = useContract(
-    "0xeE3583630f0052B363c7Ad90F46346f1Bb004F73"
-  );
+  // const { contract } = useContract(
+  //   "0xeE3583630f0052B363c7Ad90F46346f1Bb004F73"
+  // );
 
-  const { data, isLoading } = useContractRead(contract, "getBalance");
-  const players = useContractRead(contract, "getPlayers");
-  const loterryState = useContractRead(contract, "game_state");
-  const gameId = useContractRead(contract, "gameId");
+  // const { data, isLoading } = useContractRead(contract, "getBalance");
+  // const players = useContractRead(contract, "getPlayers");
+  // const loterryState = useContractRead(contract, "game_state");
+  // const gameId = useContractRead(contract, "gameId");
 
-  const finalBalance = balance?.data.toString() / ("1e" + 18);
+  // const finalBalance = balance?.data.toString() / ("1e" + 18);
 
-  console.log({ thePlayers });
+  // console.log({ thePlayers });
 
-  const finGamersID = gamerId?.gameId;
-  const currentGameID = finGamersID?.data;
+  // const finGamersID = gamerId?.gameId;
+  // const currentGameID = finGamersID?.data;
 
-  // const made = currentGameID?.toString();
+  // // const made = currentGameID?.toString();
 
-  // console.log({ made });
+  // // console.log({ made });
 
-  const gamePlayers = thePlayers?.players;
-  const finalPlayersList = gamePlayers?.data;
+  // const gamePlayers = thePlayers?.players;
+  // const finalPlayersList = gamePlayers?.data;
 
-  const gameStateData = gameState?.loterryState;
-  const currentGameState = gameStateData?.data;
+  // const gameStateData = gameState?.loterryState;
+  // const currentGameState = gameStateData?.data;
 
-  const listAmKpa = () => {
-    setLoading(true);
-    setButtonPop(true);
-  };
+  // const listAmKpa = () => {
+  //   setLoading(true);
+  //   setButtonPop(true);
+  // };
 
-  useEffect(() => {
-    if (currentGameState != 0) setGameClosed(true);
-    else {
-      setGameClosed(false);
-    }
-  }, [currentGameState]);
+  // useEffect(() => {
+  //   if (currentGameState != 0) setGameClosed(true);
+  //   else {
+  //     setGameClosed(false);
+  //   }
+  // }, [currentGameState]);
 
-  useEffect(() => {
-    if (!thePlayers) return;
-    setLotLoading(false);
-  }, [data]);
+  // useEffect(() => {
+  //   if (!thePlayers) return;
+  //   setLotLoading(false);
+  // }, [data]);
 
-  const enterLottery = async () => {
-    const entryValue = 0.01;
-    try {
-      const data = await contract.call("enter", {
-        value: ethers.utils.parseEther(`${entryValue}`),
-      });
-      console.info("contract call successs", data);
-      addWhiteList();
-    } catch (err) {
-      console.error("contract call failure", err);
-      closePop();
-    }
-  };
+  // const enterLottery = async () => {
+  //   const entryValue = 0.01;
+  //   try {
+  //     const data = await contract.call("enter", {
+  //       value: ethers.utils.parseEther(`${entryValue}`),
+  //     });
+  //     console.info("contract call successs", data);
+  //     addWhiteList();
+  //   } catch (err) {
+  //     console.error("contract call failure", err);
+  //     closePop();
+  //   }
+  // };
 
-  const addWhiteList = async () => {
-    const userDoc = {
-      _type: "users",
-      _id: address,
-      gameId: currentGameID?.toString(),
-      walletAddress: address,
-    };
+  // const addWhiteList = async () => {
+  //   const userDoc = {
+  //     _type: "users",
+  //     _id: address,
+  //     gameId: currentGameID?.toString(),
+  //     walletAddress: address,
+  //   };
 
-    try {
-      const result = await client.createIfNotExists(userDoc);
-      console.log(result);
-      closePop();
-    } catch (err) {
-      console.log({ err });
-    }
-  };
+  //   try {
+  //     const result = await client.createIfNotExists(userDoc);
+  //     console.log(result);
+  //     closePop();
+  //   } catch (err) {
+  //     console.log({ err });
+  //   }
+  // };
 
-  const closePop = () => {
-    setButtonPop(false);
-  };
+  // const closePop = () => {
+  //   setButtonPop(false);
+  // };
 
-  useEffect(() => {
-    if (!data) return;
-    setBalance({ data });
-  }, [data]);
+  // useEffect(() => {
+  //   if (!data) return;
+  //   setBalance({ data });
+  // }, [data]);
 
-  useEffect(() => {
-    if (!players) return;
-    setThePlayers({ players });
-  }, [data]);
+  // useEffect(() => {
+  //   if (!players) return;
+  //   setThePlayers({ players });
+  // }, [data]);
 
-  useEffect(() => {
-    if (!loterryState) return;
-    setGameState({ loterryState });
-  }, [data]);
+  // useEffect(() => {
+  //   if (!loterryState) return;
+  //   setGameState({ loterryState });
+  // }, [data]);
 
-  useEffect(() => {
-    if (!gameId) return;
-    setGamerId({ gameId });
-  }, [data]);
+  // useEffect(() => {
+  //   if (!gameId) return;
+  //   setGamerId({ gameId });
+  // }, [data]);
 
-  console.log({ lotLoading });
+  // console.log({ lotLoading });
 
-  for (var i = 0; i < finalPlayersList?.length; i++) {
-    console.log({ finalPlayersList });
-  }
+  // for (var i = 0; i < finalPlayersList?.length; i++) {
+  //   console.log({ finalPlayersList });
+  // }
 
   return (
-    // <div className={style.wrapper}>
-    //   <Popup trigger={buttonPop}>
-    //     <Sendingtransaction />
-    //   </Popup>
-    // </div>
-    <div class="bg-gray-50 h-full md:h-screen lg:h-full flex  justify-center  lg:px-16">
-      <div class="relative w-screen lg:mt-16">
-        <div class="absolute top-0 -left-4  w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-        <div class="absolute top-0 -right-4  w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-violet-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div class="absolute -bottom-8 left-20  w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-        {/* <div class="lg:m-8 relative lg:space-y-4"></div> */}
-
-        <div className={style.wrapper}>
-          <Popup trigger={buttonPop}>
-            <Sendingtransaction />
-          </Popup>
-          <div className={style.topContent}>
-            {lotLoading ? (
-              <div className={style.nftImgContainer}>
-                <div className="text-sky-400">Loading...</div>
-              </div>
-            ) : (
-              <>
-                <div>
-                  {gameClosed ? (
-                    <div className={style.nftImgContainer}>
-                      <div
-                        className={style.headerIcon}
-                        // onClick={() => setIsOpen(true)}
-                      >
-                        <AiFillAlert />
-                      </div>
-
-                      <p>
-                        Game is currently closed and calculating winer. Click
-                        here for our terms and conditions and more information.
-                        By entering the game you accept our terms and
-                        conditions.
-                      </p>
-                      <div className={style.searchBarClosed}></div>
-                    </div>
-                  ) : (
-                    <>
-                      <div className={style.nftImgContainer}>
-                        <div
-                          className={style.headerIcon}
-                          // onClick={() => setIsOpen(true)}
-                        >
-                          <AiFillAlert />
-                        </div>
-
-                        <p>
-                          Game is open, press the "Enter" button to play. By
-                          entering the game you accept our terms and conditions.
-                        </p>
-
-                        <div className={style.searchBar}></div>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </>
-            )}
-
-            <div className={style.detailsContainer}>
-              <div
-                className={style.headerIcon}
-                // onClick={() => setIsOpen(true)}
-              >
-                <CgProfile />
-              </div>
-              {finalPlayersList?.map((playerList, id) => (
-                <div key={id} className="my-2">{`${playerList}`}</div>
-              ))}
-            </div>
-          </div>
-
-          <div className={style.timeContainer}>
-            {isLoading ? (
-              <div className="text-sky-400">Loading</div>
-            ) : (
-              <>
-                <div>
-                  <img
-                    src="/Binance-Icon-Logo.wine.svg"
-                    alt="eth"
-                    className={style.ethLogo}
-                  />
-                </div>
-                <div>
-                  <div className="text-xl text-gray-400 lg:2-xl">
-                    POT BALANCE
-                  </div>
-                  <div className={style.ethPotBalance}>
-                    <div>{`${finalBalance}`} BNB</div>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
-
-          <div
-            className={style.button}
-            onClick={() => {
-              enterLottery();
-              listAmKpa();
-            }}
-          >
-            <div className={style.buttonText}>Enter</div>
-          </div>
-        </div>
+    <div class="relative snap-y snap-mandatory overflow-scroll bg-gray-50 h-screen md:h-screen lg:h-screen  justify-center bg-fixed">
+      <div className="fixed h-screen md:h-screen w-screen flex items-center lg:h-full">
+        <div class="absolute top-0 -left-4 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-rose-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob "></div>
+        <div class="absolute top-0 -right-4 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-20 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+        <div class="m-8 relative space-y-4"></div>
+      </div>
+      <div className="relative snap-start w-screen h-screen mb-8  p-4 lg:p-16 flex flex-col items-center">
+        <Gamefrontopen />
+      </div>
+      <div className="absolute inset-x-0 bottom-0">
+        <Footert />
       </div>
     </div>
   );
 };
 
 export default mainPage;
-
-/* <div className={style.wrapper}>
-      <Popup trigger={buttonPop}>
-        <Sendingtransaction />
-      </Popup>
-
-      <div className={style.topContent}>
-        {lotLoading ? (
-          <div className={style.nftImgContainer}>
-            <div className="text-sky-400">Loading...</div> 
-          </div>
-        ) : (
-          <>
-            <div>
-              {gameClosed ? (
-                <div className={style.nftImgContainer}>
-                  <h2>DO NOT ENTER &rarr;</h2>
-                  <p>
-                    Game is currently closed and calculating winer. Click here
-                    for our terms and conditions and more information. By
-                    entering the game you accept our terms and conditions.
-                  </p>
-
-                  <div className={style.searchBarClosed}></div>
-                </div>
-              ) : (
-                <>
-                  <div className={style.nftImgContainer}>
-                    <a href="">
-                      <h2>ENTER &rarr;</h2>
-                      <p>
-                        Game is open, press the "Enter" button to play. Click
-                        here for our terms and conditions and more information.
-                        By entering the game you accept our terms and
-                        conditions.
-                      </p>
-                    </a>
-                    <div className={style.searchBar}></div>
-                  </div>
-                </>
-              )}
-            </div>
-          </>
-        )}
-
-        <div className={style.detailsContainer}>
-          <h2>Entries &rarr;</h2>
-          {finalPlayersList?.map((playerList, id) => (
-            <div key={id} className="my-2">{`${playerList}`}</div>
-          ))}
-        </div>
-      </div>
-
-      <div className={style.timeContainer}>
-        {isLoading ? (
-          <div className="text-sky-400">Loading</div>
-        ) : (
-          <>
-            <img
-              src="/Binance-Icon-Logo.wine.svg"
-              alt="eth"
-              className={style.ethLogo}
-            />
-
-            <div>
-              <div className="text-xl lg:2-xl">POT BALANCE</div>
-              <div className={style.ethPotBalance}>
-                <div>{`${finalBalance}`} BNB</div>
-                
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-
-      <div
-        className={style.button}
-        onClick={() => {
-          enterLottery();
-          listAmKpa();
-        }}
-      >
-        <div className={style.buttonText}>Enter</div>
-      </div>
-    </div> */

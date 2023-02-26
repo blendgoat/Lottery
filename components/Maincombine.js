@@ -48,7 +48,9 @@ const Maincombine = ({ children }) => {
               <>
                 <Header />
                 {children}
-                <Footert />
+                {/* <div className="sm:flex hidden w-screen z-10"> */}
+                {/* <Footert /> */}
+                {/* </div> */}
               </>
             )}
           </>

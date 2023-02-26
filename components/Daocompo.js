@@ -208,117 +208,7 @@ const Daocompo = () => {
             </div>
           </div>
         </div>
-        <div className={style.formTitle}>New Proposal</div>
-        <div className={style.formInputContainer}>
-          <div className={style.formInput}>
-            <textarea
-              type="text"
-              value={proposalDescription}
-              onChange={(e) => setProposalDescription(e.target.value)}
-              placeholder="Description..."
-              className={style.formInput}
-            />
-          </div>
-        </div>
-        <div>
-          <button
-            className={style.button}
-            disabled={isVoteLoading}
-            onClick={() => {
-              createProposal();
-              listAmKpa();
-            }}
-          >
-            <div>Create Proposal</div>
-          </button>
-        </div>
-      </div>
-      {proposals?.map((proposal, id) => (
-        <div className="snap-start mt-32 relative w-screen h-screen flex items-center justify-center">
-          <Proposal
-            proposalId={proposal.proposalId}
-            description={proposal.description}
-            key={Math.random()}
-            proposal={proposal}
-            listAmKpa={listAmKpa}
-            closePop={closePop}
-          />
-        </div>
-      ))}
-    </div>
-  );
-};
-
-export default Daocompo;
-
-{
-  /* <div class="relative w-full justify-center  flex mt-16">
-        <div className="fixed h-screen md:h-screen lg:h-full">
-          <div class="absolute top-0 -left-4 w-[720px] h-[720px] bg-rose-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob "></div>
-          <div class="absolute top-0 -right-4 w-[720px] h-[720px] bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-          <div class="absolute -bottom-8 left-20 w-[720px] h-[720px] bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-          <div class="m-8 relative space-y-4"></div>
-        </div>
-        <div className={style.wrapper}>
-          <Popup trigger={buttonPop}>
-            <div className="w-full">
-              <Sendingtransaction />
-            </div>
-          </Popup>
-          <div className={style.topContent}>
-            <div className={style.nftImgContainer}>
-              <div
-                className={style.headerIcon}
-                // onClick={() => setIsOpen(true)}
-              >
-                <AiFillAlert />
-              </div>
-              <div>
-                To take part in the voting and proposal process on our platform,
-                you must delegate your BNG tokens to the designated voting
-                contract. A minimum of 1000 BNG tokens is required to create
-                proposals. Please note that this delegation is solely for the
-                purpose of verifying your voting power and does not give any
-                control over your funds.
-              </div>
-              <button
-                onClick={() => {
-                  checkDelegate();
-                  listAmKpa();
-                  // getUri();
-                }}
-                className={style.buttonDelegate}
-              >
-                Delegate
-              </button>
-            </div>
-            <div className={style.nftImgContainer}>
-              <div
-                className={style.headerIcon}
-                // onClick={() => setIsOpen(true)}
-              >
-                <AiFillAccountBook />
-              </div>
-              <div>
-                To take part in the voting and proposal process on our platform,
-                you must delegate your BNG tokens to the designated voting
-                contract. A minimum of 1000 BNG tokens is required to create
-                proposals. Please note that this delegation is solely for the
-                purpose of verifying your voting power and does not give any
-                control over your funds.
-              </div>
-              <div className="my-4">
-                <div className="font-bold">
-                  {tbalance?.symbol}: {tbalance?.displayValue}
-                </div>
-                <div className="my-2"></div>
-                <div className="font-bold">
-                  {nativeBalance?.symbol}: {nativeBalance?.displayValue}
-                </div>
-              </div>
-            </div>
-          </div>
-
+        <div className="sm:flex hidden flex flex-col w-full justify-center items-center">
           <div className={style.formTitle}>New Proposal</div>
           <div className={style.formInputContainer}>
             <div className={style.formInput}>
@@ -343,18 +233,50 @@ export default Daocompo;
               <div>Create Proposal</div>
             </button>
           </div>
-          <div className="w-2/3 mt-24">
-            {proposals?.map((proposal, id) => (
-              <Proposal
-                proposalId={proposal.proposalId}
-                description={proposal.description}
-                key={Math.random()}
-                proposal={proposal}
-                listAmKpa={listAmKpa}
-                closePop={closePop}
+        </div>
+      </div>
+      <div>
+        <div className="sm:hidden relative snap-start flex h-screen p-4 flex-col w-full">
+          <div className={style.formTitle}>New Proposal</div>
+          <div className={style.formInputContainer}>
+            <div className={style.formInput}>
+              <textarea
+                type="text"
+                value={proposalDescription}
+                onChange={(e) => setProposalDescription(e.target.value)}
+                placeholder="Description..."
+                className={style.formInput}
               />
-            ))}
+            </div>
+          </div>
+          <div>
+            <button
+              className={style.button}
+              disabled={isVoteLoading}
+              onClick={() => {
+                createProposal();
+                listAmKpa();
+              }}
+            >
+              <div>Create Proposal</div>
+            </button>
           </div>
         </div>
-      </div> */
-}
+      </div>
+      {proposals?.map((proposal, id) => (
+        <div className="snap-start mt-32 relative w-screen h-screen flex items-center justify-center">
+          <Proposal
+            proposalId={proposal.proposalId}
+            description={proposal.description}
+            key={Math.random()}
+            proposal={proposal}
+            listAmKpa={listAmKpa}
+            closePop={closePop}
+          />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Daocompo;
