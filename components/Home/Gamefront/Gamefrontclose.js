@@ -155,7 +155,7 @@ const Gamefrontopen = () => {
   }
 
   return (
-    <div className="w-screen h-screen  p-4 lg:p-16 flex flex-col items-center">
+    <div className="relative w-screen h-screen  p-4 lg:p-16 flex flex-col items-center">
       <div className={style.topContent}>
         <div className={style.nftImgContainer}>
           <div
