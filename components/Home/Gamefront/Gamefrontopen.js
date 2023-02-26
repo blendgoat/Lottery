@@ -27,7 +27,7 @@ const style = {
 
   detailsContainer: ` w-[330px] md:w-[400px] lg:w-[500] text-xs text-gray-400 lg:text-base p-4 lg:p-8 overflow-scroll border-gray-300 bg-opacity-30   bg-gray-300 m-4  lg:m-8 card rounded-lg h-48  items-center  `,
   nftImgContainer: `w-[330px] md:w-[400px] lg:w-[500] text-gray-400 text-xs  p-4 lg:p-8 m-8 card   border-gray-300 bg-gray-300 bg-opacity-30  rounded-lg h-48 items-center `,
-  timeContainer: `container justify-center w-2/3 lg:w-full  shadow-xl rounded-lg mt-16 md:mt-16 lg:mt-24 xl:mt-32 bg-gray-300 bg-opacity-30 flex-shrink-0  items-center p-4 h-32 lg:h-64 flex flex-row`,
+  timeContainer: `container justify-center w-4/5 lg:w-full  shadow-xl rounded-lg mt-16 md:mt-16 lg:mt-24 xl:mt-32 bg-gray-300 bg-opacity-30 flex-shrink-0  items-center p-4 h-32 lg:h-64 flex flex-row`,
   ethcontainer: ` max-w-[280px] flex-1  mr-2 items-center justify-center `,
   ethLogo: `items-center justify-center w-[72px]  lg:w-[300px]`,
   ethPotBalance: `items-center text-4xl lg:text-9xl text-gray-400 mr-16  lg:mr-32 font-bold`,
