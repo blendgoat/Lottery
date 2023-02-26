@@ -11,7 +11,7 @@ const mainPage = () => {
         <div className="absolute -bottom-8 left-20 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
         <div className="m-8 relative space-y-4"></div>
       </div>
-      <div className="relative  w-screen h-screen mb-8  p-4 lg:p-16 flex flex-col items-center">
+      <div className="relative  w-screen h-screen mb-8 lg:p-16 flex flex-col items-center">
         <Gamefrontopen />
       </div>
     </div>
