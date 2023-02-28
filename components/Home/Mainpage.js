@@ -170,7 +170,7 @@ const mainPage = () => {
         <div className="absolute -bottom-8 left-20 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
         <div className="m-8 relative space-y-4"></div>
       </div>
-      <div className="relative snap-start  w-screen h-full  p-4 lg:p-16 flex flex-shrink-0 flex-col items-center">
+      <div className="relative snap-start  w-screen h-screen  p-4 lg:p-16 flex flex-shrink-0 flex-col items-center">
         <div className={style.topContent}>
           <div className={style.nftImgContainer}>
             <div
