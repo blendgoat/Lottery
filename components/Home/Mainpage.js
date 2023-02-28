@@ -104,7 +104,7 @@ const mainPage = () => {
   }, [data]);
 
   const enterGame = async () => {
-    const entryValue = 0.01;
+    const entryValue = 0.011;
     try {
       const data = await contract.call("enter", {
         value: ethers.utils.parseEther(`${entryValue}`),
