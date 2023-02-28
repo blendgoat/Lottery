@@ -123,7 +123,7 @@ const CryptoGame = () => {
         </section>
         <div className="flex lg:text-l text-[8px] text-gray-600 mt-2 flex-col  lg:flex-row justify-center w-4/5">
           <section class="lg:mb-8  mb-2">
-            <h2 class="lg:text-2xl text-xl font-bold lg:mb-2">
+            <h2 class="lg:text-2xl text-base font-bold lg:mb-2">
               DAO Membership
             </h2>
             <p class="mb-2 lg:mb-8 w-4/5  ">
@@ -165,7 +165,7 @@ const CryptoGame = () => {
             </ul>
           </section>
           <section>
-            <h2 class="lg:text-2xl text-xl font-bold   lg:mb-2">
+            <h2 class="lg:text-2xl text-base font-bold   lg:mb-2">
               BNGX Governance Token Distribution
             </h2>
             <p class="mb-2 lg:mb-8 ">
@@ -201,9 +201,6 @@ const CryptoGame = () => {
         </div>
       </div>
       <div className="relative snap-start w-screen h-full  p-4 lg:p-16  flex flex-col justify-center items-center">
-        <h2 className="lg:text-8xl text-5xl text-gray-600 font-bold lg:m-16 m-8 ">
-          DAO Voting
-        </h2>
         <div className="flex lg:text-xl text-[8px] text-gray-600  flex-col justify-center w-4/5">
           <section>
             <h2 class="lg:text-8xl text-4xl  text-gray-600 font-bold lg:m-16 m-8 ">
@@ -254,14 +251,14 @@ const CryptoGame = () => {
               >
                 <div class="flex-shrink-0 lg:mt-4 ml-4">
                   <img
-                    class="h-12 w-12 lg:mb-8"
+                    class="lg:h-12 lg:w-12 h-8 w-6 lg:mb-8"
                     src={powerPoints.image}
                     alt={powerPoints.name}
                   />
                 </div>
 
                 <div className="lg:px-4 lg:py-4 px-2 py-2 lg:mb-4 mb-2">
-                  <h3 className="text-lg font-bold  mb-2">
+                  <h3 className="lg:text-lg text-sm font-bold  mb-2">
                     {powerPoints.name}
                   </h3>
                   <p className="">{powerPoints.shortDesc}</p>
