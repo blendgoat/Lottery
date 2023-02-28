@@ -131,14 +131,14 @@ export default function Proposal({
       <Popup trigger={buttonPop}>
         <Sendingtransaction />
       </Popup>
-      <div className="relative snap-start w-screen h-screen  p-16 flex flex-col items-center">
+      <div className="relative snap-start w-screen h-screen p-4  lg:p-16 flex flex-col items-center">
         <div className={style.card}>
           <div className={styles.top}>
             <div>
               <div className="lg:text-xl text-base  font-bold text-sky-400 my-4">
                 Proposer: {truncateEthAddress(proposal?.proposer)}
               </div>
-              <div className="lg:text-xl text-sm text-slate-600 mb-8">
+              <div className="lg:text-xl w-full text-sm text-slate-600 mb-8">
                 {description}
               </div>
             </div>

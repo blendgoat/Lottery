@@ -14,7 +14,7 @@ const Footert = () => {
       <div>
         <a
           target="_blank"
-          href="https://discord.gg/rkdgJwWj"
+          href="https://discord.gg/yQr9MAxVDB"
           rel="noopener noreferrer"
         >
           <img
