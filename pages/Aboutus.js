@@ -105,7 +105,7 @@ const CryptoGame = () => {
         <img src="/daoStructure.png" alt="" className="w-[1020px]" />
       </div>
       <div className="relative snap-start w-screen h-full  p-4 lg:p-16  flex flex-col justify-center items-center">
-        <h2 className="lg:text-8xl text-3xl text-gray-600 font-bold m-2 lg:m-16">
+        <h2 className="lg:text-8xl text-4xl text-gray-600 font-bold m-2 lg:m-16">
           Asset Distribution
         </h2>
 
@@ -200,9 +200,11 @@ const CryptoGame = () => {
       </div>
       <div className="relative snap-start w-screen h-full  p-4 lg:p-16  flex flex-col justify-center items-center">
         <h2 className="text-8xl text-gray-600 font-bold m-16 ">DAO Voting</h2>
-        <div className="flex lg:text-xl text:xs text-gray-600  flex-col justify-center w-4/5">
+        <div className="flex lg:text-xl text-[8px] text-gray-600  flex-col justify-center w-4/5">
           <section>
-            <h2 class="lg:text-2xl text-xl font-bold  mt-4 mb-2">DAO Voting</h2>
+            <h2 class="lg:text-2xl text-l font-bold  lg:mt-4 mt-2 mb-2">
+              DAO Voting
+            </h2>
             <p class="mb-2 ">
               The DAO dao is set up with a 60% voting quorum, this means that a
               total of 60% of all votes is required for proposals to pass.
@@ -215,7 +217,7 @@ const CryptoGame = () => {
         </div>
       </div>
       <div className="relative snap-start w-screen h-full  p-4 lg:p-16  flex flex-col justify-center items-center">
-        <h2 className="text-8xl text-gray-600 font-bold m-16 ">
+        <h2 className="lg:text-8xl text-4xl  text-gray-600 font-bold m-16 ">
           Smart Contract Addreses
         </h2>
         <div className="flex lg:text-xl text:xs text-gray-200  flex-col justify-center w-4/5">
@@ -226,8 +228,10 @@ const CryptoGame = () => {
                 className="bg-gray-900 bg-opacity-30 overflow-hidden shadow rounded-lg"
               >
                 <div className="px-4 py-4">
-                  <h3 className="text-lg font-bold  mb-2">{contract.name}</h3>
-                  <p className="lg:text-base text-sm">
+                  <h3 className="text-lg text-base font-bold  mb-2">
+                    {contract.name}
+                  </h3>
+                  <p className="lg:text-base text-[8px]">
                     Contract Address: {contract.address}
                   </p>
                 </div>
