@@ -109,7 +109,7 @@ const CryptoGame = () => {
           Asset Distribution
         </h2>
 
-        <section className="flex lg:m-8  lg:text-l text:xs text-gray-600  flex-row justify-center w-4/5">
+        <section className="flex lg:m-8  lg:text-l text-[8px] text-gray-600  flex-row justify-center w-4/5">
           <h2 class="text-2xl text-gray-300 font-bold mb-2"></h2>
           <p>
             The Bullion DAO is a winner-takes-all game combined with a
