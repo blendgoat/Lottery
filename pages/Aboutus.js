@@ -67,7 +67,7 @@ const CryptoGame = () => {
       </div>
       <div className="relative snap-start  h-full  p-4 lg:p-16  flex flex-col justify-center items-center">
         <h2 className="text-8xl text-gray-600 font-bold m-8 lg:m-16">About</h2>
-        <div className="flex lg:text-xl text:[8px] flex-col lg:flex-row justify-center w-4/5">
+        <div className="flex lg:text-xl text-[8px] flex-col lg:flex-row justify-center w-4/5">
           <p className=" text-gray-900 m-4">
             Our mission is to provide an exciting and fair gaming experience
             while giving back to the community through charitable donations. We
