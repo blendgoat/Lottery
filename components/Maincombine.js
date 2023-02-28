@@ -29,35 +29,33 @@ const Maincombine = ({ children }) => {
 
   return (
     <div>
-      <div>
-        {address ? (
-          <>
-            {netMisMatch == true && (
-              <>
-                <div>
-                  <h2>Please connect to Binance Smart Chain Testnet</h2>
-                  <p>
-                    This dapp currently only works on the Binance Smart Chain
-                    Testnet network, please switch networks in your connected
-                    wallet.
-                  </p>
-                </div>
-              </>
-            )}
-            {netMisMatch == false && (
-              <>
-                <Header />
-                {children}
-                <Footert />
-              </>
-            )}
-          </>
-        ) : (
-          <>
-            <Lander />
-          </>
-        )}
-      </div>
+      {address ? (
+        <>
+          {netMisMatch == true && (
+            <>
+              <div>
+                <h2>Please connect to Binance Smart Chain Testnet</h2>
+                <p>
+                  This dapp currently only works on the Binance Smart Chain
+                  Testnet network, please switch networks in your connected
+                  wallet.
+                </p>
+              </div>
+            </>
+          )}
+          {netMisMatch == false && (
+            <>
+              <Header />
+              {children}
+              <Footert />
+            </>
+          )}
+        </>
+      ) : (
+        <>
+          <Lander />
+        </>
+      )}
     </div>
   );
 };

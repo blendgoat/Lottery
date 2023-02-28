@@ -163,14 +163,14 @@ const mainPage = () => {
     console.log({ finalPlayersList });
   }
   return (
-    <div className="relative snap-y snap-mandatory overflow-scroll bg-gray-50 h-screen md:h-screen lg:h-screen  justify-center bg-fixed">
+    <div className="relative snap-y lg:snap-mandatory overflow-scroll bg-gray-50 h-screen md:h-screen lg:h-screen  justify-center bg-fixed">
       <div className="fixed h-screen md:h-screen w-screen flex items-center lg:h-full">
         <div className="absolute top-0 -left-4 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-rose-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob "></div>
         <div className="absolute top-0 -right-4 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
         <div className="absolute -bottom-8 left-20 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
         <div className="m-8 relative space-y-4"></div>
       </div>
-      <div className="relative snap-start w-screen h-full  p-4 lg:p-16 flex flex-col items-center">
+      <div className="relative snap-start  w-screen h-full  p-4 lg:p-16 flex flex-shrink-0 flex-col items-center">
         <div className={style.topContent}>
           <div className={style.nftImgContainer}>
             <div
@@ -262,7 +262,7 @@ const mainPage = () => {
           <div className={style.buttonText}>Enter</div>
         </div>
       </div>
-      <div className="relative snap-start w-screen h-full  p-4 lg:p-16  flex flex-col justify-center items-center">
+      <div className="relative snap-start w-screen h-screen  p-4 lg:p-16  flex flex-col justify-center items-center">
         <h2 className="text-8xl text-gray-600 font-bold m-16">How It Works</h2>
 
         <img src="/howItWorksBG.png" alt="" className="w-[1020px]" />
@@ -272,91 +272,3 @@ const mainPage = () => {
 };
 
 export default mainPage;
-
-/* <div className="relative snap-y snap-mandatory overflow-scroll  bg-gray-50 h-screen md:h-screen lg:h-screen  justify-center bg-fixed">
-      <div className="fixed h-screen md:h-screen w-screen flex items-center lg:h-full">
-        <div className="absolute top-0 -left-4 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-rose-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob "></div>
-        <div className="absolute top-0 -right-4 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-20 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-        <div className="m-8 relative space-y-4"></div>
-      </div>
-      <div className="relative snap-start  w-screen h-screen mb-8 lg:p-16 flex flex-col items-center">
-        <div className={style.topContent}>
-          <div className={style.nftImgContainer}>
-            <div
-              className={style.headerIcon}
-              // onClick={() => setIsOpen(true)}
-            >
-              <AiFillAlert />
-            </div>
-            {lotLoading ? (
-              <div className="text-sky-400">Loading...</div>
-            ) : (
-              <div>
-                {currentGameState == 0 && (
-                  <>
-                    <div>
-                      <p>
-                        Game is open, press the "Enter" button to play. By
-                        entering the game you accept our terms and conditions.
-                      </p>
-                    </div>
-                    <div className={style.searchBar}></div>
-                  </>
-                )}
-                {currentGameState > 0 && (
-                  <>
-                    <div>
-                      <p>
-                        Game is currently closed and calculating winer. By
-                        entering the game you accept our terms and conditions.
-                      </p>
-                    </div>
-                    <div className={style.searchBarClosed}></div>
-                  </>
-                )}
-              </div>
-            )}
-          </div>
-          <div className={style.nftImgContainer}>
-            <div className={style.headerIcon}>
-              <CgProfile />
-            </div>
-            <div className="my-4">
-              {finalPlayersList?.map((playerList, id) => (
-                <div key={id} className="my-2">{`${playerList}`}</div>
-              ))}
-              <div className="my-2"></div>
-            </div>
-          </div>
-        </div>
-        <div className={style.timeContainer}>
-          <div>
-            <img
-              src="/Binance-Icon-Logo.wine.svg"
-              alt="eth"
-              className={style.ethLogo}
-            />
-          </div>
-          <div>
-            <div className="text-xl text-gray-400 lg:2-xl">POT BALANCE</div>
-            {lotLoading ? (
-              <div className="text-sky-400">Loading...</div>
-            ) : (
-              <div className={style.ethPotBalance}>
-                <div>{`${finalBalance}`} BNB</div>
-              </div>
-            )}
-          </div>
-        </div>
-        <div
-          className={style.button}
-          onClick={() => {
-            enterGame();
-            listAmKpa();
-          }}
-        >
-          <div className={style.buttonText}>Enter</div>
-        </div>
-      </div>
-    </div> */
