@@ -58,15 +58,17 @@ const powerPoints = [
 
 const CryptoGame = () => {
   return (
-    <div className="relative snap-y lg:snap-mandatory overflow-scroll bg-gray-50 h-screen md:h-screen lg:h-screen  justify-center bg-fixed">
+    <div className="relative snap-y snap-mandatory overflow-scroll bg-gray-50 h-screen md:h-screen lg:h-screen  justify-center bg-fixed">
       <div className="fixed h-screen md:h-screen w-screen flex items-center lg:h-full">
         <div className="absolute top-0 -left-4 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-rose-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob "></div>
         <div className="absolute top-0 -right-4 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
         <div className="absolute -bottom-8 left-20 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-        <div className="m-8 relative space-y-4"></div>
+        <div className="lg:m-8 m-4 relative space-y-4"></div>
       </div>
       <div className="relative snap-start  h-full  p-4 lg:p-16  flex flex-col justify-center items-center">
-        <h2 className="text-8xl text-gray-600 font-bold m-8 lg:m-16">About</h2>
+        <h2 className="lg:text-8xl text-5xl text-gray-600 font-bold m-8 lg:m-16">
+          About
+        </h2>
         <div className="flex lg:text-xl text-[8px] flex-col lg:flex-row justify-center w-4/5">
           <p className=" text-gray-900 m-4">
             Our mission is to provide an exciting and fair gaming experience
@@ -99,13 +101,13 @@ const CryptoGame = () => {
         </div>
       </div>
       <div className="relative snap-start w-screen h-full  p-4 lg:p-16  flex flex-col justify-center items-center">
-        <h2 className="text-8xl text-gray-600 font-bold mt-16 ">
+        <h2 className="lg:text-8xl text-5xl text-gray-600 font-bold mt-16 ">
           DAO Structure
         </h2>
         <img src="/daoStructure.png" alt="" className="w-[1020px]" />
       </div>
       <div className="relative snap-start w-screen h-full  p-4 lg:p-16  flex flex-col justify-center items-center">
-        <h2 className="lg:text-8xl text-4xl text-gray-600 font-bold m-2 lg:m-16">
+        <h2 className="lg:text-8xl text-5xl text-gray-600 font-bold m-2 lg:m-16">
           Asset Distribution
         </h2>
 
@@ -199,7 +201,9 @@ const CryptoGame = () => {
         </div>
       </div>
       <div className="relative snap-start w-screen h-full  p-4 lg:p-16  flex flex-col justify-center items-center">
-        <h2 className="text-8xl text-gray-600 font-bold m-16 ">DAO Voting</h2>
+        <h2 className="lg:text-8xl text-5xl text-gray-600 font-bold lg:m-16 m-8 ">
+          DAO Voting
+        </h2>
         <div className="flex lg:text-xl text-[8px] text-gray-600  flex-col justify-center w-4/5">
           <section>
             <h2 class="lg:text-2xl text-l font-bold  lg:mt-4 mt-2 mb-2">
@@ -217,11 +221,11 @@ const CryptoGame = () => {
         </div>
       </div>
       <div className="relative snap-start w-screen h-full  p-4 lg:p-16  flex flex-col justify-center items-center">
-        <h2 className="lg:text-8xl text-4xl  text-gray-600 font-bold m-16 ">
+        <h2 className="lg:text-8xl text-4xl  text-gray-600 font-bold lg:m-16 m-8 ">
           Smart Contract Addreses
         </h2>
         <div className="flex lg:text-xl text:xs text-gray-200  flex-col justify-center w-4/5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-8 gap-4">
             {contractAddresses.map((contract) => (
               <div
                 key={contract.name}
