@@ -260,7 +260,7 @@ const CryptoGame = () => {
                   />
                 </div>
 
-                <div className="px-4 py-4">
+                <div className="lg:px-4 lg:py-4 px-2 py-2 lg:mb-4 mb-2">
                   <h3 className="text-lg font-bold  mb-2">
                     {powerPoints.name}
                   </h3>
