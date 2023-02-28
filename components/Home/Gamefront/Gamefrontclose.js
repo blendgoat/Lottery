@@ -93,7 +93,7 @@ const Gamefrontopen = () => {
     setLotLoading(false);
   }, [data]);
 
-  const enterLottery = async () => {
+  const enterGame = async () => {
     const entryValue = 0.01;
     try {
       const data = await contract.call("enter", {
@@ -202,7 +202,7 @@ const Gamefrontopen = () => {
       <div
         className={style.button}
         onClick={() => {
-          enterLottery();
+          enterGame();
           listAmKpa();
         }}
       >

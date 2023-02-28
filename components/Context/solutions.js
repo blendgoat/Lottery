@@ -8,6 +8,7 @@ import {
   useNetwork,
   useNFTBalance,
   useSDK,
+  useTokenBalance,
 } from "@thirdweb-dev/react";
 import { VoteType } from "@thirdweb-dev/sdk";
 import { ethers } from "ethers";
@@ -27,6 +28,19 @@ export const ApeDaoProvider = ({ children }) => {
   const { contract: editionDrop, isLoading: isNftLoading } = useContract(
     "0xa85caec09986d1AC483709A960bD1cCa972E3c44",
     "edition-drop"
+  );
+
+  const usdtContractAdd = "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd";
+
+  const { contract: usdtContract } = useContract(usdtContractAdd);
+
+  const {
+    data: usdtBbalance,
+    isLoading,
+    error,
+  } = useTokenBalance(
+    usdtContract,
+    "0x952f931A5a118Ac8a90C339A79287E998d51BEe2"
   );
 
   const NftImage = globalThis.data;
@@ -71,6 +85,14 @@ export const ApeDaoProvider = ({ children }) => {
     return balance;
   };
 
+  const GetTreasureBalanceUSDT = async () => {
+    const usdtBalance = await usdtContract?.balanceOf(
+      "0x952f931A5a118Ac8a90C339A79287E998d51BEe2"
+    );
+
+    return usdtBalance;
+  };
+
   const getAllProposals = async () => {
     const proposals = await vote?.getAll();
     console.log(proposals);
@@ -108,10 +130,12 @@ export const ApeDaoProvider = ({ children }) => {
         network,
         nft,
         isNftLoading,
+        usdtBbalance,
         NftImage,
         isExecutable,
         GetTreasureBalance,
         GetTreasureBalanceNative,
+        GetTreasureBalanceUSDT,
         executeProposal,
       }}
     >

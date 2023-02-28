@@ -31,10 +31,18 @@ const Daocompo = () => {
   const [proposalDescription, setProposalDescription] = useState("");
   const [tbalance, setTbalance] = useState(0);
   const [nativeBalance, setNativeBalance] = useState(0);
+  const [usdtBalance, setUsdtBalance] = useState(0);
   const [buttonPop, setButtonPop] = useState(false);
 
-  const { address, nftBalance, GetTreasureBalance, GetTreasureBalanceNative } =
-    useContext(ApeDaoContext);
+  const {
+    address,
+    nftBalance,
+    GetTreasureBalance,
+    GetTreasureBalanceNative,
+    GetTreasureBalanceUSDT,
+  } = useContext(ApeDaoContext);
+
+  console.log({ nativeBalance });
 
   ////////////////////////////////////////////////////
 
@@ -146,6 +154,15 @@ const Daocompo = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    GetTreasureBalanceUSDT()
+      .then((balance) => {
+        setUsdtBalance(balance);
+        console.log({ balance });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, [nftBalance]);
 
   return (
@@ -156,7 +173,7 @@ const Daocompo = () => {
         <div className="absolute -bottom-8 left-20 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
         <div className="m-8 relative space-y-4"></div>
       </div>
-      <div className="relative snap-start w-screen h-screen  p-4 lg:p-16 flex flex-col items-center">
+      <div className="relative snap-start w-screen h-full  p-4 lg:p-16 flex flex-col items-center">
         <div className={style.topContent}>
           <div className={style.nftImgContainer}>
             <div
@@ -194,6 +211,10 @@ const Daocompo = () => {
             <div className="my-4">
               <div className="font-bold">
                 {tbalance?.symbol}: {tbalance?.displayValue}
+              </div>
+              <div className="my-2"></div>
+              <div className="font-bold">
+                {usdtBalance?.symbol}: {usdtBalance?.displayValue}
               </div>
               <div className="my-2"></div>
               <div className="font-bold">
