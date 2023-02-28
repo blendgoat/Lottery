@@ -119,7 +119,7 @@ const CryptoGame = () => {
             technology.
           </p>
         </section>
-        <div className="flex lg:text-l text:xs text-gray-600 mt-2 flex-col  lg:flex-row justify-center w-4/5">
+        <div className="flex lg:text-l text-[8px] text-gray-600 mt-2 flex-col  lg:flex-row justify-center w-4/5">
           <section class="lg:mb-8  mb-2">
             <h2 class="lg:text-2xl text-xl font-bold lg:mb-2">
               DAO Membership
