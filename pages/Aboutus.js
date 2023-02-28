@@ -101,13 +101,13 @@ const CryptoGame = () => {
         </div>
       </div>
       <div className="relative snap-start w-screen h-full  p-4 lg:p-16  flex flex-col justify-center items-center">
-        <h2 className="lg:text-8xl text-5xl text-gray-600 font-bold mt-16 ">
+        <h2 className="lg:text-8xl text-4xl  text-gray-600 font-bold lg:m-16 m-8  ">
           DAO Structure
         </h2>
         <img src="/daoStructure.png" alt="" className="w-[1020px]" />
       </div>
       <div className="relative snap-start w-screen h-full  p-4 lg:p-16  flex flex-col justify-center items-center">
-        <h2 className="lg:text-8xl text-5xl text-gray-600 font-bold m-2 lg:m-16">
+        <h2 className="lg:text-8xl text-4xl  text-gray-600 font-bold lg:m-16 m-8 ">
           Asset Distribution
         </h2>
 
@@ -206,7 +206,7 @@ const CryptoGame = () => {
         </h2>
         <div className="flex lg:text-xl text-[8px] text-gray-600  flex-col justify-center w-4/5">
           <section>
-            <h2 class="lg:text-2xl text-l font-bold  lg:mt-4 mt-2 mb-2">
+            <h2 class="lg:text-8xl text-4xl  text-gray-600 font-bold lg:m-16 m-8 ">
               DAO Voting
             </h2>
             <p class="mb-2 ">
