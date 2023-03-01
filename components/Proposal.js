@@ -131,7 +131,7 @@ export default function Proposal({
       <Popup trigger={buttonPop}>
         <Sendingtransaction />
       </Popup>
-      <div className="relative w-screen h-screen p-4  lg:p-16 flex flex-col items-center">
+      <div className="relative w-screen justify-center h-screen p-4  lg:p-16 flex flex-col items-center">
         <div className={style.card}>
           <div className={styles.top}>
             <div>

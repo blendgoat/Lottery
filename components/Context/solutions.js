@@ -30,17 +30,12 @@ export const ApeDaoProvider = ({ children }) => {
     "edition-drop"
   );
 
-  const usdtContractAdd = "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd";
+  const { contract: token, isLoading: isTokenLoading } = useContract(
+    process.env.NEXT_PUBLIC_TOKEN
+  );
 
-  const { contract: usdtContract } = useContract(usdtContractAdd);
-
-  const {
-    data: usdtBbalance,
-    isLoading,
-    error,
-  } = useTokenBalance(
-    usdtContract,
-    "0x952f931A5a118Ac8a90C339A79287E998d51BEe2"
+  const { contract: vote, isLoading: isVoteLoading } = useContract(
+    process.env.NEXT_PUBLIC_VOTE
   );
 
   const NftImage = globalThis.data;
@@ -55,16 +50,6 @@ export const ApeDaoProvider = ({ children }) => {
     .catch((err) => {
       console.log(err);
     });
-
-  const { contract: token, isLoading: isTokenLoading } = useContract(
-    process.env.NEXT_PUBLIC_TOKEN
-  );
-
-  const { contract: vote, isLoading: isVoteLoading } = useContract(
-    process.env.NEXT_PUBLIC_VOTE
-  );
-
-  // const [hasMembership, setHasMembership] = useState();
 
   const { data: nftBalance } = useNFTBalance(editionDrop, address, "0");
   const daoMember = nftBalance?.toString();
@@ -83,14 +68,6 @@ export const ApeDaoProvider = ({ children }) => {
     );
 
     return balance;
-  };
-
-  const GetTreasureBalanceUSDT = async () => {
-    const usdtBalance = await usdtContract?.balanceOf(
-      "0x952f931A5a118Ac8a90C339A79287E998d51BEe2"
-    );
-
-    return usdtBalance;
   };
 
   const getAllProposals = async () => {
@@ -130,12 +107,11 @@ export const ApeDaoProvider = ({ children }) => {
         network,
         nft,
         isNftLoading,
-        usdtBbalance,
         NftImage,
         isExecutable,
         GetTreasureBalance,
         GetTreasureBalanceNative,
-        GetTreasureBalanceUSDT,
+
         executeProposal,
       }}
     >

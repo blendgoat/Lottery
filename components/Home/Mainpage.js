@@ -47,7 +47,6 @@ const style = {
 };
 
 const mainPage = () => {
-  const [balance, setBalance] = useState();
   const [thePlayers, setThePlayers] = useState();
   const [gameState, setGameState] = useState();
   const [gameClosed, setGameClosed] = useState();
@@ -62,27 +61,23 @@ const mainPage = () => {
     "0xeE3583630f0052B363c7Ad90F46346f1Bb004F73"
   );
 
-  const { data, isLoading } = useContractRead(contract, "getBalance");
+  const balance = useContractRead(contract, "getBalance");
   const players = useContractRead(contract, "getPlayers");
   const loterryState = useContractRead(contract, "game_state");
   const gameId = useContractRead(contract, "gameId");
 
-  const finalBalance = balance?.data.toString() / ("1e" + 18);
+  const Balance = balance?.data;
+  const finalBalance = Balance?.toString() / ("1e" + 18);
 
-  console.log({ thePlayers });
+  console.log({ finalBalance });
 
-  const finGamersID = gamerId?.gameId;
-  const currentGameID = finGamersID?.data;
+  const currentGameID = gameId?.data;
+  const finalPlayersList = players.data;
+  const currentGameState = loterryState?.data;
 
   // const made = currentGameID?.toString();
 
   // console.log({ made });
-
-  const gamePlayers = thePlayers?.players;
-  const finalPlayersList = gamePlayers?.data;
-
-  const gameStateData = gameState?.loterryState;
-  const currentGameState = gameStateData?.data;
 
   console.log({ currentGameState });
 
@@ -99,9 +94,9 @@ const mainPage = () => {
   }, [currentGameState]);
 
   useEffect(() => {
-    if (!thePlayers) return;
+    if (!players) return;
     setLotLoading(false);
-  }, [data]);
+  }, [balance]);
 
   const enterGame = async () => {
     const entryValue = 0.011;
@@ -137,26 +132,6 @@ const mainPage = () => {
   const closePop = () => {
     setButtonPop(false);
   };
-
-  useEffect(() => {
-    if (!data) return;
-    setBalance({ data });
-  }, [data]);
-
-  useEffect(() => {
-    if (!players) return;
-    setThePlayers({ players });
-  }, [data]);
-
-  useEffect(() => {
-    if (!loterryState) return;
-    setGameState({ loterryState });
-  }, [data]);
-
-  useEffect(() => {
-    if (!gameId) return;
-    setGamerId({ gameId });
-  }, [data]);
 
   console.log({ lotLoading });
 

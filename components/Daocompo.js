@@ -1,4 +1,4 @@
-import { useContract, useSDK } from "@thirdweb-dev/react";
+import { useContract, useContractRead, useSDK } from "@thirdweb-dev/react";
 import React, { useEffect, useState, useMemo, useContext } from "react";
 import Proposal from "./Proposal";
 import Popup from "./Popup";
@@ -27,22 +27,46 @@ const style = {
 };
 
 const Daocompo = () => {
-  const [proposals, setProposals] = useState([]);
+  const [proposals, setProposals] = useState();
   const [proposalDescription, setProposalDescription] = useState("");
   const [tbalance, setTbalance] = useState(0);
   const [nativeBalance, setNativeBalance] = useState(0);
-  const [usdtBalance, setUsdtBalance] = useState(0);
+  const [musdtBalance, setMusdtBalance] = useState(0);
+
   const [buttonPop, setButtonPop] = useState(false);
 
-  const {
-    address,
-    nftBalance,
-    GetTreasureBalance,
-    GetTreasureBalanceNative,
-    GetTreasureBalanceUSDT,
-  } = useContext(ApeDaoContext);
+  const usdContracts = "0x952f931A5a118Ac8a90C339A79287E998d51BEe2";
 
-  console.log({ nativeBalance });
+  const { contract } = useContract(
+    "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd"
+  );
+
+  const usdtContractBalance = useContractRead(
+    contract,
+    "balanceOf",
+    usdContracts
+  );
+
+  const usdtBalanceHex = usdtContractBalance?.data;
+  const usdtBalance = usdtBalanceHex?.toString();
+  const usdtContractSym = useContractRead(contract, "_symbol");
+
+  useEffect(() => {
+    if (!usdtBalanceHex) return;
+    const ethValue = ethers.utils.formatEther(usdtBalance);
+    setMusdtBalance(ethValue);
+  }, [usdtBalance]);
+
+  // const usdtBalanceHex = usdtContractBalance?.data;
+  // const usdtBalance = parseInt(usdtBalanceHex);
+  // const usdtContractSym = useContractRead(contract, "_symbol");
+  // const ethValue = ethers.utils.formatEther(usdtBalance);
+  // // ethers.utils.formatEther(usdtBalance);
+
+  console.log({ musdtBalance });
+
+  const { address, nftBalance, GetTreasureBalance, GetTreasureBalanceNative } =
+    useContext(ApeDaoContext);
 
   ////////////////////////////////////////////////////
 
@@ -52,6 +76,7 @@ const Daocompo = () => {
   const { contract: vote, isLoading: isVoteLoading } = useContract(
     process.env.NEXT_PUBLIC_VOTE
   );
+  console.log({ isVoteLoading });
 
   useEffect(() => {
     const getAllProposals = async () => {
@@ -145,19 +170,12 @@ const Daocompo = () => {
       .catch((err) => {
         console.log(err);
       });
+  }, [nftBalance]);
 
+  useEffect(() => {
     GetTreasureBalanceNative()
       .then((balance) => {
         setNativeBalance(balance);
-        console.log({ balance });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    GetTreasureBalanceUSDT()
-      .then((balance) => {
-        setUsdtBalance(balance);
         console.log({ balance });
       })
       .catch((err) => {
@@ -209,16 +227,12 @@ const Daocompo = () => {
               <AiFillAccountBook />
             </div>
             <div className="my-4">
-              <div className="font-bold">
-                {tbalance?.symbol}: {tbalance?.displayValue}
-              </div>
+              <div className="font-bold">BNGX: {tbalance?.displayValue}</div>
+              <div className="my-2"></div>
+              <div className="font-bold">USDT: {musdtBalance}</div>
               <div className="my-2"></div>
               <div className="font-bold">
-                {usdtBalance?.symbol}: {usdtBalance?.displayValue}
-              </div>
-              <div className="my-2"></div>
-              <div className="font-bold">
-                {nativeBalance?.symbol}: {nativeBalance?.displayValue}
+                TBNB: {nativeBalance?.displayValue}
               </div>
             </div>
             <div>
@@ -284,18 +298,27 @@ const Daocompo = () => {
           </div>
         </div>
       </div>
-      {proposals?.map((proposal, id) => (
-        <div className="snap-start mt-32 relative w-screen h-screen flex items-center justify-center">
-          <Proposal
-            proposalId={proposal.proposalId}
-            description={proposal.description}
-            key={Math.random()}
-            proposal={proposal}
-            listAmKpa={listAmKpa}
-            closePop={closePop}
-          />
+      {!proposals && (
+        <div className="snap-start mt-32 text-gray-400 relative w-screen h-screen flex items-center justify-center">
+          <h2>Loading Proposals...</h2>
         </div>
-      ))}
+      )}
+      {proposals && (
+        <>
+          {proposals?.map((proposal, id) => (
+            <div className="snap-start mt-32 relative w-screen h-screen flex items-center justify-center">
+              <Proposal
+                proposalId={proposal.proposalId}
+                description={proposal.description}
+                key={Math.random(id)}
+                proposal={proposal}
+                listAmKpa={listAmKpa}
+                closePop={closePop}
+              />
+            </div>
+          ))}
+        </>
+      )}
     </div>
   );
 };
