@@ -184,14 +184,14 @@ const Daocompo = () => {
   }, [nftBalance]);
 
   return (
-    <div className="relative lg:snap-y lg:snap-mandatory overflow-scroll bg-gray-50 h-screen md:h-screen lg:h-screen  justify-center bg-fixed">
+    <div className="relative snap-y snap-mandatory overflow-scroll bg-gray-50 h-screen md:h-screen lg:h-screen  justify-center bg-fixed">
       <div className="fixed h-screen md:h-screen w-screen flex items-center lg:h-full">
         <div className="absolute top-0 -left-4 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-rose-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob "></div>
         <div className="absolute top-0 -right-4 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
         <div className="absolute -bottom-8 left-20 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
         <div className="m-8 relative space-y-4"></div>
       </div>
-      <div className="relative lg:snap-start w-screen h-full  p-4 lg:p-16 flex flex-col items-center">
+      <div className="relative snap-start w-screen h-full  p-4 lg:p-16 flex flex-col items-center">
         <div className={style.topContent}>
           <div className={style.nftImgContainer}>
             <div
@@ -271,7 +271,7 @@ const Daocompo = () => {
         </div>
       </div>
       <div>
-        <div className="sm:hidden relative lg:snap-start flex h-screen p-4 flex-col w-full">
+        <div className="sm:hidden relative snap-start flex h-screen p-4 flex-col w-full">
           <div className={style.formTitle}>New Proposal</div>
           <div className={style.formInputContainer}>
             <div className={style.formInput}>
@@ -299,14 +299,14 @@ const Daocompo = () => {
         </div>
       </div>
       {!proposals && (
-        <div className="lg:snap-start mt-32 text-gray-400 relative w-screen h-screen flex items-center justify-center">
+        <div className="snap-start mt-32 text-gray-400 relative w-screen h-screen flex items-center justify-center">
           <h2>Loading Proposals...</h2>
         </div>
       )}
       {proposals && (
         <>
           {proposals?.map((proposal, id) => (
-            <div className="lg:snap-start mt-32 relative w-screen h-screen flex items-center justify-center">
+            <div className="snap-start mt-32 relative w-screen h-screen flex items-center justify-center">
               <Proposal
                 proposalId={proposal.proposalId}
                 description={proposal.description}
