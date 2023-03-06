@@ -192,6 +192,9 @@ const Daocompo = () => {
         <div className="m-8 relative space-y-4"></div>
       </div>
       <div className="relative snap-start w-screen h-full  p-4 lg:p-16 flex flex-col items-center">
+        <Popup trigger={buttonPop}>
+          <Sendingtransaction />
+        </Popup>
         <div className={style.topContent}>
           <div className={style.nftImgContainer}>
             <div

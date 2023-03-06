@@ -4,9 +4,10 @@ import Daocompo from "../components/Daocompo";
 import Mintcompo from "../components/Mintcompo";
 import { ApeDaoContext } from "../components/Context/solutions";
 import Checkingmembership from "../components/Checkingmembership";
+import Lander from "../components/Home/Lander";
 
 const NewDao = () => {
-  const { daoMember } = useContext(ApeDaoContext);
+  const { daoMember, address } = useContext(ApeDaoContext);
 
   ////////////////////////////////////////////////////
 
@@ -26,7 +27,12 @@ const NewDao = () => {
         </>
       ) : (
         <>
-          <Checkingmembership />
+          {address && <Checkingmembership />}
+          {!address && (
+            <div className="h-screen w-screen flex bg-gray-50 text-gray-600 justify-center items-center">
+              <h2>Please Connect Your Wallet</h2>
+            </div>
+          )}
         </>
       )}
     </div>

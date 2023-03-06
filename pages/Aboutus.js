@@ -3,10 +3,10 @@ import React from "react";
 const teamMembers = [
   {
     name: "Delnoi Otsemobor",
-    role: "CTO",
-    bio: "To create a proposal, you'll need at least 1000BNG tokens. The first 1,000 members will receive 1000BNG tokens via airdrop for free! After that, you can get the tokens on Pancake Swap and other exchanges. To make sure that proposals are fair, we require a 60% quorum to pass, and we only allow a maximum of five proposals at a time. We're excited to see all the great ideas you'll come up with and can't wait to have you join our community!",
+    role: "Founder & CTO",
+    bio: "At Bullion Foundation, Delnoi serves as our Founder & CTO, leading the development of our smart contracts and DApps. His contributions are integral to all of our application projects. Delnoi is a passionate learner and experimenter, always seeking out new languages and techniques for online technology development. He is proficient in several languages, including HTML, CSS, JavaScript, and Solidity. His love for technology and the web3 space drives him to explore and tinker with emerging technologies to build innovative and cutting-edge dapps that are both highly functional and simple. We are fortunate to have Delnoi as a member of our team, as his skills and dedication to the industry have been invaluable to us. His passion for technology and desire to drive the industry forward has inspired us all to keep pushing the boundaries of what's possible in the web3 space.",
 
-    image: "/logoHome.png",
+    image: "/DelnoiProfilePhoto.jpeg",
   },
   // { name: "Jane Smith", role: "CFO", image: "/logoHome.png" },
   // {
@@ -109,7 +109,7 @@ const CryptoGame = () => {
           Asset Distribution
         </h2>
 
-        <section className="flex lg:m-8  lg:text-l text-[8px] text-gray-600  flex-row justify-center w-4/5">
+        <section className="flex lg:m-8  lg:text-lg text-[8px] text-gray-600  flex-row justify-center w-4/5">
           <h2 class="text-2xl text-gray-300 font-bold mb-2"></h2>
           <p>
             The Bullion DAO is a winner-takes-all game combined with a
@@ -119,7 +119,7 @@ const CryptoGame = () => {
             technology.
           </p>
         </section>
-        <div className="flex lg:text-l text-[8px] text-gray-600 mt-2 flex-col  lg:flex-row justify-center w-4/5">
+        <div className="flex lg:text-lg text-[8px] text-gray-600 mt-2 flex-col  lg:flex-row justify-center w-4/5">
           <section class="lg:mb-8  mb-2">
             <h2 class="lg:text-2xl text-sm font-bold lg:mb-2">
               DAO Membership
@@ -267,8 +267,11 @@ const CryptoGame = () => {
         </div>
       </div>
       <div className="relative snap-start w-screen h-full  p-4 lg:p-16  flex flex-col justify-center items-center">
-        <div className="flex lg:text-[12px] text-[8px] text-gray-200  flex-col justify-center w-4/5">
-          <div className="grid grid-cols-1 md:grid-cols-3  gap-4">
+        <h2 className="lg:text-8xl text-4xl  text-gray-600 font-bold lg:m-16 m-8 ">
+          Our Team
+        </h2>
+        <div className="flex lg:text-[12px] text-[8px] text-gray-200  flex-col justify-center lg:items-center w-4/5">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:flex lg:w-4/5 lg:justify-center lg:items-center  gap-4">
             {teamMembers.map((member, id) => (
               <div
                 key={member.name}
@@ -276,14 +279,15 @@ const CryptoGame = () => {
               >
                 <div class="flex-shrink-0 lg:mt-4 ml-4">
                   <img
-                    class="h-12 w-12 lg:mb-8"
+                    class="h-16 w-16 rounded-full lg:mb-8"
                     src={member.image}
                     alt={member.name}
                   />
                 </div>
 
-                <div className="px-4 py-4">
+                <div className="px-4">
                   <h3 className="text-lg font-bold  mb-2">{member.name}</h3>
+                  <h3 className="text-base font-bold  mb-2">{member.role}</h3>
                   <p className="">{member.bio}</p>
                 </div>
               </div>
@@ -295,246 +299,3 @@ const CryptoGame = () => {
   );
 };
 export default CryptoGame;
-
-// <div className="bg-indigo-900">
-//       <div className="mx-auto w-4/5 px-4 sm:px-6  lg:px-8">
-//         <div className="py-8">
-//           <h1 className="text-3xl font-bold text-gray-200 mt-24 mb-2">
-//             Welcome to Bullion DAO
-//           </h1>
-// <p className="text-xl text-gray-300 mb-4">
-//   Our mission is to provide an exciting and fair gaming experience
-//   while giving back to the community through charitable donations. We
-//   believe in the power of blockchain and decentralization to create a
-//   more equitable and transparent world, and we strive to reflect these
-//   values in everything we do.
-// </p>
-//  <p className="text-xl text-gray-300 mb-4">
-//   Our game is simple and easy to play. With no need to choose numbers, all you
-//   have to do is click the enter button to join the game. A small fee of 0.01 BNB
-//   is charged and added to the pot, which grows as more players enter. The game
-//   remains open for 7 days, after which it will close, select a winner in a
-//   provably random way, pay out the winner, and reset the game. To improve your
-//   chances you may enter as many times as you want.
-// </p>;
-// <p className="text-xl text-gray-300 mb-4">
-//  What's more, we want to assure you that at no point are your funds
-//  held by the company, all game funds are held by the contract. The
-//  pot is split in a way that benefits everyone involved. 60% goes to
-//  the lucky winner, 20% is used for marketing and operations, 10% is
-//  split between all members of the DAO, and the remaining 10% goes to
-//  our charity DAO where members can decide how the funds are
-//  distributed.
-// </p>
-//          <p className="text-xl text-gray-300 mb-4">
-//            We want you to be a part of this incredible journey and make a
-//            difference in the world. So why not take a chance and play our game
-//            today? Remember, not only could you win big, but you'll also be
-//            contributing to a greater cause. Join us now and be a part of
-//            something amazing!
-//         </p>{" "}
-//           <h1 className="text-3xl font-bold mt-24 text-gray-300 mb-2">
-//             White Paper
-//           </h1>
-//  <section class="mb-8">
-//   <h2 class="text-2xl text-gray-300 font-bold mb-4"></h2>
-//   <p class="mb-2 text-xl text-gray-300">
-//     The Bullion DAO is a winner-takes-all game combined with a Web3
-//     development-focused DAO. The platform is designed to fund Web3
-//     development programs, support charitable initiatives on existing
-//     global issues, and invest in blockchain tech companies and
-//     technology.
-//   </p>
-// </section>
-// <section class="mb-8">
-//   <h2 class="text-2xl font-bold text-gray-300 mt-16 mb-4">
-//     DAO Membership
-//   </h2>
-
-//   <div class="mb-4">
-//     <h3 class="text-xl font-bold text-gray-300 mb-2">
-//       Private Sale:
-//     </h3>
-//     <ul class="list-disc text-xl text-gray-300 pl-6 mb-2">
-//       <li>
-//         1,000 passes will be distributed among early partners and
-//         investors via a whitelist presale, with a maximum of 100
-//         passes apportioned to Bullion Foundation.
-//       </li>
-//       <li>
-//         An additional 1,000 passes will be airdropped to early game
-//         players.
-//       </li>
-//     </ul>
-//   </div>
-
-//   <div class="mb-4  mt-8">
-//     <h3 class="text-xl text-gray-300 font-bold mb-2">Public Sale:</h3>
-//     <p class="mb-2 text-gray-300 text-xl">
-//       8,000 passes will be available for purchase at 1 BNB
-//       (approximately $300).
-//     </p>
-//   </div>
-//   <div class="mt-8">
-//     <h3 class="text-xl text-gray-300 font-bold mb-2">
-//       Distribution of Initial Sale Proceeds:
-//     </h3>
-//     <ul class="list-disc text-xl text-gray-300 pl-6">
-//       <li>
-//         50% of the Proceeds from the initial sale will be sent the DAO
-//         Treasury.
-//       </li>
-//     </ul>
-//   </div>
-// </section>
-// <section class="mb-8 mt-16">
-//   <h2 class="text-2xl text-gray-300 font-bold mb-4">
-//     BNGX Governance Token Distribution
-//   </h2>
-//   <p class="mb-2 text-xl text-gray-300">
-//     The Bullion DAO will airdrop BNGX governance tokens to early pass
-//     holders and users. The max supply of BNGX is 100,000,000.
-//   </p>
-
-//   <div>
-//     <h3 class="text-xl text-gray-300 font-bold mt-8 mb-2">
-//       Private Sale:
-//     </h3>
-//     <ul class="list-disc text-xl text-gray-300 pl-6">
-//       <li>5,000,000 BNGX will go to the Bullion DAO Treasury.</li>
-//       <li>3,000,000 BNGX will go to the Bullion Foundation.</li>
-//       <li>
-//         1,000,000 BNGX will be airdropped to early players and DAO
-//         members (1,000 each).
-//       </li>
-//       <li>5,000,000 BNGX will go to contributors.</li>
-//       <li>
-//         85,000,000 BNGX will be distributed through an ICO and
-//         listing.
-//       </li>
-//     </ul>
-//   </div>
-//   <div>
-//     <h3 class="text-xl text-gray-300 font-bold mt-8 mb-2">
-//       Public Sale:
-//     </h3>
-//     <ul class="list-disc text-xl text-gray-300 pl-6">
-//       <li>
-//         85,000,000 BNGX will be distributed through an ICO and
-//         listing.
-//       </li>
-//     </ul>
-//   </div>
-// </section>
-// <section class="mb-8">
-//   <h2 class="text-2xl text-gray-300 font-bold mt-16 mb-4">
-//     DAO Treasury Funding Inflow
-//   </h2>
-//   <p class="mb-2 text-xl text-gray-300">
-//     The initial funding for the DAO will be derived from the
-//     membership pass sale and BNG token ICO and listing. The DAO will
-//     also receive funding from 20% of every game pot and returns from
-//     DAO investment operations.
-//   </p>
-// </section>
-// <section>
-//   <h2 class="text-2xl text-gray-300 font-bold mb-4">DAO Voting</h2>
-//   <p class="mb-2 text-xl text-gray-300">
-//     The DAO will be set up with a 60% voting quorum, and 1,000 BNGX
-//     will be required to create proposals. The 60% requirement helps to
-//     secure the DAO and its treasury from harmful proposals until a
-//     meaningful number of participants are involved.
-//   </p>
-// </section>
-// <section class="mb-8 mt-16">
-//   <div>
-//     <h3 class="text-xl text-gray-300 font-bold mt-8 mb-2">
-//       Game Pot Splits:
-//     </h3>
-//     <ul class="list-disc text-xl text-gray-300 pl-6">
-//       <li>60% - Winner</li>
-//       <li>10% - Bullion Foundation</li>
-//       <li>
-//         30% - DAO Treasury(20% -Marketing & DAO operations, 10% -
-//         Distributed to DAO members )
-//       </li>
-//     </ul>
-//   </div>
-// </section>
-// <section class="mb-8 mt-16">
-//   <div>
-//     <h3 class="text-xl text-gray-300 font-bold mt-8 mb-2">
-//       Bullion Foundation:
-//     </h3>
-//     <p class="mb-2 text-xl text-gray-300">
-//       The Bullion foundation is a group of entities which consist of
-//       the founders, early investors, and contributors .
-//     </p>
-//   </div>
-// </section>{" "}
-//           <h2 className="text-2xl font-bold text-gray-300 mb-8 mt-16">
-//             Our Team
-//           </h2>
-//           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-// {teamMembers.map((member) => (
-//   <div
-//     key={member.name}
-//     className="bg-white overflow-hidden shadow rounded-lg"
-//   >
-//     <img className="w-full" src={member.image} alt={member.name} />
-//     <div className="px-4 py-4">
-//       <h3 className="text-lg font-bold text-gray-900 mb-2">
-//         {member.name}
-//       </h3>
-//       <p className="text-gray-500">{member.role}</p>
-//     </div>
-//   </div>
-// ))}
-//           </div>
-//           <h2 className="text-2xl font-bold text-gray-200 mb-2 mt-16">
-//             Smart Contract Addresses
-//           </h2>
-//           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-//             {contractAddresses.map((contract) => (
-//               <div
-//                 key={contract.name}
-//                 className="bg-white overflow-hidden shadow rounded-lg"
-//               >
-//                 <div className="px-4 py-4">
-//                   <h3 className="text-lg font-bold text-gray-900 mb-2">
-//                     {contract.name}
-//                   </h3>
-//                   <p className="text-gray-500 lg:text-base text-sm">
-//                     Contract Address: {contract.address}
-//                   </p>
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//           <h2 className="text-2xl font-bold text-gray-200 mb-2 mt-16"></h2>
-// <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
-//   {powerPoints.map((power) => (
-//     <div
-//       key={power.name}
-//       className="bg-white overflow-hidden shadow rounded-lg"
-//     >
-//       <div class="flex-shrink-0 mt-4 ml-4">
-//         <img
-//           class="h-12 w-12 mb-8"
-//           src={power.image}
-//           alt={power.name}
-//         />
-//       </div>
-
-//       <div className="px-4 py-4">
-//         <h3 className="text-lg font-bold text-gray-900 mb-2">
-//           {power.name}
-//         </h3>
-//         <p className="text-gray-500">{power.role}</p>
-//       </div>
-//     </div>
-//   ))}
-// </div>
-//         </div>
-//       </div>
-//     </div>

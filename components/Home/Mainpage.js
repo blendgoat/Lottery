@@ -94,7 +94,7 @@ const mainPage = () => {
   }, [currentGameState]);
 
   useEffect(() => {
-    if (!players) return;
+    if (isNaN(finalBalance)) return;
     setLotLoading(false);
   }, [balance]);
 
@@ -147,6 +147,9 @@ const mainPage = () => {
         <div className="m-8 relative space-y-4"></div>
       </div>
       <div className="relative snap-start  w-screen h-screen  p-4 lg:p-16 flex flex-shrink-0 flex-col items-center">
+        <Popup trigger={buttonPop}>
+          <Sendingtransaction />
+        </Popup>
         <div className={style.topContent}>
           <div className={style.nftImgContainer}>
             <div
