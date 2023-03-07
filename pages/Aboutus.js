@@ -271,7 +271,7 @@ const CryptoGame = () => {
           Our Team
         </h2>
         <div className="flex lg:text-[12px] text-[8px] text-gray-200  flex-col justify-center lg:items-center w-4/5">
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:flex lg:w-4/5 lg:justify-center lg:items-center  gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:flex lg:flex-shrink-0 lg:w-4/5 lg:justify-center lg:items-center  gap-4">
             {teamMembers.map((member, id) => (
               <div
                 key={member.name}
