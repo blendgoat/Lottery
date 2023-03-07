@@ -6,7 +6,7 @@ const teamMembers = [
     role: "Founder & CTO",
     bio: "At Bullion Foundation, Delnoi serves as our Founder & CTO, leading the development of our smart contracts and DApps. His contributions are integral to all of our application projects. Delnoi is a passionate learner and experimenter, always seeking out new languages and techniques for online technology development. He is proficient in several languages, including HTML, CSS, JavaScript, and Solidity. His love for technology and the web3 space drives him to explore and tinker with emerging technologies to build innovative and cutting-edge dapps that are both highly functional and simple to use. We are fortunate to have Delnoi as a member of our team, as his skills and dedication to the industry have been invaluable to us. His passion for technology and desire to drive the industry forward has inspired us all to keep pushing the boundaries of what's possible in the web3 space.",
 
-    image: "/DelnoiProfilePhoto.png",
+    image: "/delpropic.png",
   },
   // { name: "Jane Smith", role: "CFO", image: "/logoHome.png" },
   // {
