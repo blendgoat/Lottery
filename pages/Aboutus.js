@@ -45,7 +45,7 @@ const powerPoints = [
   {
     name: "Mint DAO Membership",
     shortDesc:
-      "To join the DAO, you'll need to mint a DAO membership. DAO memberships cost 1BNB. When you mint your membership, 100% of the funds go directly into the DAO treasury, which is controlled by members like you, and the other 50% will cover operational expenses.",
+      "To join the DAO, you'll need to mint a DAO membership. DAO memberships cost 1BNB. When you mint your membership, 100% of the funds go directly into the DAO treasury, which is controlled by members like you.",
     image: "/logoHome.png",
   },
   {
