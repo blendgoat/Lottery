@@ -34,11 +34,11 @@ const Maincombine = ({ children }) => {
         {netMisMatch == true && (
           <>
             <div className="flex items-center justify-center h-screen w-screen">
-              <p>
+              <div>
                 Please connect to Binance Smart Chain Testnet. This dapp
                 currently only works on the Binance Smart Chain Testnet network,
                 please switch networks in your connected wallet.
-              </p>
+              </div>
             </div>
           </>
         )}

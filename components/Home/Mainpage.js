@@ -135,10 +135,8 @@ const mainPage = () => {
                 {currentGameState == 0 && (
                   <>
                     <div>
-                      <p>
-                        Game is open, press the "Enter" button to play. By
-                        entering the game you accept our terms and conditions.
-                      </p>
+                      Game is open, press the "Enter" button to play. By
+                      entering the game you accept our terms and conditions.
                     </div>
                     <div className={style.searchBar}></div>
                     <button
@@ -156,10 +154,8 @@ const mainPage = () => {
                 {currentGameState > 0 && (
                   <>
                     <div>
-                      <p>
-                        Game is currently closed and calculating winer. By
-                        entering the game you accept our terms and conditions.
-                      </p>
+                      Game is currently closed and calculating winer. By
+                      entering the game you accept our terms and conditions.
                     </div>
                     <div className={style.searchBarClosed}></div>
                   </>

@@ -6,7 +6,7 @@ const teamMembers = [
     role: "Founder & CTO",
     bio: "At Bullion Foundation, Delnoi serves as our Founder & CTO, leading the development of our smart contracts and DApps. His contributions are integral to all of our application projects. Delnoi is a passionate learner and experimenter, always seeking out new languages and techniques for online technology development. He is proficient in several languages, including HTML, CSS, JavaScript, and Solidity. His love for technology and the web3 space drives him to explore and tinker with emerging technologies to build innovative and cutting-edge dapps that are both highly functional and simple to use. We are fortunate to have Delnoi as a member of our team, as his skills and dedication to the industry have been invaluable to us. His passion for technology and desire to drive the industry forward has inspired us all to keep pushing the boundaries of what's possible in the web3 space.",
 
-    image: "/DelnoiProfilePhoto.jpeg",
+    image: "/DelnoiProfilePhoto.png",
   },
   // { name: "Jane Smith", role: "CFO", image: "/logoHome.png" },
   // {
@@ -68,14 +68,14 @@ const CryptoGame = () => {
       <div className="relative snap-start  h-full  p-4 lg:p-16  flex flex-col justify-center items-center">
         <h2 className="text-8xl  text-gray-600 font-bold m-8 lg:m-16">About</h2>
         <div className="flex lg:text-xl text-[8px] flex-col lg:flex-row justify-center w-4/5">
-          <p className=" text-gray-900 m-4">
+          <div className=" text-gray-900 m-4">
             Our mission is to provide an exciting and fair gaming experience
             while giving back to the community through charitable donations. We
             believe in the power of blockchain and decentralization to create a
             more equitable and transparent world, and we strive to reflect these
             values in everything we do.
-          </p>
-          <p className=" text-gray-900 m-4">
+          </div>
+          <div className=" text-gray-900 m-4">
             Our game is simple and easy to play. With no need to choose numbers,
             all you have to do is click the enter button to join the game. A
             small fee of 0.01 BNB is charged and added to the pot, which grows
@@ -84,8 +84,8 @@ const CryptoGame = () => {
             winner, and reset the game. To improve your chances you may enter as
             many times as you want. There is a platform fee of 0.001BNB on every
             transaction(≈ $0.30)
-          </p>
-          <p className=" text-gray-900 m-4">
+          </div>
+          <div className=" text-gray-900 m-4">
             What's more, we want to assure you that at no point are your funds
             held by the company, all game funds are held by the contract. The
             pot is split in a way that benefits everyone involved. 70% goes to
@@ -95,7 +95,7 @@ const CryptoGame = () => {
             want you to be a part of this incredible journey and make a
             difference in the world. Join us now and be a part of something
             amazing!
-          </p>
+          </div>
         </div>
       </div>
       <div className="relative snap-start w-screen h-full  p-4 lg:p-16  flex flex-col justify-center items-center">
@@ -111,25 +111,25 @@ const CryptoGame = () => {
 
         <section className="flex lg:m-8  lg:text-lg text-[8px] text-gray-600  flex-row justify-center w-4/5">
           <h2 class="text-2xl text-gray-300 font-bold mb-2"></h2>
-          <p>
+          <div>
             The Bullion DAO is a winner-takes-all game combined with a
             technology development-focused DAO. The platform is designed to fund
             Web3 development programs, support charitable initiatives on
             existing global issues, and invest in blockchain tech companies and
             technology.
-          </p>
+          </div>
         </section>
         <div className="flex lg:text-lg text-[8px] text-gray-600 mt-2 flex-col  lg:flex-row justify-center w-4/5">
           <section class="lg:mb-8  mb-2">
             <h2 class="lg:text-2xl text-sm font-bold lg:mb-2">
               DAO Membership
             </h2>
-            <p class="mb-2 lg:mb-8 w-4/5  ">
+            <div class="mb-2 lg:mb-8 w-4/5  ">
               Membership pass gives users access to the DAO and all its
               functions. DAO member rewards are also distributed according to
               how many passes are owned as a percentage of total passes. The
               Bullion Foundation retains 1,000 passes.
-            </p>
+            </div>
             <h3 class="lg:text-xl  text-l font-bold">Private Sale:</h3>
             <ul class="list-disc w-4/5  pl-6 mb-2 lg:mb-8">
               <li>
@@ -143,14 +143,14 @@ const CryptoGame = () => {
             </ul>
 
             <h3 class="lg:text-xl text-l font-bold">Public Sale:</h3>
-            <p class="mb-2 ">
+            <div class="mb-2 ">
               <ul class="list-disc w-3/4  pl-6 lg:mb-8 mb-2">
                 <li>
                   7,000 passes will be available for purchase at 1 BNB plus a
                   10% plattform fee(≈ $30).
                 </li>
               </ul>
-            </p>
+            </div>
 
             <h3 class="lg:text-xl text-l font-bold">
               Distribution of Initial Sale Proceeds:
@@ -166,12 +166,12 @@ const CryptoGame = () => {
             <h2 class="lg:text-2xl text-sm font-bold   lg:mb-2">
               BNGX Governance Token Distribution
             </h2>
-            <p class="mb-2 lg:mb-8 ">
+            <div class="mb-2 lg:mb-8 ">
               Bullion Governance tokens are required to vote or create
               proposals. The Bullion Foundation will airdrop BNGX governance
               tokens to early pass holders and users. The max supply of BNGX is
               100,000,000.
-            </p>
+            </div>
 
             <h3 class="lg:text-xl text-l font-bold  ">Private Sale:</h3>
             <ul class="list-disc lg:mb-8  pl-6 ">
@@ -204,14 +204,14 @@ const CryptoGame = () => {
             <h2 class="lg:text-8xl text-4xl  text-gray-600 font-bold lg:m-16 m-8 ">
               DAO Voting
             </h2>
-            <p class="mb-2 ">
+            <div class="mb-2 ">
               The DAO dao is set up with a 60% voting quorum, this means that a
               total of 60% of all votes is required for proposals to pass.
               Members are required to be holding 1,000 BNGX and a membership
               token in order to create proposals and vote. The 60% requirement
               helps to secure the DAO and its treasury from harmful proposals
               until a meaningful number of participants are involved.
-            </p>
+            </div>
           </section>
         </div>
       </div>
@@ -230,9 +230,9 @@ const CryptoGame = () => {
                   <h3 className="text-lg text-base font-bold  mb-2">
                     {contract.name}
                   </h3>
-                  <p className="lg:text-base text-[8px]">
+                  <div className="lg:text-base text-[8px]">
                     Contract Address: {contract.address}
-                  </p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -259,7 +259,7 @@ const CryptoGame = () => {
                   <h3 className="lg:text-lg text-sm font-bold  mb-2">
                     {powerPoints.name}
                   </h3>
-                  <p className="">{powerPoints.shortDesc}</p>
+                  <div className="">{powerPoints.shortDesc}</div>
                 </div>
               </div>
             ))}
@@ -288,7 +288,7 @@ const CryptoGame = () => {
                 <div className="px-4">
                   <h3 className="text-lg font-bold  mb-2">{member.name}</h3>
                   <h3 className="text-base font-bold  mb-2">{member.role}</h3>
-                  <p className="">{member.bio}</p>
+                  <div className="">{member.bio}</div>
                 </div>
               </div>
             ))}
