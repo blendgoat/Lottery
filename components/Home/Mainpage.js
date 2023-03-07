@@ -1,38 +1,19 @@
-// import React, { useState, useEffect } from "react";
-
-// import Gamefrontopen from "./Gamefront/Gamefrontopen";
-
 import React, { useState, useEffect } from "react";
-import { ConnectWallet } from "@thirdweb-dev/react";
-import { MdOutlineAccountBalanceWallet } from "react-icons/md";
-import { AiOutlineSearch } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { AiFillAlert } from "react-icons/ai";
-import {
-  Web3Button,
-  useContract,
-  useContractWrite,
-  useContractRead,
-  useAddress,
-} from "@thirdweb-dev/react";
-import { ThirdwebSDK } from "@thirdweb-dev/sdk";
-// import { AwsKmsWallet } from "@thirdweb-dev/sdk/evm/wallets";
+import { useContract, useContractRead, useAddress } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
-// import styles from "../../styles/Home.module.css";
 import Popup from "../Popup";
 import Sendingtransaction from "./Sendingtransaction";
 import { client } from "../../lib/sanityClient";
 
 const style = {
   wrapperMain: `w-full p-8 lg:p-16 h-screen md:h-screen lg:h-full bg-gray-50 flex flex-col items-center  `,
-  wrapper: `relative  w-full flex flex-col items-center  `,
-
+  wrapper: `relative  w-full flex flex-col items-center`,
   mintwrapper: `h-screen p-2 w-full bg-indigo-900 flex justify-center flex-col items-center  `,
   topContent: `flex  flex-col  lg:flex-row w-full items-center justify-center lg:justify-between`,
   nftImgContainer: `w-[330px] md:w-[400px] lg:w-[500] text-gray-400 text-xs  p-4 lg:p-8 m-8 card   border-gray-300 bg-gray-300  bg-opacity-30  rounded-lg h-48 lg:h-64 items-center `,
   playerContainer: `w-[330px] md:w-[400px] lg:w-[500] text-gray-400 text-xs  p-4 lg:p-8 m-8 card   border-gray-300 bg-gray-300  bg-opacity-30  rounded-lg h-32 lg:h-64 items-center `,
-
-  // topItemsContainer: `flex flex-col lg:flex-row  justify-between  mt-8  rounded-xl p-8 lg:w-4/5 xl:w-4/5  `,
   formInputContainer: `p-2 mt-4 flex rounded  shadow-xl bg-gray-300 bg-opacity-30  w-full items-center justify-center `,
   formInput: `p-2 mb-2 w-full   bg-transparent lg:h-96 h-48`,
   formTitle: `text-2xl font-bold text-slate-600 mt-8`,
@@ -47,13 +28,9 @@ const style = {
 };
 
 const mainPage = () => {
-  const [thePlayers, setThePlayers] = useState();
-  const [gameState, setGameState] = useState();
   const [gameClosed, setGameClosed] = useState();
   const [lotLoading, setLotLoading] = useState(true);
   const [buttonPop, setButtonPop] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [gamerId, setGamerId] = useState();
 
   const address = useAddress();
 
@@ -74,10 +51,6 @@ const mainPage = () => {
   const currentGameID = gameId?.data;
   const finalPlayersList = players.data;
   const currentGameState = loterryState?.data;
-
-  // const made = currentGameID?.toString();
-
-  // console.log({ made });
 
   console.log({ currentGameState });
 
@@ -152,10 +125,7 @@ const mainPage = () => {
         </Popup>
         <div className={style.topContent}>
           <div className={style.nftImgContainer}>
-            <div
-              className={style.headerIcon}
-              // onClick={() => setIsOpen(true)}
-            >
+            <div className={style.headerIcon}>
               <AiFillAlert />
             </div>
             {lotLoading ? (
