@@ -16,7 +16,7 @@ const Mintcompo = () => {
   const { address } = useContext(ApeDaoContext);
 
   const { contract: editionDrop } = useContract(
-    "0xa85caec09986d1AC483709A960bD1cCa972E3c44",
+    "0x7CF4e5794087691637d421B6FD304112fB190dB6",
     "edition-drop"
   );
 

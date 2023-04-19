@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { CgProfile } from "react-icons/cg";
 import { AiFillAlert } from "react-icons/ai";
-import { useContract, useContractRead, useAddress } from "@thirdweb-dev/react";
+import { useContract, useContractRead, useAddress, useStorageUpload } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
 import Popup from "../Popup";
 import Sendingtransaction from "./Sendingtransaction";
 import { client } from "../../lib/sanityClient";
+import Math from "mathjs";
+import BigNumber from "bignumber.js";
+import { ThirdwebSDK } from "@thirdweb-dev/sdk/evm";
 
 const style = {
   wrapperMain: `w-full p-8 lg:p-16 h-screen md:h-screen lg:h-full bg-gray-50 flex flex-col items-center  `,
@@ -34,30 +37,86 @@ const mainPage = () => {
 
   const address = useAddress();
 
-  const { contract } = useContract(
-    "0xeE3583630f0052B363c7Ad90F46346f1Bb004F73"
-  );
+  const { contract } = useContract("0xC63333Bea624a6D59f154E5f5e9063B7293D1320");
 
   const balance = useContractRead(contract, "getBalance");
   const players = useContractRead(contract, "getPlayers");
-  const loterryState = useContractRead(contract, "game_state");
-  const gameId = useContractRead(contract, "gameId");
+  const loterryState = useContractRead(contract, "getGameState");
+  const gameId = useContractRead(contract, "getGameId");
 
   const Balance = balance?.data;
-  const finalBalance = Balance?.toString() / ("1e" + 18);
 
-  console.log({ finalBalance });
+  const num = Balance?.toString() / ("1e" + 18);
+  const roundedNum = num.toFixed(2); // rounds up to nearest tenth
+  // console.log(roundedNum); // output: 0.1
+  const finalBalance = roundedNum;
+
+  // console.log({ finalBalance });
 
   const currentGameID = gameId?.data;
   const finalPlayersList = players.data;
   const currentGameState = loterryState?.data;
 
-  console.log({ currentGameState });
+  // console.log({ currentGameState });
 
   const listAmKpa = () => {
-    setLoading(true);
     setButtonPop(true);
   };
+
+  const closePop = () => {
+    setButtonPop(false);
+  };
+
+  // const { mutateAsync: upload } = useStorageUpload();
+
+  // const uploadData = async () => {
+  //   // Get any data that you want to upload
+  //   const dataToUpload = [
+  //     {
+  //       name: "BullionVoteMain",
+  //       voting_delay_in_blocks: 0,
+  //       voting_period_in_blocks: 604800,
+  //       voting_token_address: "0xbda161E60c7d48f7A2eE5a98402035dBb2DaF257",
+  //       voting_quorum_fraction: 40,
+  //       proposal_token_threshold: "10000",
+  //       trusted_forwarders: ["0x2E012dC6146049948408A5e55FCC8B680213958d", "0x7C7960a6bA196548f7e09cFAad13F562F7de09FF"],
+  //     },
+  //   ];
+
+  //   // And upload the data with the upload function
+  //   const uris = await upload({ data: dataToUpload });
+  //   console.log({ uris });
+  // };
+
+  // const { mutateAsync: upload } = useStorageUpload();
+
+  // const uploadData = async () => {
+  //   // Get any data that you want to upload
+  //   const dataToUpload = [
+  //     {
+  //       name: "BullionDAOGov",
+  //       symbol: "BNGX",
+  //       description: "Governance tokens for Bullion DAO",
+  //       image: "ipfs://QmaQ7uSbQqCij1dHrEMdDcqLhjbAm2HXmqis4o6haFbbPX/logoHome.png",
+  //     },
+  //   ];
+
+  //   // And upload the data with the upload function
+  //   const uris = await upload({ data: dataToUpload });
+  //   console.log({ uris });
+  // };
+
+  // const sdk = new ThirdwebSDK("binance");
+  // const contract = await sdk.getContract(
+  //   "0x9503FFBf273f3fcfD0B258950Db657e66788A9C9"
+  // );
+
+  // const uploadData = async () => {
+  //   await contract.metadata.set({
+  //     name: "BullionVoteMain",
+  //     description: "My contract description",
+  //   });
+  // };
 
   useEffect(() => {
     if (currentGameState != 0) setGameClosed(true);
@@ -72,10 +131,30 @@ const mainPage = () => {
   }, [balance]);
 
   const enterGame = async () => {
-    const entryValue = 0.011;
+    // const entryValue = 0.011;
+    try {
+      const data = await contract.call("getLatestBNBUsdPrice");
+      console.info("contract call successs", data);
+      // console.log({ data });
+      payGameEntry(data);
+    } catch (err) {
+      console.error("contract call failure", err);
+    }
+  };
+
+  const payGameEntry = async (data) => {
+    const entryData = new BigNumber(data._hex);
+    // console.log(entryData.toString());
+    const weiToEth = new BigNumber("1e18");
+    const wei = entryData.toString();
+    // console.log(wei);
+    const entryValue = new BigNumber(wei);
+    const enterting = entryValue.dividedBy(weiToEth);
+    // console.log(enterting.toString());
+    // const gameId = currentGameID?.toString();
     try {
       const data = await contract.call("enter", {
-        value: ethers.utils.parseEther(`${entryValue}`),
+        value: ethers.utils.parseEther(`${enterting}`),
       });
       console.info("contract call successs", data);
       addWhiteList();
@@ -95,24 +174,20 @@ const mainPage = () => {
 
     try {
       const result = await client.createIfNotExists(userDoc);
-      console.log(result);
+      // console.log(result);
       closePop();
     } catch (err) {
-      console.log({ err });
+      // console.log({ err });
     }
   };
 
-  const closePop = () => {
-    setButtonPop(false);
-  };
-
-  console.log({ lotLoading });
+  // console.log({ lotLoading });
 
   for (var i = 0; i < finalPlayersList?.length; i++) {
-    console.log({ finalPlayersList });
+    // console.log({ finalPlayersList });
   }
   return (
-    <div className="relative snap-y snap-mandatory overflow-scroll bg-gray-50 h-screen md:h-screen lg:h-screen  justify-center bg-fixed">
+    <div className="relative   overflow-scroll bg-gray-50 h-screen md:h-screen lg:h-screen  justify-center bg-fixed">
       <div className="fixed h-screen md:h-screen w-screen flex items-center lg:h-full">
         <div className="absolute top-0 -left-4 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-rose-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob "></div>
         <div className="absolute top-0 -right-4 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
@@ -132,12 +207,9 @@ const mainPage = () => {
               <div className="text-sky-400">Loading...</div>
             ) : (
               <div>
-                {currentGameState == 0 && (
+                {currentGameState == 1 && (
                   <>
-                    <div>
-                      Game is open, press the "Enter" button to play. By
-                      entering the game you accept our terms and conditions.
-                    </div>
+                    <div>Game is open, press the "Enter" button to play. By entering the game you accept our terms and conditions.</div>
                     <div className={style.searchBar}></div>
                     <button
                       onClick={() => {
@@ -151,12 +223,9 @@ const mainPage = () => {
                     </button>
                   </>
                 )}
-                {currentGameState > 0 && (
+                {currentGameState != 1 && (
                   <>
-                    <div>
-                      Game is currently closed and calculating winer. By
-                      entering the game you accept our terms and conditions.
-                    </div>
+                    <div>Game is currently closed or calculating winer. By entering the game you accept our terms and conditions.</div>
                     <div className={style.searchBarClosed}></div>
                   </>
                 )}
@@ -180,11 +249,7 @@ const mainPage = () => {
         </div>
         <div className={style.timeContainer}>
           <div>
-            <img
-              src="/Binance-Icon-Logo.wine.svg"
-              alt="eth"
-              className={style.ethLogo}
-            />
+            <img src="/Binance-Icon-Logo.wine.svg" alt="eth" className={style.ethLogo} />
           </div>
           <div>
             <div className="text-xl text-gray-400 lg:2-xl">POT BALANCE</div>
@@ -200,8 +265,8 @@ const mainPage = () => {
         <div
           className={style.button}
           onClick={() => {
-            enterGame();
-            listAmKpa();
+            uploadData();
+            // listAmKpa();
           }}
         >
           <div className={style.buttonText}>Enter</div>

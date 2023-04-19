@@ -1,15 +1,6 @@
 //Import Dependencies and hooks needed for app
 import { createContext, useEffect, useState } from "react";
-import {
-  useContract,
-  useAddress,
-  useMetamask,
-  useDisconnect,
-  useNetwork,
-  useNFTBalance,
-  useSDK,
-  useTokenBalance,
-} from "@thirdweb-dev/react";
+import { useContract, useContractRead, useAddress, useMetamask, useDisconnect, useNetwork, useNFTBalance, useSDK, useTokenBalance } from "@thirdweb-dev/react";
 import { VoteType } from "@thirdweb-dev/sdk";
 import { ethers } from "ethers";
 
@@ -25,25 +16,21 @@ export const ApeDaoProvider = ({ children }) => {
   const network = useNetwork();
   console.log({ network });
 
-  const { contract: editionDrop, isLoading: isNftLoading } = useContract(
-    "0xa85caec09986d1AC483709A960bD1cCa972E3c44",
-    "edition-drop"
-  );
+  const { contract: editionDrop, isLoading: isNftLoading } = useContract("0x7CF4e5794087691637d421B6FD304112fB190dB6", "edition-drop");
 
-  const { contract: token, isLoading: isTokenLoading } = useContract(
-    process.env.NEXT_PUBLIC_TOKEN
-  );
+  const { contract: token, isLoading: isTokenLoading } = useContract(process.env.NEXT_PUBLIC_TOKEN);
 
-  const { contract: vote, isLoading: isVoteLoading } = useContract(
-    process.env.NEXT_PUBLIC_VOTE
-  );
+  const { contract: vote, isLoading: isVoteLoading } = useContract(process.env.NEXT_PUBLIC_VOTE);
+
+  const { contract } = useContract("0x4AeC5c40025b68fD252dbdd2F4Cb927b92AC5db1");
+  const usersStakedBalance = useContractRead(contract, "getStakedBalance", address);
+  const memberStakedBalance = usersStakedBalance?.data;
 
   const NftImage = globalThis.data;
 
   const nft = editionDrop
     ?.get("0")
     .then((result) => {
-      console.log({ result });
       const nftData = result.metadata;
       globalThis.data = nftData;
     })
@@ -55,24 +42,19 @@ export const ApeDaoProvider = ({ children }) => {
   const daoMember = nftBalance?.toString();
 
   const GetTreasureBalance = async () => {
-    const ownedTokenBalance = await token?.balanceOf(
-      "0x952f931A5a118Ac8a90C339A79287E998d51BEe2"
-    );
+    const ownedTokenBalance = await token?.balanceOf("0x65a4BeBA7eA7eE793e6E3C24157256ca842b0F03");
 
     return ownedTokenBalance;
   };
 
   const GetTreasureBalanceNative = async () => {
-    const balance = await sdk?.getBalance(
-      "0x952f931A5a118Ac8a90C339A79287E998d51BEe2"
-    );
+    const balance = await sdk?.getBalance("0x65a4BeBA7eA7eE793e6E3C24157256ca842b0F03");
 
     return balance;
   };
 
   const getAllProposals = async () => {
     const proposals = await vote?.getAll();
-    console.log(proposals);
   };
 
   const executeProposal = async (id, closePop) => {
@@ -80,7 +62,6 @@ export const ApeDaoProvider = ({ children }) => {
     if (canExecute) {
       try {
         const res = await vote.execute(id);
-        console.log(res);
         closePop();
       } catch (error) {
         console.log(error);
@@ -108,6 +89,7 @@ export const ApeDaoProvider = ({ children }) => {
         nft,
         isNftLoading,
         NftImage,
+        memberStakedBalance,
         isExecutable,
         GetTreasureBalance,
         GetTreasureBalanceNative,

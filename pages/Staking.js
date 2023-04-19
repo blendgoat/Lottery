@@ -1,26 +1,22 @@
-import { useState, useContext } from "react";
-
-import Daocompo from "../components/Daocompo";
+import React, { useContext } from "react";
+import Stakecompo from "../components/Stakecompo";
 import Mintcompo from "../components/Mintcompo";
 import { ApeDaoContext } from "../components/Context/solutions";
 import Checkingmembership from "../components/Checkingmembership";
-import Lander from "../components/Home/Lander";
 
-const NewDao = () => {
+const Staking = () => {
   const { daoMember, address, memberStakedBalance } = useContext(ApeDaoContext);
-
-  ////////////////////////////////////////////////////
-
-  // console.log({ memberStakedBalance });
-  //////////////////////////////////////////////////////////////////////////////////////////
-
   return (
     <div>
       {daoMember ? (
         <>
-          {daoMember > 0 && <Daocompo />}
-          {memberStakedBalance > 0 && <Daocompo />}
-          {daoMember == 0 && <Mintcompo />}
+          {daoMember > 0 && <Stakecompo />}
+          {memberStakedBalance > 0 && <Stakecompo />}
+          {daoMember == 0 && (
+            <>
+              <Mintcompo />
+            </>
+          )}
         </>
       ) : (
         <>
@@ -36,4 +32,4 @@ const NewDao = () => {
   );
 };
 
-export default NewDao;
+export default Staking;

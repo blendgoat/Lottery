@@ -19,7 +19,7 @@ const Footert = () => {
         >
           <img
             src="/discord-logo.png"
-            alt="menu"
+            alt="discord"
             className="w-[70px]   h-[30px] object-contain cursor-pointer"
           />
         </a>
@@ -32,7 +32,7 @@ const Footert = () => {
         >
           <img
             src="/logo-twitter.png"
-            alt="menu"
+            alt="twitter"
             className="w-[70px]   h-[30px] object-contain cursor-pointer"
           />
         </a>
@@ -45,7 +45,7 @@ const Footert = () => {
         >
           <img
             src="/logo-ig.png"
-            alt="menu"
+            alt="instagram"
             className="w-[70px]   h-[30px] object-contain cursor-pointer"
           />
         </a>

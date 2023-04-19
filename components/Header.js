@@ -36,21 +36,12 @@ const Header = ({ setIsOpen, refine }) => {
     setLoading(false);
   });
 
-  //   const searchClient = algoliasearch(
-  //     "YKR89ZDX1N",
-  //     "da45d5ef8287bab3b94f7f3ce0b5ced0"
-  //   );
-
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between gap-6">
       <div className="sm:flex hidden flex w-full flex-row fixed z-10 items-center justify-between">
         <div>
           <Link href="/">
-            <img
-              src="/logoHome.png"
-              alt="menu"
-              className="w-[70px] ml-2  h-[30px] object-contain cursor-pointer"
-            />
+            <img src="/logoHome.png" alt="menu" className="w-[70px] ml-2  h-[30px] object-contain cursor-pointer" />
           </Link>
         </div>
         <div className="flex">
@@ -69,12 +60,20 @@ const Header = ({ setIsOpen, refine }) => {
             </Link>
           </div>
           <div className={style.headerItems}>
+            <Link href="/Staking">
+              <div className={style.headerItemM}>
+                <div className="text-sm">STAKING</div>
+              </div>
+            </Link>
+          </div>
+          <div className={style.headerItems}>
             <Link href="/Aboutus">
               <div className={style.headerItemM}>
                 <div className="text-sm">ABOUT</div>
               </div>
             </Link>
           </div>
+
           <div className="mr-8">
             <div className={style.connect}>
               <ConnectWallet accentColor="#f9fafb" border-radius="9999px" />
@@ -85,23 +84,12 @@ const Header = ({ setIsOpen, refine }) => {
 
       <div className="sm:hidden flex justify-between px-4 items-center relative">
         <div className={style.logoContainer}>
-          <img
-            src="/logoHome.png"
-            alt="logo"
-            className="w-[60%] h-[60%] object-contain"
-          />
+          <img src="/logoHome.png" alt="logo" className="w-[60%] h-[60%] object-contain" />
         </div>
 
-        <img
-          src="/menu.svg"
-          alt="menu"
-          className="w-[14px] h-[14px] object-contain cursor-pointer"
-          onClick={() => SetToggleDrawer((prev) => !prev)}
-        />
+        <img src="/menu.svg" alt="menu" className="w-[14px] h-[14px] object-contain cursor-pointer" onClick={() => SetToggleDrawer((prev) => !prev)} />
         <div
-          className={`absolute top-[60px] flex right-0 left-0 bg-[#1c1c24]  z-10 shadow-secondary py-4 px-8 ${
-            !toggleDrawer ? "-translate-y-[100vh]" : "translate-y-0"
-          } transition-all duration-700`}
+          className={`absolute top-[60px] flex right-0 left-0 bg-[#1c1c24]  z-10 shadow-secondary py-4 px-8 ${!toggleDrawer ? "-translate-y-[100vh]" : "translate-y-0"} transition-all duration-700`}
         >
           <div className="w-full flex flex-col  items-center justify-center">
             <Link href="/">
@@ -123,6 +111,16 @@ const Header = ({ setIsOpen, refine }) => {
                 }}
               >
                 <div>DAO</div>
+              </div>
+            </Link>
+            <Link href="/Staking">
+              <div
+                className={style.headerItem}
+                onClick={() => {
+                  SetToggleDrawer(false);
+                }}
+              >
+                <div>STAKING</div>
               </div>
             </Link>
             <Link href="/Aboutus">

@@ -35,21 +35,15 @@ const Daocompo = () => {
 
   const [buttonPop, setButtonPop] = useState(false);
 
-  const usdContracts = "0x952f931A5a118Ac8a90C339A79287E998d51BEe2";
+  const usdContracts = "0x65a4BeBA7eA7eE793e6E3C24157256ca842b0F03";
 
-  const { contract } = useContract(
-    "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd"
-  );
+  const { contract } = useContract("0x337610d27c682E347C9cD60BD4b3b107C9d34dDd");
 
-  const usdtContractBalance = useContractRead(
-    contract,
-    "balanceOf",
-    usdContracts
-  );
+  const usdtContractBalance = useContractRead(contract, "balanceOf", usdContracts);
 
   const usdtBalanceHex = usdtContractBalance?.data;
   const usdtBalance = usdtBalanceHex?.toString();
-  const usdtContractSym = useContractRead(contract, "_symbol");
+  // const usdtContractSym = useContractRead(contract, "_symbol");
 
   useEffect(() => {
     if (!usdtBalanceHex) return;
@@ -63,20 +57,12 @@ const Daocompo = () => {
   // const ethValue = ethers.utils.formatEther(usdtBalance);
   // // ethers.utils.formatEther(usdtBalance);
 
-  console.log({ musdtBalance });
-
-  const { address, nftBalance, GetTreasureBalance, GetTreasureBalanceNative } =
-    useContext(ApeDaoContext);
+  const { address, nftBalance, GetTreasureBalance, GetTreasureBalanceNative } = useContext(ApeDaoContext);
 
   ////////////////////////////////////////////////////
 
-  const { contract: token, isLoading: isTokenLoading } = useContract(
-    process.env.NEXT_PUBLIC_TOKEN
-  );
-  const { contract: vote, isLoading: isVoteLoading } = useContract(
-    process.env.NEXT_PUBLIC_VOTE
-  );
-  console.log({ isVoteLoading });
+  const { contract: token, isLoading: isTokenLoading } = useContract(process.env.NEXT_PUBLIC_TOKEN);
+  const { contract: vote, isLoading: isVoteLoading } = useContract(process.env.NEXT_PUBLIC_VOTE);
 
   useEffect(() => {
     const getAllProposals = async () => {
@@ -84,7 +70,6 @@ const Daocompo = () => {
         ?.getAll()
         .then((proposals) => {
           setProposals(proposals?.reverse());
-          console.log(proposals);
         })
         .catch((err) => {
           console.log(err);
@@ -92,7 +77,6 @@ const Daocompo = () => {
     };
     getAllProposals();
   }, [nftBalance]);
-  console.log({ proposals });
 
   //////////////////////////////////////////////
 
@@ -121,10 +105,7 @@ const Daocompo = () => {
 
       // Transaction data that will be executed when the proposal is executed
       // This is an example transfer transaction with a token contract (which you would need to setup in code)
-      transactionData: token?.encoder.encode("transfer", [
-        address,
-        ethers.utils.parseUnits(ammount.toString(), 18),
-      ]),
+      transactionData: token?.encoder.encode("transfer", [address, ethers.utils.parseUnits(ammount.toString(), 18)]),
     },
   ];
 
@@ -165,7 +146,6 @@ const Daocompo = () => {
     GetTreasureBalance()
       .then((ownedTokenBalance) => {
         setTbalance(ownedTokenBalance);
-        console.log({ ownedTokenBalance });
       })
       .catch((err) => {
         console.log(err);
@@ -176,7 +156,6 @@ const Daocompo = () => {
     GetTreasureBalanceNative()
       .then((balance) => {
         setNativeBalance(balance);
-        console.log({ balance });
       })
       .catch((err) => {
         console.log(err);
@@ -184,7 +163,7 @@ const Daocompo = () => {
   }, [nftBalance]);
 
   return (
-    <div className="relative snap-y snap-mandatory overflow-scroll bg-gray-50 h-screen md:h-screen lg:h-screen  justify-center bg-fixed">
+    <div className="relative   overflow-scroll bg-gray-50 h-screen md:h-screen lg:h-screen  justify-center bg-fixed">
       <div className="fixed h-screen md:h-screen w-screen flex items-center lg:h-full">
         <div className="absolute top-0 -left-4 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-rose-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob "></div>
         <div className="absolute top-0 -right-4 w-[320px] h-[320px] lg:w-[720px] lg:h-[720px] bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
@@ -204,12 +183,8 @@ const Daocompo = () => {
               <AiFillAlert />
             </div>
             <div>
-              To take part in the voting and proposal process on our platform,
-              you must delegate your BNG tokens to the designated voting
-              contract. A minimum of 1000 BNG tokens is required to create
-              proposals. Please note that this delegation is solely for the
-              purpose of verifying your voting power and does not give any
-              control over your funds.
+              To take part in the voting and proposal process on our platform, you must delegate your BNG tokens to the designated voting contract. A minimum of 1000 BNG tokens is required to create
+              proposals. Please note that this delegation is solely for the purpose of verifying your voting power and does not give any control over your funds.
             </div>
             <button
               onClick={() => {
@@ -234,14 +209,10 @@ const Daocompo = () => {
               <div className="my-2"></div>
               <div className="font-bold">USDT: {musdtBalance}</div>
               <div className="my-2"></div>
-              <div className="font-bold">
-                TBNB: {nativeBalance?.displayValue}
-              </div>
+              <div className="font-bold">TBNB: {nativeBalance?.displayValue}</div>
             </div>
             <div>
-              The amounts displayed above indicate the total funds held by the
-              treasury. The treasury is programmed to releass a maximum of
-              5000BNGX and 1BNB per proposal which requires funding. These
+              The amounts displayed above indicate the total funds held by the treasury. The treasury is programmed to releass a maximum of 5000BNGX and 1BNB per proposal which requires funding. These
               ammounts may be reviewed upwards by the community.
             </div>
           </div>
@@ -250,13 +221,7 @@ const Daocompo = () => {
           <div className={style.formTitle}>New Proposal</div>
           <div className={style.formInputContainer}>
             <div className={style.formInput}>
-              <textarea
-                type="text"
-                value={proposalDescription}
-                onChange={(e) => setProposalDescription(e.target.value)}
-                placeholder="Description..."
-                className={style.formInput}
-              />
+              <textarea type="text" value={proposalDescription} onChange={(e) => setProposalDescription(e.target.value)} placeholder="Description..." className={style.formInput} />
             </div>
           </div>
           <div>
@@ -278,13 +243,7 @@ const Daocompo = () => {
           <div className={style.formTitle}>New Proposal</div>
           <div className={style.formInputContainer}>
             <div className={style.formInput}>
-              <textarea
-                type="text"
-                value={proposalDescription}
-                onChange={(e) => setProposalDescription(e.target.value)}
-                placeholder="Description..."
-                className={style.formInput}
-              />
+              <textarea type="text" value={proposalDescription} onChange={(e) => setProposalDescription(e.target.value)} placeholder="Description..." className={style.formInput} />
             </div>
           </div>
           <div>
@@ -310,14 +269,7 @@ const Daocompo = () => {
         <>
           {proposals?.map((proposal, id) => (
             <div className="snap-start mt-32 relative w-screen h-screen flex items-center justify-center">
-              <Proposal
-                proposalId={proposal.proposalId}
-                description={proposal.description}
-                key={Math.random(id)}
-                proposal={proposal}
-                listAmKpa={listAmKpa}
-                closePop={closePop}
-              />
+              <Proposal proposalId={proposal.proposalId} description={proposal.description} key={Math.random(id)} proposal={proposal} listAmKpa={listAmKpa} closePop={closePop} />
             </div>
           ))}
         </>
