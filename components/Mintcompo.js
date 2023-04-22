@@ -3,6 +3,8 @@ import { useContext, useState } from "react";
 import { ApeDaoContext } from "../components/Context/solutions";
 import Popup from "./Popup";
 import Sendingtransaction from "./Home/Sendingtransaction";
+
+import { Heromint } from "../sections/mintsections";
 const style = {
   wrapper: `relative w-screen h-full bg-indigo-900 flex flex-col items-center  `,
   mintwrapper: `h-screen p-2 w-full bg-indigo-900 flex justify-center flex-col items-center  `,
@@ -11,59 +13,9 @@ const style = {
 };
 
 const Mintcompo = () => {
-  const [buttonPop, setButtonPop] = useState(false);
-
-  const { address } = useContext(ApeDaoContext);
-
-  const { contract: editionDrop } = useContract(
-    "0x7CF4e5794087691637d421B6FD304112fB190dB6",
-    "edition-drop"
-  );
-
-  const listAmKpa = () => {
-    setButtonPop(true);
-  };
-
-  const closePop = () => {
-    setButtonPop(false);
-  };
-
-  const minIt = async () => {
-    try {
-      const tokenId = 0;
-      const quantity = 1;
-
-      const tx = await editionDrop.claimTo(address, tokenId, quantity);
-      closePop();
-      const receipt = tx.receipt;
-    } catch (error) {
-      console.log({ error });
-      closePop();
-    }
-    // window.location.reload();
-  };
-
   return (
-    <div className={style.mintwrapper}>
-      <Popup trigger={buttonPop}>
-        <div className="w-full">
-          <Sendingtransaction />
-        </div>
-      </Popup>
-      {/* <MediaRenderer
-            src={NftImage.animation_url}
-            className={style.nftImg}
-            /> */}
-      <h1>Mint 🍪DAO Membership</h1>
-      <button
-        onClick={() => {
-          minIt();
-          listAmKpa();
-        }}
-        className={style.mintButton}
-      >
-        Mint
-      </button>
+    <div className="bg-primary-black overflow-hidden">
+      <Heromint />
     </div>
   );
 };

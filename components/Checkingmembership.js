@@ -1,8 +1,5 @@
 import React, { useContract } from "@thirdweb-dev/react";
-import { useContext, useState } from "react";
-import { ApeDaoContext } from "../components/Context/solutions";
-import Popup from "./Popup";
-import Sendingtransaction from "./Home/Sendingtransaction";
+
 const style = {
   wrapper: `relative w-screen h-full bg-indigo-900 flex flex-col items-center  `,
   mintwrapper: `h-screen p-2 w-full bg-indigo-900 flex justify-center flex-col items-center  `,

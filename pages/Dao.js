@@ -11,25 +11,21 @@ const NewDao = () => {
 
   ////////////////////////////////////////////////////
 
-  // console.log({ memberStakedBalance });
   //////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <div>
-      {daoMember ? (
-        <>
-          {daoMember > 0 && <Daocompo />}
-          {memberStakedBalance > 0 && <Daocompo />}
-          {daoMember == 0 && <Mintcompo />}
-        </>
+      {daoMember > 0 || memberStakedBalance > 0 ? (
+        <Daocompo />
       ) : (
         <>
-          {address && <Checkingmembership />}
+          {daoMember == 0 && <Mintcompo />}
           {!address && (
             <div className="h-screen w-screen flex bg-gray-50 text-gray-600 justify-center items-center">
               <h2>Please Connect Your Wallet</h2>
             </div>
           )}
+          {address && !daoMember && <Checkingmembership />}
         </>
       )}
     </div>

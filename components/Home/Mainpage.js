@@ -6,8 +6,9 @@ import { ethers } from "ethers";
 import Popup from "../Popup";
 import Sendingtransaction from "./Sendingtransaction";
 import { client } from "../../lib/sanityClient";
-import Math from "mathjs";
+
 import BigNumber from "bignumber.js";
+import Math from "mathjs";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk/evm";
 
 const style = {

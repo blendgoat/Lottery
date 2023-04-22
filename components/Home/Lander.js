@@ -1,6 +1,5 @@
 import React from "react";
 import { ConnectWallet } from "@thirdweb-dev/react";
-import styles from "../../styles/Home.module.css";
 
 const style = {
   container: ` bg-indigo-900`,
